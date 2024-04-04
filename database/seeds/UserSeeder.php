@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -14,13 +15,14 @@ class UserSeeder extends Seeder
 	 */
 	public function run()
 	{
-		DB::table('users')->insert(
+		$faker = Faker::create('id_ID');
+		$data = array(
 			[
 				'userid' => 'admin-'.Str::random(5),
 				'username' => 'admin',
 				'email' => 'admin@mail.com',
 				'password' => Hash::make('admin'),
-				'phone' => Str::random(12),
+				'phone' => $faker->e164PhoneNumber,
 				'role' => 'admin',
 				'status' => true,
 			],
@@ -29,7 +31,7 @@ class UserSeeder extends Seeder
 				'username' => 'lppm',
 				'email' => 'lppm@mail.com',
 				'password' => Hash::make('lembaga'),
-				'phone' => Str::random(12),
+				'phone' => $faker->e164PhoneNumber,
 				'role' => 'lembaga',
 				'status' => true,
 			],
@@ -38,7 +40,7 @@ class UserSeeder extends Seeder
 				'username' => 'panitia',
 				'email' => 'panitia@mail.com',
 				'password' => Hash::make('panitia'),
-				'phone' => Str::random(12),
+				'phone' => $faker->e164PhoneNumber,
 				'role' => 'panitia',
 				'status' => true,
 			],
@@ -47,7 +49,7 @@ class UserSeeder extends Seeder
 				'username' => 'pendamping',
 				'email' => 'pendamping@mail.com',
 				'password' => Hash::make('pendamping'),
-				'phone' => Str::random(12),
+				'phone' => $faker->e164PhoneNumber,
 				'role' => 'pendamping',
 				'status' => true,
 			],
@@ -56,7 +58,7 @@ class UserSeeder extends Seeder
 				'username' => 'mahasiswa',
 				'email' => 'mahasiswa@mail.com',
 				'password' => Hash::make('mahasiswa'),
-				'phone' => Str::random(12),
+				'phone' => $faker->e164PhoneNumber,
 				'role' => 'mahasiswa',
 				'status' => true,
 			],
@@ -65,10 +67,16 @@ class UserSeeder extends Seeder
 				'username' => 'desa',
 				'email' => 'desa@mail.com',
 				'password' => Hash::make('desa'),
-				'phone' => Str::random(12),
+				'phone' => $faker->e164PhoneNumber,
 				'role' => 'desa',
 				'status' => true,
 			],
 		);
+
+		foreach($data as $i){
+			DB::table('users')->insert([
+				$i
+			]);	
+		}
 	}
 }

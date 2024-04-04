@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="auto">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -101,8 +101,10 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
 		<!-- Custom styles for this template -->
 		<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+		<link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
 	</head>
-	<body>
+
+	<body onload="startTime()">
 		<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
 			<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="/home">{{ config('app.name', 'Laravel') }}</a>
 			<ul class="navbar-nav flex-row d-md-none">
@@ -133,7 +135,14 @@
 									<a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#"><i class="bi bi-speedometer"></i> {{ __('Dashboard') }}</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link d-flex align-items-center gap-2" href="/admin"><i class="bi bi-person-lines-fill"></i> {{ __('Admin') }}</a>
+									<a class="nav-link d-flex align-items-center gap-2 collapsed" href="#"  data-toggle="collapse" data-target="#navAdmin" data-parent="#sidenav01"><i class="bi bi-person-lines-fill"></i> {{ __('Admin') }}</a>
+									<div class="collapse" id="navAdmin" style="height: 0px;">
+										<ul class="nav nav-list">
+											<li><a href="#">Submenu Admin 1.1</a></li>
+											<li><a href="#">Submenu Admin 1.2</a></li>
+											<li><a href="#">Submenu Admin 1.3</a></li>
+										</ul>
+									</div>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link d-flex align-items-center gap-2" href="#"><i class="bi bi-people-fill"></i> {{ __('Panitia') }}</a>
@@ -160,6 +169,10 @@
 										@csrf
 									</form>
 								</li>
+								<li class="nav-item">
+									<p class="nav-link d-flex align-items-center gap-2 fw-light"><i class="bi bi-alarm"></i> {{ date('d M Y') }} <span id="time"></span></p>
+								</li>
+								
 							</ul>
 						</div>
 					</div>
@@ -173,6 +186,6 @@
 	
 		<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
-		<script src="{{ asset('css/dashboard.js') }}"></script>
+		<script src="{{ asset('js/dashboard.js') }}"></script>
 	</body>
 </html>

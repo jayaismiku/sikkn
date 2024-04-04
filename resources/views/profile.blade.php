@@ -4,4 +4,5 @@
 
 @section('content')
 <h2>Profile Section</h2>
-
+<hr>
+@endsection
