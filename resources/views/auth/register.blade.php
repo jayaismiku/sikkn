@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.auth')
+
+@section('title', 'Auth Register')
 
 @section('content')
 <div class="container">
@@ -17,7 +19,7 @@
 							<div class="col-md-6">
 								<input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-								@error('name')
+								@error('username')
 									<span class="invalid-feedback" role="alert">
 										<strong>{{ $message }}</strong>
 									</span>
@@ -87,6 +89,84 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+@endsection
+
+@section('form-auth')
+<div class="d-flex justify-content-center form_container">
+	<form method="POST" action="{{ route('register') }}">
+		@csrf
+		<div class="input-group mb-3">
+			<div class="input-group-append">
+				<span class="input-group-text"><i class="fas fa-user"></i></span>
+			</div>
+			<input type="text" id="username" name="name" class="form-control input_user @error('username') is-invalid @enderror" placeholder="username" required autofocus>
+			@error('username')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-append">
+				<span class="input-group-text"><i class="fas fa-at"></i></span>
+			</div>
+			<input type="text" id="email" name="email" class="form-control input_user @error('email') is-invalid @enderror" placeholder="email" required autofocus>
+			@error('email')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
+		</div>
+		<div class="input-group mb-2">
+			<div class="input-group-append">
+				<span class="input-group-text"><i class="fas fa-key"></i></span>
+			</div>
+			<input id="password" type="password" name="password" class="form-control input_pass @error('password') is-invalid @enderror" placeholder="password" required autofocus>
+			@error('password')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
+		</div>
+		<div class="input-group mb-2">
+			<div class="input-group-append">
+				<span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
+			</div>
+			<input id="password" type="password" name="password_confirmation" class="form-control input_pass @error('password') is-invalid @enderror" placeholder="konfirmasi password" required  autofocus>
+			@error('password')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
+		</div>
+		<div class="input-group mb-2">
+			<div class="input-group-append">
+				<span class="input-group-text"><i class="fas fa-user-check"></i></span>
+			</div>
+			<select class="form-control @error('role') is-invalid @enderror" name="role" id="role" required  autofocus>
+				<option value="-" selected>- Pilih Salah Satu-</option>
+				<option value="lembaga">LPPM</option>
+				<option value="panitia">Panitia</option>
+				<option value="pendamping">Dosen Pendamping Lapangan</option>
+				<option value="mahasiswa">Mahasiswa</option>
+				<option value="desa">Kepala Desa</option>
+			</select>
+			@error('role')
+				<span class="invalid-feedback" role="alert">
+					<strong>{{ $message }}</strong>
+				</span>
+			@enderror
+		</div>
+		<div class="d-flex justify-content-center mt-3 login_container">
+			<button type="submit" name="button" class="btn login_btn">{{ __('Registrasi') }}</button>
+		</div>
+	</form>
+</div>
+<div class="mt-4">
+	<div class="d-flex justify-content-center links">
+		{{ __('Sudah punya akun?') }} <a href="{{ route('login') }}" class="ml-2">{{ __('Masuk') }}</a>
 	</div>
 </div>
 @endsection
