@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetailUserMahasiswa extends Migration
+class Laporan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,7 @@ class CreateDetailUserMahasiswa extends Migration
      */
     public function up()
     {
-        Schema::create('user_mahasiswa', function (Blueprint $table) {
-            $table->id();
-            $table->string('userid')->unique();
-
-            $table->foreign('userid')->references('userid')->on('users');
-        });
+        //
     }
 
     /**
@@ -28,6 +23,6 @@ class CreateDetailUserMahasiswa extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_mahasiswa');
+        //
     }
 }

@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\dpl;
+use App\Desa;
 use Faker\Generator as Faker;
 
-$factory->define(dpl::class, function (Faker $faker) {
+$factory->define(Desa::class, function (Faker $faker) {
     return [
         //
     ];

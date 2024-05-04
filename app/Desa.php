@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Panitia extends Model
+class Desa extends Model
 {
     //
 }
