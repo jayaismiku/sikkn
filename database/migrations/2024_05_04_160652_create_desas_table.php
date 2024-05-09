@@ -13,8 +13,13 @@ class CreateDesasTable extends Migration
      */
     public function up()
     {
-        Schema::create('desas', function (Blueprint $table) {
+        Schema::create('desa', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_desa', 50);
+            $table->string('alamat');
+            $table->string('longitude');
+            $table->string('latitude');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateDesasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('desas');
+        Schema::dropIfExists('desa');
     }
 }

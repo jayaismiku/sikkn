@@ -13,9 +13,12 @@ class CreatePendampingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pendampings', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('pendamping', function (Blueprint $table) {
+            $table->foreignId('pendamping_id');
+            $table->string('user_id', 20);
+            $table->pekerjaan();
+
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('ignore');
         });
     }
 
@@ -26,6 +29,6 @@ class CreatePendampingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pendampings');
+        Schema::dropIfExists('pendamping');
     }
 }

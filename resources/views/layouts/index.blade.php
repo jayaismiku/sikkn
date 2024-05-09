@@ -44,63 +44,105 @@
 						<span class="nav-link-text ms-1">Dashboard</span>
 					</a>
 				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Administrator') }}</h6>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./pages/tables.html">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">admin_panel_settings</i>
 						</div>
-						<span class="nav-link-text ms-1">Admin</span>
+						<span class="nav-link-text ms-1">{{ __('Admin') }}</span>
 					</a>
+				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('LPPM') }}</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./pages/billing.html">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">supervisor_account</i>
 						</div>
-						<span class="nav-link-text ms-1">LPPM</span>
+						<span class="nav-link-text ms-1">{{ __('Info LPPM') }}</span>
 					</a>
+				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Panitia KKN') }}</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./pages/virtual-reality.html">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">manage_accounts</i>
 						</div>
-						<span class="nav-link-text ms-1">Panitia</span>
+						<span class="nav-link-text ms-1">{{ __('Panitia') }}</span>
+					</a>
+				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Dosen Pendamping Lapangan') }}</h6>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="./notifications.html">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">auto_stories</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Validasi Logbook') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./notifications.html">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">assignment_ind</i>
+							<i class="material-icons opacity-10">book</i>
 						</div>
-						<span class="nav-link-text ms-1">Dosen Pembimbing</span>
+						<span class="nav-link-text ms-1">{{ __('Validasi Laporan') }}</span>
 					</a>
+				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Mahasiswa') }}</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./notifications.html">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">group</i>
 						</div>
-						<span class="nav-link-text ms-1">Mahasiswa</span>
+						<span class="nav-link-text ms-1">{{ __('Kelompok') }}</span>
 					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="./notifications.html">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">auto_stories</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Logbook') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="./notifications.html">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">book</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Laporan') }}</span>
+					</a>
+				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Lokus Kegiatan KKN') }}</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./notifications.html">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">my_location</i>
 						</div>
-						<span class="nav-link-text ms-1">Desa</span>
+						<span class="nav-link-text ms-1">{{ __('Info Desa') }}</span>
 					</a>
 				</li>
 				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Akun Pengguna') }}</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('profile') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">person</i>
 						</div>
-						<span class="nav-link-text ms-1">Profil</span>
+						<span class="nav-link-text ms-1">{{ __('Profil') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">

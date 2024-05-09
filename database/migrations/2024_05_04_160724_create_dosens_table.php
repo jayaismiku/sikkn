@@ -13,9 +13,20 @@ class CreateDosensTable extends Migration
      */
     public function up()
     {
-        Schema::create('dosens', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('dosen', function (Blueprint $table) {
+            $table->integer('nidn', 10)->primary();
+            $table->integer('nip', 15)->unique();
+            $table->string('user_id', 20);
+            $table->string('nama_dosen', 50);
+            $table->string('gelar_depan', 20);
+            $table->string('gelar_belakang', 50);
+            $table->string('alamat', 100);
+            $table->string('kelurahan', 100);
+            $table->string('kecamatan', 100);
+            $table->string('provinsi', 100);
+            $table->integer('no_telp', 15)->unique();
+
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('ignore');
         });
     }
 
@@ -26,6 +37,6 @@ class CreateDosensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dosens');
+        Schema::dropIfExists('dosen');
     }
 }

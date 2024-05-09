@@ -13,9 +13,12 @@ class CreatePanitiasTable extends Migration
      */
     public function up()
     {
-        Schema::create('panitias', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('panitia', function (Blueprint $table) {
+            $table->foreignId('panitia_id');
+            $table->string('user_id', 20);
+            $table->string('pekerjaan');
+            
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('ignore');
         });
     }
 
@@ -26,6 +29,6 @@ class CreatePanitiasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('panitias');
+        Schema::dropIfExists('panitia');
     }
 }
