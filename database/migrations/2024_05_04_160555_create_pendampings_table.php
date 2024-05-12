@@ -16,9 +16,8 @@ class CreatePendampingsTable extends Migration
         Schema::create('pendamping', function (Blueprint $table) {
             $table->string('pendamping_id')->primary();
             $table->string('user_id', 20);
-            $table->pekerjaan();
 
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('ignore');
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 

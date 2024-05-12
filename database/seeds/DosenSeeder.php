@@ -11,6 +11,6 @@ class DosenSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Dosen::class, 20)->create();
     }
 }

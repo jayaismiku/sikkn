@@ -14,11 +14,11 @@ class CreatePanitiasTable extends Migration
     public function up()
     {
         Schema::create('panitia', function (Blueprint $table) {
-            $table->foreignId('panitia_id');
+            $table->id('panitia_id');
             $table->string('user_id', 20);
             $table->string('pekerjaan');
             
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('ignore');
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MahasiswaSeeder extends Seeder
+class PendampingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class MahasiswaSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Mahasiswa::class, 500)->create();
+        factory(App\Pendamping::class, 50)->create();
     }
 }
