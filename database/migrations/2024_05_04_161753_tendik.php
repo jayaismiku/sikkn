@@ -13,7 +13,12 @@ class Tendik extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('tendik', function (Blueprint $table) {
+            $table->id('tendik_id');
+            $table->string('user_id', 20);
+            $table->string('nama_tendik');
+            
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class Tendik extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tendik');
     }
 }

@@ -13,7 +13,19 @@ class Logbook extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('logbook', function (Blueprint $table) {
+            $table->id('logbook_id');
+            $table->string('kelompok_id');
+            $table->string('nama_kegiatan', 100);
+            $table->text('deskripsi');
+            $table->string('foto_kegiatan')->nullable()->default(false);
+            $table->boolean('validasi')->default(false);
+            $table->timestamps();
+
+
+            $table->foreign('kelompok_id')->references('kelompok')->on('kelompok_id')->onDelete('ignore');
+        });
+
     }
 
     /**
@@ -23,6 +35,6 @@ class Logbook extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('logbook');
     }
 }

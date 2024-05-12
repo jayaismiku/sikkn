@@ -14,7 +14,7 @@ class CreateDesasTable extends Migration
     public function up()
     {
         Schema::create('desa', function (Blueprint $table) {
-            $table->id();
+            $table->string('desa_id')->primary();
             $table->string('nama_desa', 50);
             $table->string('alamat');
             $table->string('longitude');

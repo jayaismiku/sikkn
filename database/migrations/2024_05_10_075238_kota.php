@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Provinsi extends Migration
+class Kota extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class Provinsi extends Migration
      */
     public function up()
     {
-        Schema::create('provinsi', function (Blueprint $table) {
-            $table->id('provinsi_id');
-            $table->string('nama_provinsi', 30)->nullable();
-            $table->boolean('status')->default(true);
-            $table->timestamps();
+        Schema::create('kota', function (Blueprint $table) {
+            $table->id('kota_id');
+            $table->string('nama_kota');
+            $table->integer('provinsi_id');
+            
+            $table->foreign('provinsi_id')->references('provinsi')->on('provinsi_id')->onDelete('cascade');
         });
     }
 
@@ -28,6 +29,6 @@ class Provinsi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provinsi');
+        Schema::dropIfExists('kota');
     }
 }

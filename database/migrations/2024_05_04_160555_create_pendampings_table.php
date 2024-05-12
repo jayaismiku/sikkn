@@ -14,7 +14,7 @@ class CreatePendampingsTable extends Migration
     public function up()
     {
         Schema::create('pendamping', function (Blueprint $table) {
-            $table->foreignId('pendamping_id');
+            $table->string('pendamping_id')->primary();
             $table->string('user_id', 20);
             $table->pekerjaan();
 

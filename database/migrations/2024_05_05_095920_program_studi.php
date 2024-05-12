@@ -13,7 +13,12 @@ class ProgramStudi extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('prodi', function (Blueprint $table) {
+            $table->id('prodi_id');
+            $table->string('kode_prodi', 5);
+            $table->string('nama_prodi', 20)->nullable()->unique();       
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ class ProgramStudi extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('prodi');
     }
 }

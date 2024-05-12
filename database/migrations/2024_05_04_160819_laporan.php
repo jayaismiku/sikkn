@@ -13,7 +13,17 @@ class Laporan extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('laporan', function (Blueprint $table) {
+            $table->id('laporan_id');
+            $table->string('kelompok_id');
+            $table->enum('tipe_laporan', ['kemajuan', 'akhir', 'jurnal']);
+            $table->string('unggah_file');
+            $table->boolean('validasi')->nullable()->default(false);
+            $table->timestamps();
+
+
+            $table->foreign('kelompok_id')->references('kelompok')->on('kelompok_id')->onDelete('ignore');
+        });
     }
 
     /**
@@ -23,6 +33,6 @@ class Laporan extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('laporan');
     }
 }

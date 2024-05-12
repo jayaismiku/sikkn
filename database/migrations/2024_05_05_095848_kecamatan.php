@@ -13,7 +13,13 @@ class Kecamatan extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('kecamatan', function (Blueprint $table) {
+            $table->id('kecamatan_id');
+            $table->string('nama_kecamatan', 30);
+            $table->integer('kota_id');
+
+            $table->foreign('kota_id')->references('kota')->on('kota_id')->onDelete('cascade');
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class Kecamatan extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('kecamatan');
     }
 }
