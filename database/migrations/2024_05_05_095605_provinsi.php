@@ -14,7 +14,7 @@ class Provinsi extends Migration
     public function up()
     {
         Schema::create('provinsi', function (Blueprint $table) {
-            $table->id('provinsi_id');
+            $table->id('provinsi_id')->primary();
             $table->string('nama_provinsi', 30)->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

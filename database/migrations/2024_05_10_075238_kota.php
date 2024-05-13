@@ -14,7 +14,7 @@ class Kota extends Migration
     public function up()
     {
         Schema::create('kota', function (Blueprint $table) {
-            $table->id('kota_id');
+            $table->id('kota_id')->primary();
             $table->string('nama_kota');
             $table->integer('provinsi_id');
             

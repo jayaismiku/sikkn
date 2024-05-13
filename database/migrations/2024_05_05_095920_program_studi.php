@@ -14,7 +14,7 @@ class ProgramStudi extends Migration
     public function up()
     {
         Schema::create('prodi', function (Blueprint $table) {
-            $table->id('prodi_id');
+            $table->id('prodi_id')->primary();
             $table->string('kode_prodi', 5)->nullable()->unique();
             $table->string('nama_prodi', 20)->nullable()->unique();       
             $table->timestamps();
