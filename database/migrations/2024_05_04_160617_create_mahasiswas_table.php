@@ -18,12 +18,12 @@ class CreateMahasiswasTable extends Migration
             $table->string('user_id', 20)->nullable();
             $table->string('nama_depan', 50)->nullable();
             $table->string('nama_belakang', 50)->nullable();
-            $table->string('telp', 13)()->unique();
-            $table->string('alamat', 100)->nullable();
-            $table->integer('provinsi', 100)->nullable()->default(12);
-            $table->integer('kota', 100)->nullable()->default(161);
-            $table->integer('kecamatan', 100)->nullable()->default(2458);
-            $table->integer('kelurahan', 100)->nullable()->default(26603);
+            $table->string('alamat')->nullable();
+            $table->integer('provinsi_id')->default('12');
+            $table->integer('kota_id')->default('161');
+            $table->integer('kecamatan_id')->default('2458');
+            $table->integer('kelurahan_id')->default('26603');
+            $table->string('telp', 13)->unique();
             $table->enum('fakultas', ['Fakultas Sains dan Teknologi', 'Fakultas Sosial Humaniora', 'Fakultas Enomoni dan Bisnis', 'Fakultas Agama Islam'])->nullable();
             $table->enum('prodi', ['TE', 'IF', 'TI', 'TP', 'FA', 'BIO', 'AGRI', 'ILKOM', 'PSI', 'KTF', 'AP', 'AKUN', 'MAN', 'PAI', 'PIAUD', 'HKI', 'KPI', 'EKSYAR'])->nullable();
             $table->enum('semester', ['1', '2', '3', '4', '5', '6', '7', '8'])->default('6');

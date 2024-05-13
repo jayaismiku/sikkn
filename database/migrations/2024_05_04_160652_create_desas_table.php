@@ -17,10 +17,10 @@ class CreateDesasTable extends Migration
             $table->id('desa_id');
             $table->string('nama_desa', 50);
             $table->string('alamat');
-            $table->string('provinsi', 100)->nullable();
-            $table->string('kota', 100)->nullable();
-            $table->string('kecamatan', 100)->nullable();
-            $table->string('kelurahan', 100)->nullable();
+            $table->integer('provinsi_id', 5)->default(12);
+            $table->integer('kota_id', 5)->default(161);
+            $table->integer('kecamatan_id', 10)->default(2458);
+            $table->integer('kelurahan_id', 10)->default(26603);
             $table->string('longitude');
             $table->string('latitude');
             $table->boolean('status')->default(true);

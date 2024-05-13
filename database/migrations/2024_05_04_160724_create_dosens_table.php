@@ -26,11 +26,11 @@ class CreateDosensTable extends Migration
             $table->enum('fakultas', ['Fakultas Sains dan Teknologi', 'Fakultas Sosial Humaniora', 'Fakultas Enomoni dan Bisnis', 'Fakultas Agama Islam'])->nullable();
             $table->enum('prodi', ['TE', 'IF', 'TI', 'TP', 'FA', 'BIO', 'AGRI', 'ILKOM', 'PSI', 'KTF', 'AP', 'AKUN', 'MAN', 'PAI', 'PIAUD', 'HKI', 'KPI', 'EKSYAR'])->nullable();
             $table->integer('telp', 15)->nullable()->unique();
-            $table->string('alamat', 100)->nullable();
-            $table->string('provinsi', 100)->nullable();
-            $table->string('kota', 100)->nullable();
-            $table->string('kecamatan', 100)->nullable();
-            $table->string('kelurahan', 100)->nullable();
+            $table->string('alamat')->nullable();
+            $table->integer('provinsi_id', 5)->default(12);
+            $table->integer('kota_id', 5)->default(161);
+            $table->integer('kecamatan_id', 10)->default(2458);
+            $table->integer('kelurahan_id', 10)->default(26603);
 
             $table->foreign('user_id')->references('user_id')->on('users');
         });
