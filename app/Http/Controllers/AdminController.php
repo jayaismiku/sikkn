@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-	use AuthenticatesUsers;
+	//use AuthenticatesUsers;
 
 	protected $maxAttempts = 3;
 	protected $decayMinutes = 2;
@@ -49,5 +49,10 @@ class AdminController extends Controller
 		session()->flush();
 
 		return redirect()->route('admin.login');
+	}
+
+	public function index()
+	{
+		return view ('admin');
 	}
 }

@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Dashboard Panitia')
+@section('title', 'Dashboard Tim Pemonev')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -14,7 +14,7 @@
       <a class="opacity-5 text-dark" href="">Pages</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>Panitia</span>
+      <span>Tim Pemonev</span>
     </li>
   </ol>
 </nav>
@@ -26,12 +26,13 @@
 <h5 class="fst-italic">Welcome {{ Auth::user()->username }} , Love to see you back.</h5>
 <hr>
 
+
 <div class="row">
         <div class="col-12">
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">PANITIA</h6>
+                <h6 class="text-white text-capitalize ps-3">TIM PEMONEV</h6>
               </div>
             </div>
             <div class="card-body px-0 pb-2">
@@ -39,6 +40,7 @@
                 <table id="example" class="table align-items-center mb-0">
                   <thead>
                     <tr>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tim Pemonev</th>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Nama Dosen</th>
                       <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kelompok</th>
                       <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Member</th>
@@ -49,14 +51,25 @@
                   </thead>
                   <tbody>
                     <tr>
+                        <td>
+                        <div class="d-flex px-2 py-1">
+                            <div>
+                                <img src="{{ asset('material/img/team-3.jpg')}}" class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="text-wrap mb-0 text-sm">Alexa Liras</h6>
+                                <p class="text-wrap text-xs text-secondary mb-0">alexa@creative-tim.com</p>
+                            </div>
+                            </div>
+                        </td>
                       <td >
                         <div class="d-flex px-2 py-1">
                           <div>
                             <img src="{{ asset('material/img/team-2.jpg')}}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                            <h6 class="text-wrap mb-0 text-sm">John Michael</h6>
+                            <p class="text-wrap text-xs text-secondary mb-0">john@creative-tim.com</p>
                           </div>
                         </div>
                       </td>
@@ -160,6 +173,7 @@
           })  
       } );
     </script>
+
 
 @endsection
 

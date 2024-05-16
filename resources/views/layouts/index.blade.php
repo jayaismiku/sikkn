@@ -21,6 +21,8 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 	<!-- CSS Files -->
 	<link id="pagestyle" href="{{ asset('material/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
+	<!-- tabel style -->
+
 
 </head>
 
@@ -48,64 +50,86 @@
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Administrator') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="./pages/tables.html">
+					<a class="nav-link text-white " href="{{ route('broadcastmessage') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">admin_panel_settings</i>
+							<i class="material-icons opacity-10">dashboard</i>
 						</div>
-						<span class="nav-link-text ms-1">{{ __('Admin') }}</span>
+						<span class="nav-link-text ms-1">Broadcast Message</span>
+					</a>
+				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">MASTER DATA</h6>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">group</i>
+						</div>
+						<span class="nav-link-text ms-1">Dosen</span>
 					</a>
 				</li>
 				<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('LPPM') }}</h6>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('datamahasiswa') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">group</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Kelompok') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('desa') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">my_location</i>
+						</div>
+						<span class="nav-link-text ms-1">Desa</span>
+					</a>
+				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">LPPM</h6>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('panitia') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">admin_panel_settings</i>
+						</div>
+						<span class="nav-link-text ms-1">Panitia</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('timpemonev') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">supervisor_account</i>
+						</div>
+						<span class="nav-link-text ms-1">Tim Pemonev</span>
+					</a>
+				</li>
+        <li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">DOSEN</h6>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link text-white " href="./pages/billing.html">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">supervisor_account</i>
 						</div>
-						<span class="nav-link-text ms-1">{{ __('Info LPPM') }}</span>
+						<span class="nav-link-text ms-1">Dosen Pembimbing</span>
 					</a>
 				</li>
-				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Panitia KKN') }}</h6>
+        <li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">MAHASISWA</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./pages/virtual-reality.html">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">manage_accounts</i>
 						</div>
-						<span class="nav-link-text ms-1">{{ __('Panitia') }}</span>
+						<span class="nav-link-text ms-1">Mahasiswa</span>
 					</a>
 				</li>
-				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Dosen Pendamping Lapangan') }}</h6>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="./notifications.html">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">auto_stories</i>
-						</div>
-						<span class="nav-link-text ms-1">{{ __('Validasi Logbook') }}</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="./notifications.html">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">book</i>
-						</div>
-						<span class="nav-link-text ms-1">{{ __('Validasi Laporan') }}</span>
-					</a>
-				</li>
-				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Mahasiswa') }}</h6>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="./notifications.html">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">group</i>
-						</div>
-						<span class="nav-link-text ms-1">{{ __('Kelompok') }}</span>
-					</a>
+        <li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">DESA</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./notifications.html">
@@ -132,6 +156,14 @@
 							<i class="material-icons opacity-10">my_location</i>
 						</div>
 						<span class="nav-link-text ms-1">{{ __('Info Desa') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="./notifications.html">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">group</i>
+						</div>
+						<span class="nav-link-text ms-1">Kepala Desa</span>
 					</a>
 				</li>
 				<li class="nav-item mt-3">
@@ -229,7 +261,7 @@
 					<div class="row align-items-center justify-content-lg-between">
 						<div class="col-lg-6 mb-lg-0 mb-4">
 							<div class="copyright text-center text-sm text-muted text-lg-start">
-								© 2024, made with <i class="fa fa-heart"></i> by <a href="#" class="font-weight-bold" target="_blank">Cave Team</a> for a better web.
+								© 2024, made with <i class="fa fa-heart"></i> by <a href="#" class="font-weight-bold" target="_blank">KKN Team</a> 
 							</div>
 						</div>
 					</div>
@@ -238,11 +270,269 @@
 		</div>
 	</main>
 
+	@yield('script')
+
 	<!--   Core JS Files   -->
   <script src="{{ asset('material/js/core/popper.min.js') }}" ></script>
 	<script src="{{ asset('material/js/core/bootstrap.min.js') }}" ></script>
 	<script src="{{ asset('material/js/plugins/perfect-scrollbar.min.js') }}" ></script>
 	<script src="{{ asset('material/js/plugins/smooth-scrollbar.min.js') }}" ></script>
+	<script src="{{ asset('material//js/plugins/chartjs.min.js')}}"></script>
+
+	<script src="{{ asset('material/js/dataTables/jquery.dataTables.js')}}"></script>
+            <script src="{{ asset('material/js/dataTables/dataTables.bootstrap.js')}}"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#dataTables-example').dataTable();
+                });
+            </script>
+	<script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        datasets: [{
+          label: "Akses",
+          tension: 0.4,
+          borderWidth: 0,
+          borderRadius: 4,
+          borderSkipped: false,
+          backgroundColor: "rgba(255, 255, 255, .8)",
+          data: [50, 20, 10, 22, 50, 10, 40],
+          maxBarThickness: 6
+        }, ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+              color: "#fff"
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+
+
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Akses Bulanan",
+          tension: 0,
+          borderWidth: 0,
+          pointRadius: 5,
+          pointBackgroundColor: "rgba(255, 255, 255, .8)",
+          pointBorderColor: "transparent",
+          borderColor: "rgba(255, 255, 255, .8)",
+          borderColor: "rgba(255, 255, 255, .8)",
+          borderWidth: 4,
+          backgroundColor: "transparent",
+          fill: true,
+          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+          maxBarThickness: 6
+
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+
+    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+
+    new Chart(ctx3, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Laporan",
+          tension: 0,
+          borderWidth: 0,
+          pointRadius: 5,
+          pointBackgroundColor: "rgba(255, 255, 255, .8)",
+          pointBorderColor: "transparent",
+          borderColor: "rgba(255, 255, 255, .8)",
+          borderWidth: 4,
+          backgroundColor: "transparent",
+          fill: true,
+          data: [10, 30, 50, 100, 120, 200, 250, 300, 350],
+          maxBarThickness: 6
+
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#f8f9fa',
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+  </script>
 	<script>
 		var win = navigator.platform.indexOf('Win') > -1;
 		if (win && document.querySelector('#sidenav-scrollbar')) {
