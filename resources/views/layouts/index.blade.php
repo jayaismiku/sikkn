@@ -46,6 +46,9 @@
 						<span class="nav-link-text ms-1">Dashboard</span>
 					</a>
 				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Administrator') }}</h6>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('broadcastmessage') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -65,12 +68,15 @@
 						<span class="nav-link-text ms-1">Dosen</span>
 					</a>
 				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('LPPM') }}</h6>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('datamahasiswa') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">group</i>
 						</div>
-						<span class="nav-link-text ms-1">Mahasiswa</span>
+						<span class="nav-link-text ms-1">{{ __('Kelompok') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
@@ -128,9 +134,28 @@
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./notifications.html">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">auto_stories</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Logbook') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="./notifications.html">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">book</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Laporan') }}</span>
+					</a>
+				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Lokus Kegiatan KKN') }}</h6>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="./notifications.html">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">my_location</i>
 						</div>
-						<span class="nav-link-text ms-1">Desa</span>
+						<span class="nav-link-text ms-1">{{ __('Info Desa') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
@@ -142,14 +167,14 @@
 					</a>
 				</li>
 				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Akun Pengguna') }}</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('profile') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">person</i>
 						</div>
-						<span class="nav-link-text ms-1">Profil</span>
+						<span class="nav-link-text ms-1">{{ __('Profil') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
@@ -521,10 +546,6 @@
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
 	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="{{ asset('material/js/material-dashboard.min.js?v=3.1.0') }}"></script>
-
-	
-
-	
 
 </body>
 </html>

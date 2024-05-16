@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\panitia;
+use App\Panitia;
 use Faker\Generator as Faker;
 
-$factory->define(panitia::class, function (Faker $faker) {
+$factory->define(Panitia::class, function (Faker $faker) {
     return [
         //
     ];

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetailUserPendamping extends Migration
+class Tendik extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateDetailUserPendamping extends Migration
      */
     public function up()
     {
-        Schema::create('user_pendamping', function (Blueprint $table) {
-            $table->id();
-            $table->string('userid')->unique();
-
-            $table->foreign('userid')->references('userid')->on('users');
+        Schema::create('tendik', function (Blueprint $table) {
+            $table->id('tendik_id');
+            $table->string('user_id', 20);
+            $table->string('nama_tendik');
+            
         });
     }
 
@@ -28,6 +28,6 @@ class CreateDetailUserPendamping extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_pendamping');
+        Schema::dropIfExists('tendik');
     }
 }
