@@ -14,7 +14,7 @@ class CreateDosensTable extends Migration
     public function up()
     {
         Schema::create('dosen', function (Blueprint $table) {
-            $table->integer('nidn', 10)->primary();
+            $table->integer('nidn', 10);
             $table->integer('nip', 15)->unique()->nullable();
             $table->string('user_id', 20)->nullable();
             $table->string('nama_depan', 50)->nullable();
@@ -27,12 +27,13 @@ class CreateDosensTable extends Migration
             $table->enum('prodi', ['TE', 'IF', 'TI', 'TP', 'FA', 'BIO', 'AGRI', 'ILKOM', 'PSI', 'KTF', 'AP', 'AKUN', 'MAN', 'PAI', 'PIAUD', 'HKI', 'KPI', 'EKSYAR'])->nullable();
             $table->integer('telp', 15)->nullable()->unique();
             $table->string('alamat')->nullable();
-            $table->integer('provinsi_id', 5)->default(12);
-            $table->integer('kota_id', 5)->default(161);
-            $table->integer('kecamatan_id', 10)->default(2458);
-            $table->integer('kelurahan_id', 10)->default(26603);
+            $table->integer('provinsi_id', 5)->nullable()->default('12');
+            $table->integer('kota_id', 5)->nullable()->default('161');
+            $table->integer('kecamatan_id', 10)->nullable()->default('2458');
+            $table->integer('kelurahan_id', 10)->nullable()->default('26603');
 
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->primary('nidn');
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
         });
     }
 

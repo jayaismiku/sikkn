@@ -25,6 +25,8 @@ class CreateDesasTable extends Migration
             $table->string('latitude');
             $table->boolean('status')->default(true);
             $table->timestamps();
+
+            $table->primary('desa_id');
         });
     }
 

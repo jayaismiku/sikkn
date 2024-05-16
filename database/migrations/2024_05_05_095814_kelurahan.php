@@ -14,7 +14,7 @@ class Kelurahan extends Migration
     public function up()
     {
         Schema::create('kelurahan', function (Blueprint $table) {
-            $table->id('kelurahan_id');
+            $table->id('kelurahan_id')->primary();
             $table->string('nama_kelurahan', 30);
             $table->integer('kecamatan_id');
 
