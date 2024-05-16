@@ -1,4 +1,4 @@
-@extends('layouts.dasbor')
+@extends('layouts.index')
 
 @section('title', 'Dashboard Admin')
 
@@ -7,5 +7,8 @@
 <h2 class="fw-light">Dashboard {{ Auth::user()->role }}</h2>
 <h5 class="fst-italic">Welcome {{ Auth::user()->username }} , Love to see you back.</h5>
 <hr>
+
+testing
+
 @endsection
 
