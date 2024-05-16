@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Auth;
 use Closure;
 
-class BroadcastMessage
+class broadcastmessage
 {
     /**
      * Handle an incoming request.
