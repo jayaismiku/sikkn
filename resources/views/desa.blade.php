@@ -20,8 +20,6 @@
   </ol>
 </nav>
 @endsection
-=======
->>>>>>> 24e99ec3ffcd3c2be9a89b8a95ee8ae4e9bbc796
 
 @section('content')
 
