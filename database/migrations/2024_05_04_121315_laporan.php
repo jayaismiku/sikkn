@@ -15,14 +15,15 @@ class Laporan extends Migration
     {
         Schema::create('laporan', function (Blueprint $table) {
             $table->id('laporan_id');
-            $table->string('kelompok_id');
+            $table->string('judul_laporan')->nullable();
             $table->enum('tipe_laporan', ['kemajuan', 'akhir', 'jurnal']);
             $table->string('unggah_file');
+            $table->timestamp('tanggal_unggah')->nullable()->useCurrent();
             $table->boolean('validasi')->nullable()->default(false);
-            $table->timestamps();
+            $table->timestamp('tanggal_validasi')->nullable()->useCurrent();
+            $table->unsignedBigInteger('kelompok_id')->nullable();
 
-
-            $table->foreign('kelompok_id')->references('kelompok')->on('kelompok_id')->onDelete('ignore');
+            $table->foreign('kelompok_id')->references('kelompok_id')->on('kelompok')->onDelete('cascade');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLembagasTable extends Migration
+class Kota extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateLembagasTable extends Migration
      */
     public function up()
     {
-        Schema::create('lembaga', function (Blueprint $table) {
-            $table->id('lembaga_id');
-            $table->string('user_id', 20);
-            $table->string('jabatan');
-            
-            $table->foreign('user_id')->references('user_id')->on('users');
+        Schema::create('kota', function (Blueprint $table) {
+            $table->id('kota_id');
+            $table->string('nama_kota');
+            $table->unsignedBigInteger('provinsi_id');
+
+            $table->foreign('provinsi_id')->references('provinsi_id')->on('provinsi')->onDelete('cascade');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateLembagasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lembaga');
+        Schema::dropIfExists('kota');
     }
 }

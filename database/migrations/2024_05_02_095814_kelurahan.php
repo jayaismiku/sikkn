@@ -14,11 +14,11 @@ class Kelurahan extends Migration
     public function up()
     {
         Schema::create('kelurahan', function (Blueprint $table) {
-            $table->id('kelurahan_id')->primary();
+            $table->id('kelurahan_id');
             $table->string('nama_kelurahan', 30);
-            $table->integer('kecamatan_id');
+            $table->unsignedBigInteger('kecamatan_id');
 
-            $table->foreign('kecamatan_id')->references('kecamatan')->on('kecamatan_id')->onDelete('cascade');
+            $table->foreign('kecamatan_id')->references('kecamatan_id')->on('kecamatan')->onDelete('cascade');
         });
     }
 

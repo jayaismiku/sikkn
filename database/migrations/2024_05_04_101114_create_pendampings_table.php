@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ProgramStudi extends Migration
+class CreatePendampingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class ProgramStudi extends Migration
      */
     public function up()
     {
-        Schema::create('prodi', function (Blueprint $table) {
-            $table->id('prodi_id')->primary();
-            $table->string('kode_prodi', 5)->nullable()->unique();
-            $table->string('nama_prodi', 20)->nullable()->unique();       
-            $table->timestamps();
+        Schema::create('pendamping', function (Blueprint $table) {
+            $table->id('pendamping_id');
+            $table->unsignedBigInteger('dosen_id')->nullable();
+
+            $table->foreign('dosen_id')->references('dosen_id')->on('dosen')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ class ProgramStudi extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prodi');
+        Schema::dropIfExists('pendamping');
     }
 }

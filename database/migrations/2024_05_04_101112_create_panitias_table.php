@@ -15,10 +15,11 @@ class CreatePanitiasTable extends Migration
     {
         Schema::create('panitia', function (Blueprint $table) {
             $table->id('panitia_id');
-            $table->string('user_id', 20);
-            $table->string('pekerjaan');
-            
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->string('nama_lengkap')->nullable();
+            $table->enum('pekerjaan', ['ketua', 'sekretaris', 'bendahara', 'ketua bidang', 'anggota']);
+            $table->unsignedBigInteger('user_id')->nullable();
+
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
         });
     }
 

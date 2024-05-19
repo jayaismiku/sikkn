@@ -15,11 +15,14 @@ class Bap extends Migration
     {
         Schema::create('bap', function (Blueprint $table) {
             $table->id('bap_id');
-            $table->string('pendamping_id');
-            $table->string('unggah_surat');
-            $table->boolean('validasi');
+            $table->string('nama_bap')->nullable();
+            $table->string('unggah_surat')->nullable();
+            $table->timestamp('tanggal_unggah')->nullable()->useCurrent();
+            $table->boolean('validasi')->nullable();
+            $table->timestamp('tanggal_validasi')->nullable()->useCurrent();
+            $table->unsignedBigInteger('pendamping_id')->nullable;
 
-            $table->foreign('pendamping_id')->references('pendamping')->on('pendamping_id')->onDelete('ignore');
+            $table->foreign('pendamping_id')->references('pendamping_id')->on('pendamping')->onDelete('cascade');
         });
     }
 

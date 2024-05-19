@@ -15,17 +15,16 @@ class Logbook extends Migration
     {
         Schema::create('logbook', function (Blueprint $table) {
             $table->id('logbook_id');
-            $table->string('kelompok_id');
-            $table->string('nama_kegiatan', 100);
-            $table->text('deskripsi');
+            $table->string('nama_kegiatan', 100)->nullable();
+            $table->timestamp('tanggal_kegiatan')->nullable()->useCurrent();
+            $table->text('deskripsi_kegiatan')->nullable();
             $table->string('foto_kegiatan')->nullable()->default(false);
             $table->boolean('validasi')->default(false);
-            $table->timestamps();
+            $table->timestamp('tanggal_validasi')->nullable()->useCurrent();
+            $table->unsignedBigInteger('nim')->nullable();
 
-
-            $table->foreign('kelompok_id')->references('kelompok')->on('kelompok_id')->onDelete('ignore');
+            $table->foreign('nim')->references('nim')->on('mahasiswa')->onDelete('cascade');
         });
-
     }
 
     /**
