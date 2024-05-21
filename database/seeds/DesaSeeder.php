@@ -11,6 +11,6 @@ class DesaSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Desa::class, 50)->create();
+        factory(App\Desa::class, 25)->create();
     }
 }
