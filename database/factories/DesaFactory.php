@@ -13,8 +13,10 @@ $factory->define(Desa::class, function (Faker $faker) {
         'kota_id' => $faker->numberBetween($min = 158, $max = 178),
         'kecamatan_id' => $faker->numberBetween($min = 1941, $max = 2566),
         'kelurahan_id' => $faker->numberBetween($min = 25237, $max = 31170),
-        'longitude' => longitude($min = 107, $max = 108),
-        'latitude' => latitude($min = -6.2, $max = -7.2),
-        'status' => true
+        'longitude' => null,
+        'latitude' => null,
+        'status' => true,
+        'created_at' => date("Y-m-d H:i:s"),
+        'updated_at' => date("Y-m-d H:i:s"),
     ];
 });

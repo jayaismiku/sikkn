@@ -19,6 +19,7 @@ class CreateFakultasTable extends Migration
             $table->string('nama_fakultas')->nullable();
             $table->string('dekan')->nullable();
             $table->string('wadek')->nullable();
+            $table->timestamps();
         });
     }
 

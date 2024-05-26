@@ -3,34 +3,48 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('material/img/apple-icon.png') }}">
-	<link rel="icon" type="image/png" href="{{ asset('material/favicons/favicon.ico') }}">
+	<meta name="author" content="Jaya Kuncara, Mulki Rezka, Dwi Purliantoro">
+
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>{{ config('app.name', 'Laravel') }}</title>
 
+	<!-- Favicon -->
+	<link rel="apple-touch-icon" sizes="60x60" href="{{ asset('favicons/apple-icon-60x60.png') }}">
+	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('favicons/apple-icon-72x72.png') }}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicons/favicon-32x32.png') }}">
+	<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicons/favicon-96x96.png') }}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicons/favicon-16x16.png') }}">
+	<link rel="manifest" href="{{ asset('favicons/manifest.json') }}">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="{{ asset('favicons/ms-icon-144x144.png') }}">
+	<meta name="theme-color" content="#ffffff">    
+
 	<!-- Fonts and icons -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+
 	<!-- Nucleo Icons -->
 	<link href="{{ asset('material/css/nucleo-icons.css') }}" rel="stylesheet" />
 	<link href="{{ asset('material/css/nucleo-svg.css') }}" rel="stylesheet" />
-	<!-- Font Awesome Icons -->
-	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
 	<!-- Material Icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
 	<!-- CSS Files -->
 	<link id="pagestyle" href="{{ asset('material/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
 
+	<!-- Custom style -->
+	<link href="{{ asset('css/style-2.css') }}" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-	<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+	<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
 		<div class="sidenav-header">
 			<i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
 			<a class="navbar-brand m-0" href="./" target="_blank">
 				<img src="{{ asset('material/favicons/favicon-32x32.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-				<span class="ms-1 font-weight-bold text-white">SI KKN UMBdg</span>
+				<span class="ms-1 font-weight-bold text-white">SI-KKN UMBdg</span>
 			</a>
 		</div>
 		<hr class="horizontal light mt-0 mb-2">
@@ -41,87 +55,130 @@
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">dashboard</i>
 						</div>
-						<span class="nav-link-text ms-1">Dashboard</span>
+						<span class="nav-link-text ms-1">{{ __('Dashboard') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('broadcastmessage') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">dashboard</i>
+							<i class="material-icons opacity-10">campaign</i>
 						</div>
-						<span class="nav-link-text ms-1">Broadcast Message</span>
+						<span class="nav-link-text ms-1">{{ __('Broadcast Message') }}</span>
 					</a>
 				</li>
 				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">MASTER DATA</h6>
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Master Data') }}</h6>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('fakultas') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">apartment</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Fakultas') }}</span>
+					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('datadosen') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">group</i>
+							<i class="material-icons opacity-10">domain</i>
 						</div>
-						<span class="nav-link-text ms-1">Dosen</span>
+						<span class="nav-link-text ms-1">{{ __('Program Studi') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">groups</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Dosen') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">diversity_3</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Mahasiswa') }}</span>
+					</a>
+				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Panitia') }}</h6>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">holiday_village</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Desa') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">account_circle</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Perangkat Desa') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('datamahasiswa') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">group</i>
+							<i class="material-icons opacity-10">diversity_2</i>
 						</div>
 						<span class="nav-link-text ms-1">{{ __('Kelompok') }}</span>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('desa') }}">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">my_location</i>
-						</div>
-						<span class="nav-link-text ms-1">Desa</span>
-					</a>
-				</li>
 				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">LPPM</h6>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('panitia') }}">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">admin_panel_settings</i>
-						</div>
-						<span class="nav-link-text ms-1">Panitia</span>
-					</a>
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Pemonev') }}</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('timpemonev') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">supervisor_account</i>
 						</div>
-						<span class="nav-link-text ms-1">Tim Pemonev</span>
+						<span class="nav-link-text ms-1">{{ __('Tim Pemonev') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('panitia') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">verified</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Validasi') }}</span>
 					</a>
 				</li>
         <li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">DOSEN</h6>
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Dosen Pendamping Lapangan') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="./pages/billing.html">
+					<a class="nav-link text-white " href="{{ route('home') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">supervisor_account</i>
 						</div>
-						<span class="nav-link-text ms-1">Dosen Pembimbing</span>
+						<span class="nav-link-text ms-1">{{ __('Data DPL') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="./pages/virtual-reality.html">
+					<a class="nav-link text-white " href="{{ route('home') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">manage_accounts</i>
+							<i class="material-icons opacity-10">fact_check</i>
 						</div>
-						<span class="nav-link-text ms-1">Mahasiswa</span>
+						<span class="nav-link-text ms-1">{{ __('Validasi Kegiatan') }}</span>
 					</a>
 				</li>
         <li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">DESA</h6>
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Mahasiswa') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="./notifications.html">
+					<a class="nav-link text-white " href="{{ route('profile') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">manage_accounts</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Data Saya') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('home') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">auto_stories</i>
 						</div>
@@ -129,30 +186,11 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="./notifications.html">
+					<a class="nav-link text-white " href="{{ route('home') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">book</i>
 						</div>
 						<span class="nav-link-text ms-1">{{ __('Laporan') }}</span>
-					</a>
-				</li>
-				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Lokus Kegiatan KKN') }}</h6>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="./notifications.html">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">my_location</i>
-						</div>
-						<span class="nav-link-text ms-1">{{ __('Info Desa') }}</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="./notifications.html">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">group</i>
-						</div>
-						<span class="nav-link-text ms-1">Kepala Desa</span>
 					</a>
 				</li>
 				<li class="nav-item mt-3">
@@ -195,7 +233,7 @@
 		<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
 			<div class="container-fluid py-1 px-3">
         @yield('pathway')
-				
+								
 				<div class="mt-sm-0 me-md-0 me-sm-4" id="navbar">
 					<ul class="navbar-nav justify-content-end me-md-2 me-sm-4">
 						<li class="nav-item d-xl-none pe-2 d-flex align-items-center">
@@ -243,7 +281,7 @@
 		<!-- End Navbar -->
 
 		<div class="container-fluid py-4 main-content">
-      @yield('content')
+			@yield('content')
 			
 			<footer class="footer py-4">
 				<div class="container-fluid">
@@ -259,7 +297,7 @@
 		</div>
 	</main>
 
-	@yield('script')
+	<!-- @yield('script') -->
 
 	<!--   Core JS Files   -->
   <script src="{{ asset('material/js/core/popper.min.js') }}" ></script>
@@ -269,272 +307,17 @@
 	<script src="{{ asset('material//js/plugins/chartjs.min.js')}}"></script>
 
 	<script src="{{ asset('material/js/dataTables/jquery.dataTables.js')}}"></script>
-            <script src="{{ asset('material/js/dataTables/dataTables.bootstrap.js')}}"></script>
-            <script>
-                $(document).ready(function () {
-                    $('#dataTables-example').dataTable();
-                });
-            </script>
-	<script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
+	<script src="{{ asset('material/js/dataTables/dataTables.bootstrap.js')}}"></script>
 
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
-        datasets: [{
-          label: "Akses",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [50, 20, 10, 22, 50, 10, 40],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Akses Bulanan",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-
-    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
-
-    new Chart(ctx3, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Laporan",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [10, 30, 50, 100, 120, 200, 250, 300, 350],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#f8f9fa',
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-  </script>
-	<script>
-		var win = navigator.platform.indexOf('Win') > -1;
-		if (win && document.querySelector('#sidenav-scrollbar')) {
-			var options = {
-				damping: '0.5'
-			}
-			Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-		}
-	</script>
 	<!-- Github buttons -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
 	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="{{ asset('material/js/material-dashboard.min.js?v=3.1.0') }}"></script>
+	<!-- Font Awesome Icons -->
+	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+	<!-- Custom Script -->
+	<script src="{{ asset('js/custom.js')}}"></script>
 
 </body>
 </html>

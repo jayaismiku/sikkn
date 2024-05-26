@@ -25,6 +25,10 @@ Route::post('admin/login', 'Auth\AdminAuthController@postLogin');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 
+// Master Data
+Route::get('/fakultas', 'FakultasController@index')->name('fakultas');
+
+
 Route::get('/editdosen', 'editdosenController@index')->name('editdosen');
 Route::get('/datadosen', 'datadosenController@index')->name('datadosen');
 Route::get('/datamahasiswa', 'datamahasiswaController@index')->name('datamahasiswa');

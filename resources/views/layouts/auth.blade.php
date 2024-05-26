@@ -30,7 +30,7 @@
     <link rel="manifest" href="{{ asset('favicons/manifest.json') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ asset('favicons/ms-icon-144x144.png') }}">
-    <meta name="theme-color" content="#ffffff">    
+    <meta name="theme-color" content="#ffffff">
   </head>
 
   <body>
