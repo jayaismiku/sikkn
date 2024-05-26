@@ -21,8 +21,6 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 	<!-- CSS Files -->
 	<link id="pagestyle" href="{{ asset('material/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
-	<!-- tabel style -->
-
 
 </head>
 
@@ -46,9 +44,6 @@
 						<span class="nav-link-text ms-1">Dashboard</span>
 					</a>
 				</li>
-				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Administrator') }}</h6>
-				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('broadcastmessage') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -67,9 +62,6 @@
 						</div>
 						<span class="nav-link-text ms-1">Dosen</span>
 					</a>
-				</li>
-				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('LPPM') }}</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('datamahasiswa') }}">
@@ -116,9 +108,6 @@
 						</div>
 						<span class="nav-link-text ms-1">Dosen Pembimbing</span>
 					</a>
-				</li>
-        <li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">MAHASISWA</h6>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="./pages/virtual-reality.html">
