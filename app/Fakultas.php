@@ -8,7 +8,15 @@ class Fakultas extends Model
 {
     protected $table = 'fakultas';
 
+    protected $primaryKey = 'fakultas_id';
+
     protected $fillable = [
-        'fakultas_id', 'kode_fakultas', 'nama_fakultas', 'dekan', 'wadek', 'created_at', 'updated_at',
+        'fakultas_id', 
+        'kode_fakultas', 
+        'nama_fakultas', 
+        'dekan', 
+        'wadek', 
+        'created_at', 
+        'updated_at',
     ];
 }

@@ -25,8 +25,27 @@ Route::post('admin/login', 'Auth\AdminAuthController@postLogin');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 
-// Master Data
+// CRUD Fakultas
 Route::get('/fakultas', 'FakultasController@index')->name('fakultas');
+Route::get('/fakultas/create', 'FakultasController@create')->name('createFakultas');
+Route::post('/fakultas', 'FakultasController@store')->name('storeFakultas');
+Route::get('/fakultas/{fakultas}/edit', 'FakultasController@edit')->name('editFakultas');
+Route::put('/fakultas/{fakultas}', 'FakultasController@update')->name('updateFakultas');
+Route::delete('/fakultas/{fakultas}', 'FakultasController@destroy')->name('deleteFakultas');
+// CRUD Program Studi
+Route::get('/prodi', 'ProdiController@index')->name('prodi');
+Route::get('/prodi/create', 'ProdiController@create')->name('createProdi');
+Route::post('/prodi', 'ProdiController@store')->name('storeProdi');
+Route::get('/prodi/{prodi}/edit', 'ProdiController@edit')->name('editProdi');
+Route::put('/prodi/{prodi}', 'ProdiController@update')->name('updateProdi');
+Route::delete('/prodi/{prodi}', 'ProdiController@destroy')->name('deleteProdi');
+// CRUD Dosen
+Route::get('/dosen', 'DosenController@index')->name('dosen');
+Route::get('/dosen/create', 'DosenController@create')->name('createDosen');
+Route::post('/dosen', 'DosenController@store')->name('storeDosen');
+Route::get('/dosen/{dosen}/edit', 'DosenController@edit')->name('editDosen');
+Route::put('/dosen/{dosen}', 'DosenController@update')->name('updateDosen');
+Route::delete('/dosen/{dosen}', 'DosenController@destroy')->name('deleteDosen');
 
 
 Route::get('/editdosen', 'editdosenController@index')->name('editdosen');

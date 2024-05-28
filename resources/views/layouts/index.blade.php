@@ -6,7 +6,7 @@
 	<meta name="author" content="Jaya Kuncara, Mulki Rezka, Dwi Purliantoro">
 
 	<!-- CSRF Token -->
-	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 
 	<title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -78,7 +78,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+					<a class="nav-link text-white " href="{{ route('prodi') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">domain</i>
 						</div>
