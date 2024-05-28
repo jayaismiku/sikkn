@@ -26,7 +26,6 @@
 <h2 class="fw-light">Dashboard Informasi Desa</h2>
 <h5 class="fst-italic">Desa A</h5>
 <hr>
-
 <<<<<<< HEAD
 <div class="row">
         <div class="col-12">
@@ -243,9 +242,5 @@
       } );
     </script>
 
-=======
-
-<script src="../../assets/js/plugins/datatables.js"></script>
->>>>>>> 24e99ec3ffcd3c2be9a89b8a95ee8ae4e9bbc796
 @endsection
 
