@@ -48,9 +48,6 @@ Route::put('/dosen/{dosen}', 'DosenController@update')->name('updateDosen');
 Route::delete('/dosen/{dosen}', 'DosenController@destroy')->name('deleteDosen');
 
 
-Route::get('/editdosen', 'editdosenController@index')->name('editdosen');
-Route::get('/datadosen', 'datadosenController@index')->name('datadosen');
-Route::get('/datamahasiswa', 'datamahasiswaController@index')->name('datamahasiswa');
 Route::get('/broadcastmessage', 'broadcastmessageController@index')->name('broadcastmessage');
 Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
 Route::get('/desa', 'DesaController@index')->name('desa');
