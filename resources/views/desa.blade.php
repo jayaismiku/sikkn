@@ -67,7 +67,7 @@
                   <span class="text-secondary text-xs font-weight-bold">081546234556</span>
                 </td>
                 <td class="align-middle">
-                  <a href="{{ route('editdosen') }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                  <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     Edit
                   </a>
                 </td>
@@ -91,7 +91,7 @@
                   <span class="text-secondary text-xs font-weight-bold">081546234556</span>
                 </td>
                 <td class="align-middle">
-                  <a href="{{ route('editdosen') }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                  <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     Edit
                   </a>
                 </td>
@@ -115,7 +115,7 @@
                   <span class="text-secondary text-xs font-weight-bold">081546234556</span>
                 </td>
                 <td class="align-middle">
-                  <a href="{{ route('editdosen') }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                  <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     Edit
                   </a>
                 </td>
@@ -139,7 +139,7 @@
                   <span class="text-secondary text-xs font-weight-bold">081546234556</span>
                 </td>
                 <td class="align-middle">
-                  <a href="{{ route('editdosen') }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                  <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     Edit
                   </a>
                 </td>
@@ -163,7 +163,7 @@
                   <span class="text-secondary text-xs font-weight-bold">081546234556</span>
                 </td>
                 <td class="align-middle">
-                  <a href="{{ route('editdosen') }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                  <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     Edit
                   </a>
                 </td>
@@ -187,7 +187,7 @@
                   <span class="text-secondary text-xs font-weight-bold">081546234556</span>
                 </td>
                 <td class="align-middle">
-                  <a href="{{ route('editdosen') }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                  <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                     Edit
                   </a>
                 </td>

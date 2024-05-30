@@ -59,18 +59,18 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('broadcastmessage') }}">
+					<a class="nav-link text-white " href="{{ route('post.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">campaign</i>
 						</div>
-						<span class="nav-link-text ms-1">{{ __('Broadcast Message') }}</span>
+						<span class="nav-link-text ms-1">{{ __('Berita') }}</span>
 					</a>
 				</li>
 				<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Master Data') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('fakultas') }}">
+					<a class="nav-link text-white " href="{{ route('fakultas.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">apartment</i>
 						</div>
@@ -78,7 +78,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('prodi') }}">
+					<a class="nav-link text-white " href="{{ route('prodi.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">domain</i>
 						</div>
@@ -86,7 +86,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+					<a class="nav-link text-white " href="{{ route('dosen.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">groups</i>
 						</div>
@@ -94,7 +94,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+					<a class="nav-link text-white " href="{{ route('mahasiswa.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">diversity_3</i>
 						</div>
@@ -105,7 +105,7 @@
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Panitia') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+					<a class="nav-link text-white " href="{{ route('desa.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">holiday_village</i>
 						</div>
@@ -113,7 +113,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('datadosen') }}">
+					<a class="nav-link text-white " href="{{ route('perangkat.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">account_circle</i>
 						</div>
@@ -121,7 +121,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('datamahasiswa') }}">
+					<a class="nav-link text-white " href="{{ route('kelompok.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">diversity_2</i>
 						</div>
@@ -132,7 +132,7 @@
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Pemonev') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('timpemonev') }}">
+					<a class="nav-link text-white " href="{{ route('pemonev.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">supervisor_account</i>
 						</div>
@@ -140,7 +140,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('panitia') }}">
+					<a class="nav-link text-white " href="{{ route('panitia.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">verified</i>
 						</div>
@@ -151,7 +151,7 @@
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Dosen Pendamping Lapangan') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('home') }}">
+					<a class="nav-link text-white " href="{{ route('pendamping.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">supervisor_account</i>
 						</div>
@@ -178,7 +178,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('home') }}">
+					<a class="nav-link text-white " href="{{ route('logbook.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">auto_stories</i>
 						</div>
@@ -186,7 +186,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('home') }}">
+					<a class="nav-link text-white " href="{{ route('laporan.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">book</i>
 						</div>

@@ -23,9 +23,9 @@ class CreateMahasiswasTable extends Migration
 			$table->integer('kota_id')->nullable()->default('161');
 			$table->integer('provinsi_id')->nullable()->default('12');
 			$table->unsignedBigInteger('telp')->unique();
-			$table->enum('fakultas', ['Fakultas Sains dan Teknologi', 'Fakultas Sosial Humaniora', 'Fakultas Enomoni dan Bisnis', 'Fakultas Agama Islam'])->nullable();
-			$table->enum('prodi', ['TE', 'IF', 'TI', 'TP', 'FA', 'BIO', 'AGRI', 'ILKOM', 'PSI', 'KTF', 'AP', 'AKUN', 'MAN', 'PAI', 'PIAUD', 'HKI', 'KPI', 'EKSYAR'])->nullable();
-			$table->enum('semester', ['1', '2', '3', '4', '5', '6', '7', '8'])->default('6');
+			$table->string('fakultas')->nullable();
+			$table->string('prodi')->nullable();
+			$table->string('semester')->default('6');
 			$table->string('unggah_krs')->nullable();
 			$table->boolean('validasi_krs')->default(false);
 			$table->string('unggah_keuangan')->nullable();
@@ -33,7 +33,7 @@ class CreateMahasiswasTable extends Migration
 			$table->string('unggah_ukt')->nullable();
 			$table->boolean('validasi_ukt')->default(false);
 			$table->string('sakit_berat')->nullable();
-			$table->string('alergi')->default(false);
+			$table->string('alergi')->nullable();
 			$table->unsignedBigInteger('user_id')->nullable();
 
 			$table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

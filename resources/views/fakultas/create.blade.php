@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Dashboard Admin')
+@section('title', 'Fakultas')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -11,7 +11,7 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm">
-      <a class="opacity-5 text-dark" href="{{ route('fakultas') }}">Fakultas</a>
+      <a class="opacity-5 text-dark" href="{{ route('fakultas.index') }}">Fakultas</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
       <span>Tambah Fakultas</span>
@@ -41,7 +41,7 @@
         </div>
         <br />
         @endif
-        <form method="post" action="{{ route('storeFakultas') }}">
+        <form method="post" action="{{ route('fakultas.store') }}">
           @csrf
           <div class="form-group">
             <label class="form-label" for="kode_fakultas">{{ __('Kode Fakultas:') }}</label>
@@ -59,9 +59,13 @@
               <label class="form-label" for="wadek">{{ __('Wakil Dekan') }}</label>
               <input type="text" class="form-control" name="wadek"/>
           </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-success-outline">{{ __('Simpan') }}</button>
-            <a href="{{ route('fakultas') }}"><span class="btn btn-info-outline">{{ __('Kembali') }}</span></a>
+          <div class="form-group mt-4">
+            <button type="submit" class="btn btn-success xs">
+              <span class="material-icons">save</span>
+            </button>
+            <a class="btn btn-info xs" href="{{ route('fakultas.index') }}">
+              <span class="material-icons">undo</span>
+            </a>
           </div>         
         </form>
       </div>

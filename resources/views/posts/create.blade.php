@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Tambah Prodi')
+@section('title', 'Dashboard Admin')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -11,10 +11,10 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm">
-      <a class="opacity-5 text-dark" href="{{ route('prodi.index') }}">Prodi</a>
+      <a class="opacity-5 text-dark" href="{{ route('post.index') }}">{{ __('Berita') }}</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>Tambah Prodi</span>
+      <span>{{ __('Tambah Berita') }}</span>
     </li>
   </ol>
 </nav>
@@ -27,7 +27,7 @@
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-secondary shadow-secondary border-radius-lg pt-4 pb-3">
-          <h6 class="text-white text-capitalize ps-3">Tambah Prodi</h6>
+          <h6 class="text-white text-capitalize ps-3">{{ __('Tambah Berita') }}</h6>
         </div>
       </div>
       <div class="card-body px-0 pb-2 mx-3 ">
@@ -41,33 +41,23 @@
         </div>
         <br />
         @endif
-        <form id="" method="post" action="{{ route('prodi.store') }}">
+        <form method="post" action="{{ route('post.store') }}">
           @csrf
           <div class="form-group">
-            <label class="form-label" for="kode_prodi">{{ __('Kode Prodi:') }}</label>
-            <input type="text" class="form-control px-2" name="kode_prodi"/>
+            <label class="form-label" for="judul">{{ __('Judul Berita:') }}</label>
+            <input type="text" class="form-control" name="judul" required/>
           </div>
           <div class="form-group">
-              <label class="form-label" for="nama_prodi">{{ __('Nama Prodi:') }}</label>
-              <input type="text" class="form-control px-2" name="nama_prodi"/>
+              <label class="form-label" for="slug">{{ __('Slug Berita:') }}</label>
+              <input type="text" class="form-control" name="slug" required/>
           </div>
           <div class="form-group">
-              <label class="form-label" for="kaprodi">{{ __('Kaprodi:') }}</label>
-              <input type="text" class="form-control px-2" name="kaprodi"/>
+              <label class="form-label" for="deskripsi">{{ __('Deskripsi:') }}</label>
+              <textarea class="form-control" name="deskripsi" id="deskripsi" rows="3"></textarea>
           </div>
           <div class="form-group">
-              <label class="form-label" for="sekprodi">{{ __('Sekprodi') }}</label>
-              <input type="text" class="form-control px-2" name="sekprodi"/>
-          </div>
-          <div class="form-group">
-              <label class="form-label" for="fakultas">{{ __('Fakultas') }}</label>
-              <select class="form-control form-select px-2" aria-label=".form-select-sm example" name="fakultas">
-                <option selected>Open this select menu</option>
-                <option value="FST">Fakultas Sains dan Teknologi</option>
-                <option value="FSH">Fakultas Sosial Humaniora</option>
-                <option value="FEB">Fakultas Ekonomi dan Bisnis</option>
-                <option value="FAI">Fakultas Agama Islam</option>
-              </select>
+              <label class="form-label" for="penulis">{{ __('Penulis') }}</label>
+              <input type="text" class="form-control" name="penulis"/>
           </div>
           <div class="form-group mt-4">
             <button type="submit" class="btn btn-success xs">
@@ -76,11 +66,25 @@
             <a class="btn btn-info xs" href="{{ route('prodi.index') }}">
               <span class="material-icons">undo</span>
             </a>
-          </div>         
+          </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+@push('scripts')
+  <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+  <script>
+    ClassicEditor
+      .create( document.querySelector('#deskripsi') )
+      .then( editor => {
+        console.log( editor );
+      } )
+      .catch( error => {
+        console.error( error );
+      } );
+  </script>
+@endpush
+
 @endsection
 

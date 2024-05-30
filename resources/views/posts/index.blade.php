@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Program Studi')
+@section('title', 'Berita')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -11,7 +11,7 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>Prodi</span>
+      <span>Berita</span>
     </li>
   </ol>
 </nav>
@@ -19,7 +19,7 @@
 
 @section('content')
 @if(session()->get('success'))
-<div class="alert alert-success alert-dismissible text-white mx-3 fade show" role="alert">
+<div class="alert alert-success alert-dismissible text-white fade show mx-3" role="alert">
   <span class="alert-icon align-middle">
     <span class="material-icons text-md">thumb_up_off_alt</span>
   </span>
@@ -36,10 +36,10 @@
         <div class="bg-gradient-secondary shadow-secondary border-radius-lg pt-4 pb-3 container">
           <div class="row">
             <div class="col-sm-8">
-              <h6 class="text-white text-capitalize ps-3">{{ __('Data Program Studi') }}</h6>
+              <h6 class="text-white text-capitalize ps-3">{{ __('Berita Terkini') }}</h6>
             </div>
             <div class="col-sm-4 text-end">
-              <a class="text-warning-outline pe-4" href="{{ route('prodi.create') }}">
+              <a class="text-warning-outline pe-4" href="{{ route('post.create') }}">
                 <span class="material-icons">add_circle</span>
               </a>
             </div>
@@ -51,27 +51,25 @@
           <table class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Kode Prodi') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Prodi') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Kaprodi') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Sekprodi') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Fakultas') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Judul') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Slug') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Penulis') }}</th>
                 <th class="text-center"><i class="material-icons">draw</i></th>
               </tr>
             </thead>
             <tbody>
-              @foreach($prodi as $pd)
+              @foreach($posts as $post)
               <tr>
-                <td class="text-xs">{{ $pd->kode_prodi }}</td>
-                <td class="text-xs">{{ $pd->nama_prodi }}</td>
-                <td class="text-xs">{{ $pd->kaprodi }}</td>
-                <td class="text-xs">{{ $pd->sekprodi }}</td>
-                <td class="text-xs">{{ $pd->fakultas }}</td>
+                <td class="text-xs">{{ $post->judul }}</td>
+                <td class="text-xs">{{ $post->slug }}</td>
+                <td class="text-xs">{{ $post->penulis }}</td>
                 <td class="text-xs text-center">
-                  <a class="text-warning" href="{{ route('prodi.edit', $pd->prodi_id)}}"><span class="material-icons">edit</span></a>
-                  <a class="nav-link text-danger" href="{{ route('prodi.destroy', $pd->prodi_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $pd->prodi_id }}').submit();">
+                  <a class="text-warning" href="{{ route('post.edit', $post->dosen_id)}}">
+                    <span class="material-icons">edit</span>
+                  </a>
+                  <a class="nav-link text-danger" href="{{ route('post.destroy', $post->dosen_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $post->dosen_id }}').submit();">
                     <span class="material-icons">delete</span>
-                    <form id="delete-form-{{ $pd->prodi_id }}" action="{{ route('prodi.destroy', $pd->prodi_id) }}" method="POST" class="d-none">
+                    <form id="delete-form-{{ $post->dosen_id }}" action="{{ route('post.destroy', $post->dosen_id) }}" method="POST" class="d-none">
                       @csrf
                       @method('DELETE')
                     </form>

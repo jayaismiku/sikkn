@@ -11,7 +11,7 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm">
-      <a class="opacity-5 text-dark" href="{{ route('fakultas') }}">Fakultas</a>
+      <a class="opacity-5 text-dark" href="{{ route('fakultas.index') }}">Fakultas</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
       <span>Edit Fakultas</span>
@@ -41,7 +41,7 @@
         </div>
         <br />
         @endif
-        <form id="editFakultas" method="post" action="{{ route('updateFakultas', $fakultas->fakultas_id) }}">
+        <form id="editFakultas" method="post" action="{{ route('fakultas.update', $fakultas->fakultas_id) }}">
           @csrf
           @method('PUT')
           <div class=" input-group-outline my-3">
@@ -60,10 +60,14 @@
               <label class="form-label" for="wadek">{{ __('Wakil Dekan') }}</label>
               <input type="text" class="form-control px-2 py-2" name="wadek" value="{{ $fakultas->wadek }}"/>
           </div>
-          <div class="form-group">
+          <div class="form-group mt-4">
             <input type="hidden" class="form-control px-2 py-2" name="fakultas_id" value="{{ $fakultas->fakultas_id }}" />
-            <button type="submit" class="btn btn-success-outline">{{ __('Simpan') }}</button>
-            <a href="{{ route('fakultas') }}"><span class="btn btn-info-outline">{{ __('Kembali') }}</span></a>
+            <button type="submit" class="btn btn-success xs">
+              <span class="material-icons">save</span>
+            </button>
+            <a class="btn btn-info xs" href="{{ route('fakultas.index') }}">
+              <span class="material-icons">undo</span>
+            </a>
           </div>         
         </form>
       </div>

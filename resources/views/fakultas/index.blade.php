@@ -19,7 +19,7 @@
 
 @section('content')
 @if(session()->get('success'))
-<div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+<div class="alert alert-success alert-dismissible text-white fade show mx-3" role="alert">
   <span class="alert-icon align-middle">
     <span class="material-icons text-md">thumb_up_off_alt</span>
   </span>
@@ -39,7 +39,7 @@
               <h6 class="text-white text-capitalize ps-3">{{ __('Data Fakultas') }}</h6>
             </div>
             <div class="col-sm-4 text-end">
-              <a class="text-warning-outline pe-4" href="{{ route('createFakultas') }}">
+              <a class="text-warning-outline pe-4" href="{{ route('fakultas.create') }}">
                 <span class="material-icons">add_circle</span>
               </a>
             </div>
@@ -66,10 +66,12 @@
                 <td class="text-xs">{{ $fk->dekan }}</td>
                 <td class="text-xs">{{ $fk->wadek }}</td>
                 <td class="text-xs text-center">
-                  <a class="text-warning" href="{{ route('editFakultas', $fk->fakultas_id)}}"><span class="material-icons">edit</span></a>
-                  <a class="nav-link text-danger" href="{{ route('deleteFakultas', $fk->fakultas_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $fk->fakultas_id }}').submit();">
+                  <a class="text-warning" href="{{ route('fakultas.edit', $fk->fakultas_id)}}">
+                    <span class="material-icons">edit</span>
+                  </a>
+                  <a class="nav-link text-danger" href="{{ route('fakultas.destroy', $fk->fakultas_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $fk->fakultas_id }}').submit();">
                     <span class="material-icons">delete</span>
-                    <form id="delete-form-{{ $fk->fakultas_id }}" action="{{ route('deleteFakultas', $fk->fakultas_id) }}" method="POST" class="d-none">
+                    <form id="delete-form-{{ $fk->fakultas_id }}" action="{{ route('fakultas.destroy', $fk->fakultas_id) }}" method="POST" class="d-none">
                       @csrf
                       @method('DELETE')
                     </form>

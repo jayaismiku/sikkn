@@ -15,13 +15,11 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id('post_id');
-            $table->string('judul');
-            $table->string('slug');
-            $table->unsignedBigInteger('penulis');
-            $table->text('deskripsi');
+            $table->string('judul')->nullable();
+            $table->string('slug')->nullable();
+            $table->text('deskripsi')->nullable();
+            $table->unsignedBigInteger('penulis')->nullable()->default(2);
             $table->timestamps();
-
-            $table->foreign('penulis')->references('panitia_id')->on('panitia')->onDelete('cascade');
         });
     }
 

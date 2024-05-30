@@ -11,7 +11,7 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm">
-      <a class="opacity-5 text-dark" href="{{ route('prodi') }}">Prodi</a>
+      <a class="opacity-5 text-dark" href="{{ route('prodi.index') }}">Prodi</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
       <span>Edit Prodi</span>
@@ -41,7 +41,7 @@
         </div>
         <br />
         @endif
-        <form id="editFakultas" method="post" action="{{ route('updateProdi', $prodi->prodi_id) }}">
+        <form id="editFakultas" method="post" action="{{ route('prodi.update', $prodi->prodi_id) }}">
           @csrf
           @method('PUT')
           <div class=" input-group-outline my-3">
@@ -74,7 +74,7 @@
             <button type="submit" class="btn btn-success xs">
               <span class="material-icons">save</span>
             </button>
-            <a class="btn btn-info xs" href="{{ route('prodi') }}">
+            <a class="btn btn-info xs" href="{{ route('prodi.index') }}">
               <span class="material-icons">undo</span>
             </a>
           </div>         

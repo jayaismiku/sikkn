@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PanitiaController extends Controller
+class LogbookController extends Controller
 {
     /**
      * Display a listing of the resource.

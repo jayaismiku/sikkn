@@ -11,7 +11,7 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm">
-      <a class="opacity-5 text-dark" href="{{ route('dosen.index') }}">Fakultas</a>
+      <a class="opacity-5 text-dark" href="{{ route('mahasiswa.index') }}">Fakultas</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
       <span>Tambah Fakultas</span>
@@ -41,7 +41,7 @@
         </div>
         <br />
         @endif
-        <form method="post" action="{{ route('dosen.store') }}">
+        <form method="post" action="{{ route('mahasiswa.store') }}">
           @csrf
           <div class="form-group">
             <label class="form-label" for="kode_fakultas">{{ __('Kode Fakultas:') }}</label>
@@ -61,7 +61,7 @@
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success-outline">{{ __('Simpan') }}</button>
-            <a href="{{ route('dosen.index') }}"><span class="btn btn-info-outline">{{ __('Kembali') }}</span></a>
+            <a href="{{ route('mahasiswa.index') }}"><span class="btn btn-info-outline">{{ __('Kembali') }}</span></a>
           </div>         
         </form>
       </div>

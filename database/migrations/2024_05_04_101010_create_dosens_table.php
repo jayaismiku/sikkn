@@ -15,16 +15,16 @@ class CreateDosensTable extends Migration
 	{
 		Schema::create('dosen', function (Blueprint $table) {
 			$table->id('dosen_id');
-			$table->integer('nidn')->unsigned()->nullable();
-			$table->integer('nip')->unsigned()->nullable();
+			$table->string('nidn')->unsigned()->nullable();
+			$table->string('nip')->unsigned()->nullable();
 			$table->string('nama_lengkap')->nullable();
 			$table->string('gelar_depan')->nullable();
 			$table->string('gelar_belakang')->nullable();
 			$table->string('pangkat')->nullable()->default('Penata Muda Tk.I');
 			$table->string('golongan')->nullable()->default('III/B');
-			$table->enum('fakultas', ['Fakultas Sains dan Teknologi', 'Fakultas Sosial Humaniora', 'Fakultas Enomoni dan Bisnis', 'Fakultas Agama Islam'])->nullable();
-			$table->enum('prodi', ['TE', 'IF', 'TI', 'TP', 'FA', 'BIO', 'AGRI', 'ILKOM', 'PSI', 'KTF', 'AP', 'AKUN', 'MAN', 'PAI', 'PIAUD', 'HKI', 'KPI', 'EKSYAR'])->nullable();
-			$table->integer('telp')->nullable();
+			$table->string('fakultas')->nullable();
+			$table->string('prodi')->nullable();
+			$table->string('telp')->nullable();
 			$table->string('alamat')->nullable();
 			$table->integer('kelurahan_id')->nullable()->default('26603');
 			$table->integer('kecamatan_id')->nullable()->default('2458');
@@ -33,6 +33,8 @@ class CreateDosensTable extends Migration
 			$table->unsignedBigInteger('user_id')->nullable();
 
 			$table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+			$table->foreign('fakultas')->references('kode_fakultas')->on('fakultas')->onDelete('cascade');
+			$table->foreign('prodi')->references('kode_prodi')->on('prodi')->onDelete('cascade');
 		});
 	}
 
