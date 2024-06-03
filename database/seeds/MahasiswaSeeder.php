@@ -11,6 +11,6 @@ class MahasiswaSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Mahasiswa::class, 500)->create();
+        factory(App\Mahasiswa::class, 30)->create();
     }
 }

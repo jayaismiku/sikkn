@@ -3,6 +3,7 @@ body{
 }
 
 .form-control{
-  border-width: thin;
-  border-style: solid;
+  border: 1px solid lightgray;
+  padding-left: 0.35rem;
+  padding-right: 0.35rem;
 }

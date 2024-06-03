@@ -6,13 +6,30 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+
+
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
-    public function index()
+    public function panitia()
     {
-        return view('profile');
+
+    }
+
+    public function pemonev()
+    {
+        
+    }
+
+    public function dpl()
+    {
+        
+    }
+
+    public function mahasiswa()
+    {
+        return view('mahasiswa.profil');
     }
 }

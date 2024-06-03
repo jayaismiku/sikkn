@@ -124,10 +124,19 @@
             <button type="submit" class="btn btn-success xs">
               <span class="material-icons">save</span>
             </button>
-            <a class="btn btn-info xs" href="{{ route('dosen.index') }}">
+            <a class="btn btn-info xs" href="{{ route('mahasiswa.index') }}">
               <span class="material-icons">undo</span>
             </a>
+            @if($mahasiswa->user_id == 0)
+            <a class="btn btn-warning xs" href="{{ route('mahasiswa.verify', $mahasiswa->user_id) }}" onclick="event.preventDefault(); document.getElementById('verify-account').submit();">
+              <span class="material-icons">verified</span>
+            </a>
+            @endif
           </div>         
+        </form>
+        <form id="verify-account" action="{{ route('mahasiswa.verify', $mahasiswa->user_id) }}" method="POST" class="d-none">
+          @csrf
+          @method('PUT')
         </form>
       </div>
     </div>

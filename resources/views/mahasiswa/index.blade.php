@@ -19,7 +19,7 @@
 
 @section('content')
 @if(session()->get('success'))
-<div class="alert alert-success alert-dismissible text-white fade show mx-3" role="alert">
+<div id="alert-success" class="alert alert-success alert-dismissible text-white fade show mx-3" role="alert">
   <span class="alert-icon align-middle">
     <span class="material-icons text-md">thumb_up_off_alt</span>
   </span>
@@ -51,13 +51,14 @@
           <table class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Mahasiswa') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Email') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Fakultas') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Prodi') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('KRS') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Bayar') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('UKT') }}</th>
+                <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Mahasiswa') }}</th>
+                <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Email') }}</th>
+                <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Fakultas') }}</th>
+                <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Prodi') }}</th>
+                <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('KRS') }}</th>
+                <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Bayar') }}</th>
+                <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('UKT') }}</th>
+                <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Status') }}</th>
                 <th class="text-center"><i class="material-icons">draw</i></th>
               </tr>
             </thead>
@@ -68,9 +69,10 @@
                 <td class="text-xs">{{ $mhs->email }}</td>
                 <td class="text-xs">{{ $mhs->fakultas }}</td>
                 <td class="text-xs">{{ $mhs->prodi }}</td>
-                <td class="text-xs">{!! ($mhs->validasi_krs==1)?'<span class="material-icons text-success">verified</span>':'<span class="material-icons text-warning">warning</span>' !!}</td>
-                <td class="text-xs">{!! ($mhs->validasi_keuangan==1)?'<span class="material-icons text-success">verified</span>':'<span class="material-icons text-warning">warning</span>' !!}</td>
-                <td class="text-xs">{!! ($mhs->validasi_ukt==1)?'<span class="material-icons text-success">verified</span>':'<span class="material-icons text-warning">warning</span>' !!}</td>
+                <td class="text-xs text-center">{!! ($mhs->validasi_krs==1)?'<span class="material-icons text-success">verified</span>':'<span class="material-icons text-warning">warning</span>' !!}</td>
+                <td class="text-xs text-center">{!! ($mhs->validasi_keuangan==1)?'<span class="material-icons text-success">verified</span>':'<span class="material-icons text-warning">warning</span>' !!}</td>
+                <td class="text-xs text-center">{!! ($mhs->validasi_ukt==1)?'<span class="material-icons text-success">verified</span>':'<span class="material-icons text-warning">warning</span>' !!}</td>
+                <td class="text-xs text-center">{!! ($mhs->status==1)?'<span class="material-icons text-success">verified</span>':'<span class="material-icons text-warning">warning</span>' !!}</td>
                 <td class="text-xs text-center">
                   <a class="text-warning" href="{{ route('mahasiswa.edit', $mhs->mahasiswa_id)}}">
                     <span class="material-icons">edit</span>
@@ -92,5 +94,13 @@
     </div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" type="text/javascript" charset="utf-8" async defer></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#alert-success').delay(1000).fadeOut();
+  });
+</script>
+
 @endsection
 

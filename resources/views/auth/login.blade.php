@@ -113,7 +113,7 @@
 </div>
 <div class="mt-4">
 	<div class="d-flex justify-content-center links">
-		{{ __('Belum punya akun?') }} <a href="{{ route('register') }}" class="ml-2">{{ __('Buat Akun') }}</a>
+		{{ __('Belum punya akun?') }} <a href="{{ route('daftar') }}" class="ml-2">{{ __('Buat Akun') }}</a>
 	</div>
 	<div class="d-flex justify-content-center links">
 		<a href="{{ route('password.request') }}">{{ __('Lupa kata sandi?') }}</a>

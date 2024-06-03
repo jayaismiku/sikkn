@@ -88,9 +88,9 @@ class MahasiswaController extends Controller
 			'semester' => 'required',
 			'telp' => 'required|unique:mahasiswa|max:15',
 			'krs' => 'required|image|max:2048',
-			// 'bayar' => 'required|image|max:2048',
-			// 'ukt' => 'required|image|max:2048',
-			// 'sakit' => 'image|max:2048',
+			'bayar' => 'required|image|max:2048',
+			'ukt' => 'required|image|max:2048',
+			'sakit' => 'image|max:2048',
 		]);
 
 		$path_storage = 'files/' . $request->get('nim');
@@ -139,9 +139,20 @@ class MahasiswaController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$mahasiswa = User::find($id);
+		$mahasiswa = Mahasiswa::find($id);
 		$mahasiswa->delete();
 		
 		return redirect('/mahasiswa')->with('success', 'User berhasil dihapus!');
+	}
+
+	public function verify($id)
+	{
+		// dd($id);
+		$verify = User::find($id);
+		$verify->status = 1;
+		$verify->email_verified_at = date('Y-m-d H:i:s');
+		$verify->save();
+
+		return redirect('/mahasiswa')->with('success', 'Verifikasi User berhasil!');
 	}
 }
