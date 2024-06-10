@@ -34,7 +34,7 @@
             <div class="form-group row my-1">
               <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
               <div class="col-md-6">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" >
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" required>
                 @error('email')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -45,7 +45,7 @@
             <div class="form-group row my-1">
               <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
               <div class="col-md-6">
-                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" >
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" required>
                 @error('password')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
             <div class="form-group row my-1">
               <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Konfirmasi Password') }}</label>
               <div class="col-md-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" >
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" required>
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@
             <div class="form-group row my-1">
               <label for="nim" class="col-md-4 col-form-label text-md-right">{{ __('NIM') }}</label>
               <div class="col-md-6">
-                <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim"  autocomplete="nim">
+                <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim" autocomplete="nim" required>
                 @error('nim')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
             <div class="form-group row my-1">
               <label for="namalengkap" class="col-md-4 col-form-label text-md-right">{{ __('Nama Lengkap') }}</label>
               <div class="col-md-6">
-                <input type="text" class="form-control @error('namalengkap') is-invalid @enderror" id="namalengkap" name="namalengkap"  autocomplete="namalengkap">
+                <input type="text" class="form-control @error('namalengkap') is-invalid @enderror" id="namalengkap" name="namalengkap" autocomplete="namalengkap" required>
                 @error('namalengkap')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -97,7 +97,7 @@
             <div class="form-group row my-1">
               <label for="telp" class="col-md-4 col-form-label text-md-right">{{ __('No Whatsapp (aktif)') }}</label>
               <div class="col-md-6">
-                <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" name="telp" autocomplete="telp" >
+                <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" name="telp" autocomplete="telp" required>
                 @error('telp')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -110,7 +110,7 @@
             <div class="form-group row my-1">
               <label for="fakultas" class="col-md-4 col-form-label text-md-right">{{ __('Fakultas') }}</label>
               <div class="col-md-6">
-                <select class="form-select form-control @error('fakultas') is-invalid @enderror" id="fakultas" name="fakultas" aria-label="select fakultas" >
+                <select class="form-select form-control @error('fakultas') is-invalid @enderror" id="fakultas" name="fakultas" aria-label="select fakultas" required>
                   <option selected>- Pilih Fakultas -</option>
                   @foreach($fakultas as $fk)
                   <option value="{{ $fk->kode_fakultas }}">{{ $fk->nama_fakultas }}</option>
@@ -126,7 +126,7 @@
             <div class="form-group row my-1">
               <label for="prodi" class="col-md-4 col-form-label text-md-right">{{ __('Program Studi') }}</label>
               <div class="col-md-6">
-                <select class="form-select form-control @error('prodi') is-invalid @enderror" id="prodi" name="prodi" aria-label="select prodi" >
+                <select class="form-select form-control @error('prodi') is-invalid @enderror" id="prodi" name="prodi" aria-label="select prodi" required>
                   <option selected>- Pilih Program Studi -</option>
                   @foreach($prodi as $pr)
                   <option value="{{ $pr->kode_prodi }}">{{ $pr->nama_prodi }}</option>
@@ -142,7 +142,7 @@
             <div class="form-group row my-1">
               <label for="semester" class="col-md-4 col-form-label text-md-right">{{ __('semester') }}</label>
               <div class="col-md-6">
-                <select class="form-select form-control @error('semester') is-invalid @enderror" id="semester" name="semester" aria-label="select semester" >
+                <select class="form-select form-control @error('semester') is-invalid @enderror" id="semester" name="semester" aria-label="select semester" required>
                   <option selected>- Pilih Semester -</option>
                   <option value="4">4</option>
                   <option value="6">6</option>
@@ -160,7 +160,7 @@
             <div class="form-group row my-1">
               <label for="unggahkrs" class="col-md-4 col-form-label text-md-right">{{ __('Unggah KRS') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahkrs') is-invalid @enderror" id="unggahkrs" name="unggahkrs"  autocomplete="unggahkrs">
+                <input type="file" class="form-control @error('unggahkrs') is-invalid @enderror" id="unggahkrs" name="unggahkrs" autocomplete="unggahkrs" required>
                 @error('unggahkrs')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -171,7 +171,7 @@
             <div class="form-group row my-1">
               <label for="unggahukt" class="col-md-4 col-form-label text-md-right">{{ __('Unggah UKT') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahukt') is-invalid @enderror" id="unggahukt" name="unggahukt"  autocomplete="unggahukt">
+                <input type="file" class="form-control @error('unggahukt') is-invalid @enderror" id="unggahukt" name="unggahukt" autocomplete="unggahukt" required>
                 @error('unggahukt')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -182,7 +182,7 @@
             <div class="form-group row my-1">
               <label for="unggahbiaya" class="col-md-4 col-form-label text-md-right">{{ __('Unggah Biaya KKN') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahbiaya') is-invalid @enderror" id="unggahbiaya" name="unggahbiaya"  autocomplete="unggahbiaya">
+                <input type="file" class="form-control @error('unggahbiaya') is-invalid @enderror" id="unggahbiaya" name="unggahbiaya" autocomplete="unggahbiaya" >
                 @error('unggahbiaya')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

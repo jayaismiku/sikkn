@@ -24,10 +24,6 @@
 	<!-- Fonts and icons -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 
-	<!-- Nucleo Icons -->
-	<link href="{{ asset('material/css/nucleo-icons.css') }}" rel="stylesheet" />
-	<link href="{{ asset('material/css/nucleo-svg.css') }}" rel="stylesheet" />
-
 	<!-- Material Icons -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
@@ -36,6 +32,7 @@
 
 	<!-- Custom style -->
 	<link href="{{ asset('css/style-2.css') }}" rel="stylesheet" />
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -50,20 +47,13 @@
 		<hr class="horizontal light mt-0 mb-2">
 		<div class="collapse navbar-collapse w-auto " id="sidenav-collapse-main">
 			<ul class="navbar-nav">
+				@if(Auth::user()->role == 'admin')
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('home') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">dashboard</i>
 						</div>
 						<span class="nav-link-text ms-1">{{ __('Dashboard') }}</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('post.index') }}">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">campaign</i>
-						</div>
-						<span class="nav-link-text ms-1">{{ __('Berita') }}</span>
 					</a>
 				</li>
 				<li class="nav-item mt-3">
@@ -101,6 +91,8 @@
 						<span class="nav-link-text ms-1">{{ __('Mahasiswa') }}</span>
 					</a>
 				</li>
+				@endif
+				@if(Auth::user()->role == 'panitia' || Auth::user()->role == 'admin')
 				<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Panitia') }}</h6>
 				</li>
@@ -128,6 +120,16 @@
 						<span class="nav-link-text ms-1">{{ __('Kelompok') }}</span>
 					</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('post.index') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">campaign</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Berita') }}</span>
+					</a>
+				</li>
+				@endif
+				@if(Auth::user()->role == 'pemonev' || Auth::user()->role == 'admin')
 				<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Pemonev') }}</h6>
 				</li>
@@ -147,6 +149,8 @@
 						<span class="nav-link-text ms-1">{{ __('Validasi') }}</span>
 					</a>
 				</li>
+				@endif
+				@if(Auth::user()->role == 'pendamping' || Auth::user()->role == 'admin')
         <li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Dosen Pendamping Lapangan') }}</h6>
 				</li>
@@ -166,6 +170,8 @@
 						<span class="nav-link-text ms-1">{{ __('Validasi Kegiatan') }}</span>
 					</a>
 				</li>
+				@endif
+				@if(Auth::user()->role == 'mahasiswa' || Auth::user()->role == 'admin')
         <li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Mahasiswa') }}</h6>
 				</li>
@@ -193,6 +199,7 @@
 						<span class="nav-link-text ms-1">{{ __('Laporan') }}</span>
 					</a>
 				</li>
+				@endif
 				<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Akun Pengguna') }}</h6>
 				</li>
@@ -254,7 +261,7 @@
 									<a class="dropdown-item border-radius-md" href="javascript:;">
 										<div class="d-flex py-1">
 											<div class="my-auto">
-												<img src="material/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+												<img src="{{ asset('material/img/team-2.jpg') }}" class="avatar avatar-sm  me-3 ">
 											</div>
 											<div class="d-flex flex-column justify-content-center">
 												<h6 class="text-sm font-weight-normal mb-1">
@@ -300,21 +307,28 @@
 	<!-- @yield('script') -->
 
 	<!--   Core JS Files   -->
+	<script src="{{ asset('js/jquery-3.7.1.min.js')}}"></script>
   <script src="{{ asset('material/js/core/popper.min.js') }}" ></script>
-	<script src="{{ asset('material/js/core/bootstrap.min.js') }}" ></script>
 	<script src="{{ asset('material/js/plugins/perfect-scrollbar.min.js') }}" ></script>
 	<script src="{{ asset('material/js/plugins/smooth-scrollbar.min.js') }}" ></script>
 	<script src="{{ asset('material//js/plugins/chartjs.min.js')}}"></script>
-
 	<script src="{{ asset('material/js/dataTables/jquery.dataTables.js')}}"></script>
 	<script src="{{ asset('material/js/dataTables/dataTables.bootstrap.js')}}"></script>
 
-	<!-- Github buttons -->
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
 	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="{{ asset('material/js/material-dashboard.min.js?v=3.1.0') }}"></script>
-	<!-- Font Awesome Icons -->
-	<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+	
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('fontawesome-6.5.2/css/all.min.css') }}">
+	<script src="{{ asset('fontawesome-6.5.2/js/all.min.js') }}" crossorigin="anonymous"></script>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('bootstrap-5.3.3/css/bootstrap.min.css') }}">
+	<script src="{{ asset('bootstrap-5.3.3/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
+
+	<!-- include summernote css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 	<!-- Custom Script -->
 	<script src="{{ asset('js/custom.js')}}"></script>

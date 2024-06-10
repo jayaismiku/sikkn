@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 // use MahasiswaController;
+use App\Http\Middleware\Mahasiswa;
+
+// use App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +26,6 @@ Auth::routes();
 // Route::get('admin/login', 'Auth\AdminAuthController@getLogin')->name('admin.login');
 // Route::post('admin/login', 'Auth\AdminAuthController@postLogin');
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 // Pendaftaran User
 Route::get('/pendaftaran', 'PendaftaranController@index')->name('daftar');
@@ -37,28 +39,42 @@ Route::get('/pendaftaran/mahasiswa', 'PendaftaranController@mahasiswa')->name('d
 Route::post('/pendaftaran/mahasiswa', 'PendaftaranController@storemahasiswa')->name('daftar.mahasiswa.store');
 Route::get('/pendaftaran/sukses', 'PendaftaranController@sukses')->name('daftar.sukses');
 
+Route::middleware('auth')->group(function(){
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::resource('/fakultas', FakultasController::class);
+	Route::resource('/prodi', ProdiController::class);
+	Route::resource('/dosen', DosenController::class);
+});
 
-Route::resource('/fakultas', FakultasController::class);
-Route::resource('/prodi', ProdiController::class);
-Route::resource('/dosen', DosenController::class);
-Route::resource('/mahasiswa', MahasiswaController::class);
-Route::resource('/pemonev', PemonevController::class);
-Route::resource('/panitia', PanitiaController::class);
-Route::resource('/pendamping', PendampingController::class);
-Route::resource('/desa', DesaController::class);
-Route::resource('/perangkat', PerangkatDesaController::class);
-Route::resource('/kelompok', KelompokController::class);
-Route::resource('/logbook', LogbookController::class);
-Route::resource('/laporan', LaporanController::class);
-Route::resource('/post', PostController::class);
+Route::middleware('auth')->group(function(){
+	Route::resource('/panitia', PanitiaController::class);
+	Route::resource('/desa', DesaController::class);
+	Route::resource('/perangkat', PerangkatDesaController::class);
+	Route::resource('/post', PostController::class);
+	Route::put('/mahasiswa/{mahasiswa}/verify', 'MahasiswaController@verify')->name('mahasiswa.verify');
+	Route::get('/profil/panitia', 'ProfileController@panitia')->name('profil.penitia');
+});
+
+Route::middleware('auth')->group(function(){
+	Route::resource('/pemonev', PemonevController::class);
+	Route::get('/profil/pemonev', 'ProfileController@pemonev')->name('profil.pemonev');
+});
+
+Route::middleware('auth')->group(function(){
+	Route::resource('/pendamping', PendampingController::class);
+	Route::get('/profil/dpl', 'ProfileController@dpl')->name('profil.dpl');
+});
+
+Route::middleware(['auth', 'mahasiswa'])->group(function(){
+	Route::resource('/mahasiswa', MahasiswaController::class);
+	Route::resource('/kelompok', KelompokController::class);
+	Route::resource('/logbook', LogbookController::class);
+	Route::resource('/laporan', LaporanController::class);
+	Route::get('/profil/mahasiswa', 'ProfileController@mahasiswa')->name('profil.mahasiswa');
+});
 
 # Custom Route
-Route::put('/mahasiswa/{mahasiswa}', 'MahasiswaController@verify')->name('mahasiswa.verify');
 Route::get('/broadcastmessage', 'broadcastmessageController@index')->name('broadcastmessage');
-Route::get('/profil/panitia', 'ProfileController@panitia')->name('profil.penitia');
-Route::get('/profil/pemonev', 'ProfileController@pemonev')->name('profil.pemonev');
-Route::get('/profil/dpl', 'ProfileController@dpl')->name('profil.dpl');
-Route::get('/profil/mahasiswa', 'ProfileController@mahasiswa')->name('profil.mahasiswa');
 // Route::get('/admin', 'AdminController@index')->name('admin')->middleware('admin');
 // Route::get('/desa', 'DesaController@index')->name('desa');
 // Route::get('/lembaga', 'LembagaController@index')->name('lembaga')->middleware('lembaga');

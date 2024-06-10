@@ -7,3 +7,8 @@ body{
   padding-left: 0.35rem;
   padding-right: 0.35rem;
 }
+
+.input-group-text{
+  padding: 0.35rem !important;
+  position: relative !important;
+}

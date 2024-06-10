@@ -1,5 +1,9 @@
 $(document).ready(function () {
   $('#dataTables-example').dataTable();
+
+  $('#deskripsi-kegiatan').summernote();
+
+  $('#alert-success').delay(800).fadeOut(800);
 });
 
 var ctx = document.getElementById("chart-bars").getContext("2d");

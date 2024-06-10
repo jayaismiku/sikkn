@@ -3,13 +3,13 @@
 @section('title', 'Pendaftaran')
 
 @section('content')
-<div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+<div class="col-xl-5 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
   <div class="card card-plain">
     <div class="card-header text-center">
-      <h4 class="font-weight-bolder">{{ __('Mau daftar sebagai?') }}</h4>
-      <p class="mb-0">{{ __('Pilih mode pengguna') }}</p>
+      <h4 class="font-weight-bolder">{{ __('Mau Daftar Sebagai?') }}</h4>
+      <p class="mb-0">{{ __('Pilih Mode Pengguna') }}</p>
     </div>
-    <div class="card-body">
+    <div class="card-body bg-white">
       <a class="btn btn-lg btn-icon btn-3 btn-info w-100" href="{{ Route('daftar.panitia') }}">
         <span class="btn-inner--icon"><i class="material-icons">supervisor_account</i></span><br>
         <span class="btn-inner--text">{{ __('Panitia KKN') }}</span>

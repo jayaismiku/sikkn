@@ -21,27 +21,25 @@ class Pendamping
         }
 
         if (Auth::user()->role == 'admin') {
-            return redirect()->route('admin');
-        }
-
-        if (Auth::user()->role == 'lembaga') {
-            return redirect()->route('lembaga');
+            return redirect()->route('home');
         }
 
         if (Auth::user()->role == 'panitia') {
-            return redirect()->route('panitia');
+            return redirect()->route('panitia.index');
+        }
+
+        if (Auth::user()->role == 'pemonev') {
+            return redirect()->route('pemonev.index');
         }
 
         if (Auth::user()->role == 'pendamping') {
-            return redirect()->route('pendamping');
+            return redirect()->route('pendamping.index');
         }
 
         if (Auth::user()->role == 'mahasiswa') {
-            return redirect()->route('mahasiswa');
+            return redirect()->route('mahasiswa.index');
         }
 
-        if (Auth::user()->role == 'desa') {
-            return redirect()->route('desa');
-        }
+        return $next($request);
     }
 }

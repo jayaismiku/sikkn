@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.auth2')
 
 @section('title', 'Auth Login')
 
@@ -75,48 +75,49 @@
 @endsection
 
 @section('form-auth')
-<div class="d-flex justify-content-center form_container">
-	<form method="POST" action="{{ route('login') }}">
-		@csrf
-		<div class="input-group mb-3">
-			<div class="input-group-append">
-				<span class="input-group-text"><i class="fas fa-at"></i></span>
-			</div>
-			<input type="text" id="email" name="email" class="form-control input_user @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="username" required autocomplete="email" autofocus>
-			@error('email')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-			@enderror
+<form method="POST" action="{{ route('login') }}">
+	@csrf
+	<div class="input-group mb-3">
+		<div class="input-group-append">
+			<span class="input-group-text"><i class="fas fa-at"></i></span>
 		</div>
-		<div class="input-group mb-2">
-			<div class="input-group-append">
-				<span class="input-group-text"><i class="fas fa-key"></i></span>
-			</div>
-			<input id="password" type="password" name="password" class="form-control input_pass @error('password') is-invalid @enderror" value="" placeholder="password" required autocomplete="current-password">
-			@error('password')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message }}</strong>
-				</span>
-			@enderror
-		</div>
-		<div class="form-group">
-			<div class="custom-control custom-checkbox">
-				<input type="checkbox" class="custom-control-input" id="customControlInline">
-				<label class="custom-control-label" for="customControlInline">{{ __('Ingatkan Saya') }}</label>
-			</div>
-		</div>
-		<div class="d-flex justify-content-center mt-3 login_container">
-			<button type="submit" name="button" class="btn login_btn">{{ __('Masuk') }}</button>
-		</div>
-	</form>
-</div>
-<div class="mt-4">
-	<div class="d-flex justify-content-center links">
-		{{ __('Belum punya akun?') }} <a href="{{ route('daftar') }}" class="ml-2">{{ __('Buat Akun') }}</a>
+		<input type="text" id="email" name="email" class="form-control input_user @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="username" required autocomplete="email" autofocus>
+		@error('email')
+			<span class="invalid-feedback" role="alert">
+				<strong>{{ $message }}</strong>
+			</span>
+		@enderror
 	</div>
+	<div class="input-group mb-2">
+		<div class="input-group-append">
+			<span class="input-group-text"><i class="fas fa-key"></i></span>
+		</div>
+		<input id="password" type="password" name="password" class="form-control input_pass @error('password') is-invalid @enderror" value="" placeholder="password" required autocomplete="current-password">
+		@error('password')
+			<span class="invalid-feedback" role="alert">
+				<strong>{{ $message }}</strong>
+			</span>
+		@enderror
+	</div>
+	<div class="form-group">
+		<div class="custom-control custom-checkbox">
+			<input type="checkbox" class="custom-control-input" id="customControlInline">
+			<label class="custom-control-label" for="customControlInline">{{ __('Ingatkan Saya') }}</label>
+		</div>
+	</div>
+	<div class="d-flex justify-content-center mt-3 login_container">
+		<div class="d-flex justify-content-center links mx-2">
+			<button type="submit" name="button" class="btn btn-info login_btn"><i class="fa-solid fa-floppy-disk text-lg"></i> {{ __('Masuk') }}</button>
+		</div>
+		<div class="d-flex justify-content-center links mx-2">
+			<a href="{{ route('daftar') }}" class="btn btn-warning ml-2"><i class="fa-solid fa-user-plus text-lg"></i> {{ __('Buat Akun') }}</a>
+		</div>
+	</div>
+</form>
+</div>
+<div class="mb-2">
 	<div class="d-flex justify-content-center links">
-		<a href="{{ route('password.request') }}">{{ __('Lupa kata sandi?') }}</a>
+		<a href="{{ route('password.request') }}"><i class="fa-solid fa-circle-question text-lg"></i> {{ __('Lupa kata sandi?') }}</a>
 	</div>
 </div>
 @endsection

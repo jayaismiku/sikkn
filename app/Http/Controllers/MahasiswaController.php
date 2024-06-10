@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\User;
 use App\Mahasiswa;
 use Illuminate\Http\Request;
@@ -127,6 +128,13 @@ class MahasiswaController extends Controller
 		$mahasiswa->sakit_berat = $path_sakit;
 		$mahasiswa->alergi = $request->get('alergi');
 		$mahasiswa->save();
+
+		if (Auth::user()->role == 'mahasiswa') {
+			return redirect('/profil/mahasiswa')->with('success', 'User berhasil diubah!');
+		} else {
+			return redirect('/mahasiswa')->with('success', 'User berhasil diubah!');
+		}
+		
 
 		return redirect('/mahasiswa')->with('success', 'User berhasil diubah!');
 	}

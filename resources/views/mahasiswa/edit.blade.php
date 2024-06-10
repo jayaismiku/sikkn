@@ -46,15 +46,15 @@
           @method('PUT')
           <div class=" input-group-outline my-3">
             <label class="form-label" for="nim">{{ __('NIM:') }}</label>
-            <input type="text" class="form-control px-2 py-2" name="nim" value="{{ $mahasiswa->nim }}" required/>
+            <input type="text" class="form-control form-control-sm p-2" name="nim" value="{{ $mahasiswa->nim }}" required/>
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="nama_lengkap">{{ __('Nama Lengkap:') }}</label>
-            <input type="text" class="form-control px-2 py-2" name="nama_lengkap" value="{{ $mahasiswa->nama_lengkap }}" required/>
+            <input type="text" class="form-control form-control-sm p-2" name="nama_lengkap" value="{{ $mahasiswa->nama_lengkap }}" required/>
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="fakultas">{{ __('Fakultas') }}</label>
-            <select class="form-control form-select px-2" aria-label=".form-select-sm select-fakultas" name="fakultas" required>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-fakultas" name="fakultas" required>
               <option value="FST" {{ $mahasiswa->fakultas=='FST'?'selected':'' }}>{{ __('Fakultas Sains dan Teknologi') }}</option>
               <option value="FSH" {{ $mahasiswa->fakultas=='FSH'?'selected':'' }}>{{ __('Fakultas Sosial Humaniora') }}</option>
               <option value="FEB" {{ $mahasiswa->fakultas=='FEB'?'selected':'' }}>{{ __('Fakultas Ekonomi dan Bisnis') }}</option>
@@ -63,7 +63,7 @@
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="prodi">{{ __('Program Studi') }}</label>
-            <select class="form-control form-select px-2" aria-label=".form-select-sm select-prodi" name="prodi" required>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-prodi" name="prodi" required>
               <option value="TE" {{ $mahasiswa->prodi=='TE'?'selected':'' }}>{{ __('Teknik Elektro') }}</option>
               <option value="IF" {{ $mahasiswa->prodi=='IF'?'selected':'' }}>{{ __('Teknik Informatika') }}</option>
               <option value="TI" {{ $mahasiswa->prodi=='TI'?'selected':'' }}>{{ __('Teknik Industri') }}</option>
@@ -86,38 +86,41 @@
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="semester">{{ __('Semester') }}</label>
-            <select class="form-control form-select px-2" aria-label=".form-select-sm select-semester" name="semester" required>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-semester" name="semester" required>
               <option value="4" {{ $mahasiswa->semester=='4'?'selected':'' }}>{{ __('Semester 4') }}</option>
               <option value="6" {{ $mahasiswa->semester=='6'?'selected':'' }}>{{ __('Semester 6') }}</option>
               <option value="8" {{ $mahasiswa->semester=='8'?'selected':'' }}>{{ __('Semester 8') }}</option>
             </select>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="telp">{{ __('Telp (WA)') }}</label>
-            <input type="text" class="form-control px-2 py-2" name="telp" value="{{ $mahasiswa->telp }}" required/>
+            <div class="input-group mb-3">
+              <span class="input-group-text text-sm" id="basic-addon1">+62</span>
+              <input type="text" class="form-control form-control-sm" placeholder="telp" aria-label="telp" aria-describedby="basic-addon1" name="telp" value="{{ $mahasiswa->telp }}" required>
+            </div>
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="alamat">{{ __('Alamat') }}</label>
-            <input type="text" class="form-control px-2 py-2" name="alamat" value="{{ $mahasiswa->alamat }}"/>
+            <input type="text" class="form-control form-control-sm p-2" name="alamat" value="{{ $mahasiswa->alamat }}"/>
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="krs">{{ __('Unggah Bukti KRS') }}</label>
-            <input type="file" class="form-control px-2 py-2" name="krs" value="{{ $mahasiswa->krs }}" required/>
+            <input type="file" class="form-control form-control-sm p-2" name="krs" value="{{ $mahasiswa->krs }}" required/>
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="bayar">{{ __('Unggah Bukti Bayar KKN') }}</label>
-            <input type="file" class="form-control px-2 py-2" name="bayar" value="{{ $mahasiswa->bayar }}"/>
+            <input type="file" class="form-control form-control-sm p-2" name="bayar" value="{{ $mahasiswa->bayar }}"/>
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="ukt">{{ __('Unggah Bukti Bayar UKT') }}</label>
-            <input type="file" class="form-control px-2 py-2" name="ukt" value="{{ $mahasiswa->ukt }}" />
+            <input type="file" class="form-control form-control-sm p-2" name="ukt" value="{{ $mahasiswa->ukt }}" />
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="sakit">{{ __('Unggah Surat Sakit (Berat)') }}</label>
-            <input type="file" class="form-control px-2 py-2" name="sakit" value="{{ $mahasiswa->sakit }}"/>
+            <input type="file" class="form-control form-control-sm p-2" name="sakit" value="{{ $mahasiswa->sakit }}"/>
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="alergi">{{ __('Silahkan dituliskan jika punya alergi:') }}</label>
-            <input type="text" class="form-control px-2 py-2" name="alergi" value="{{ $mahasiswa->alergi }}"/>
+            <input type="text" class="form-control form-control-sm p-2" name="alergi" value="{{ $mahasiswa->alergi }}"/>
           </div>
           <div class="form-group">
             <input type="hidden" class="form-control px-2 py-2" name="mahasiswa_id" value="{{ $mahasiswa->mahasiswa_id }}" />
@@ -127,11 +130,9 @@
             <a class="btn btn-info xs" href="{{ route('mahasiswa.index') }}">
               <span class="material-icons">undo</span>
             </a>
-            @if($mahasiswa->user_id == 0)
             <a class="btn btn-warning xs" href="{{ route('mahasiswa.verify', $mahasiswa->user_id) }}" onclick="event.preventDefault(); document.getElementById('verify-account').submit();">
               <span class="material-icons">verified</span>
             </a>
-            @endif
           </div>         
         </form>
         <form id="verify-account" action="{{ route('mahasiswa.verify', $mahasiswa->user_id) }}" method="POST" class="d-none">
@@ -142,5 +143,6 @@
     </div>
   </div>
 </div>
+
 @endsection
 

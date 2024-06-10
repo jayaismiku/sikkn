@@ -27,44 +27,8 @@ class LoginController extends Controller
 	 *
 	 * @var string
 	 */
-	protected $redirectTo = RouteServiceProvider::HOME;
-	// protected $redirectTo;
-
-	/*public function redirectTo()
-	{
-		switch(Auth::user()->role){
-			case 'desa':
-				$this->redirectTo = '/desa';
-				return $this->redirectTo;
-				break;
-
-			case 'lembaga':
-			$this->redirectTo = '/lembaga';
-			return $this->redirectTo;
-				break;
-
-			case 'panitia':
-					$this->redirectTo = '/panitia';
-				return $this->redirectTo;
-				break;
-
-			case 'pendamping':
-				$this->redirectTo = '/pendamping';
-				return $this->redirectTo;
-				break;
-
-			case 'mahasiswa':
-					$this->redirectTo = '/mahasiswa';
-				return $this->redirectTo;
-				break;
-
-			default:
-				$this->redirectTo = '/login';
-				return $this->redirectTo;
-		}
-		 
-		// return $next($request);
-	}*/
+	// protected $redirectTo = RouteServiceProvider::HOME;
+	protected $redirectTo;
 
 	/**
 	 * Create a new controller instance.
@@ -75,4 +39,36 @@ class LoginController extends Controller
 	{
 		$this->middleware('guest')->except('logout');
 	}
+
+	public function redirectTo()
+	{
+		switch(Auth::user()->role){
+			case 'panitia':
+				$this->redirectTo = '/profil/panitia';
+				return $this->redirectTo;
+				break;
+
+			case 'pemonev':
+				$this->redirectTo = '/profil/pemonev';
+				return $this->redirectTo;
+				break;
+
+			case 'dpl':
+				$this->redirectTo = '/profil/dpl';
+				return $this->redirectTo;
+				break;
+
+			case 'mahasiswa':
+				$this->redirectTo = '/profil/mahasiswa';
+				return $this->redirectTo;
+				break;
+
+			default:
+				$this->redirectTo = RouteServiceProvider::HOME;
+				return $this->redirectTo;
+		}
+		 
+		// return $next($request);
+	}
+
 }
