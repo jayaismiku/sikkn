@@ -48,7 +48,7 @@
       </div>
       <div class="card-body px-0 pb-2 mx-3">
         <div class="table-responsive p-0">
-          <table class="table align-items-center justify-content-center mb-0">
+          <table id="tblMahasiswa" class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
                 <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Mahasiswa') }}</th>
@@ -74,8 +74,13 @@
                 <td class="text-xs text-center">{!! ($mhs->validasi_ukt==1)?'<span class="material-icons text-success">verified</span>':'<span class="material-icons text-warning">warning</span>' !!}</td>
                 <td class="text-xs text-center">{!! ($mhs->status==1)?'<span class="material-icons text-success">verified</span>':'<span class="material-icons text-warning">warning</span>' !!}</td>
                 <td class="text-xs text-center">
+                  @if(Auth::user()->role == 'mahasiswa')
                   <a class="text-warning" href="{{ route('mahasiswa.edit', $mhs->mahasiswa_id)}}">
                     <span class="material-icons">edit</span>
+                  </a>
+                  @else
+                  <a class="text-warning" href="{{ route('mahasiswa.verify', $mhs->mahasiswa_id)}}">
+                    <i class="fa-regular fa-square-check"></i>
                   </a>
                   <a class="nav-link text-danger" href="{{ route('mahasiswa.destroy', $mhs->mahasiswa_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $mhs->mahasiswa_id }}').submit();">
                     <span class="material-icons">delete</span>
@@ -84,6 +89,7 @@
                       @method('DELETE')
                     </form>
                   </a>
+                  @endif
                 </td>
               </tr>
               @endforeach
@@ -100,6 +106,8 @@
   $(document).ready(function() {
     $('#alert-success').delay(1000).fadeOut();
   });
+
+  $('#tblMahasiswa').DataTable();
 </script>
 
 @endsection

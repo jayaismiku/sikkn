@@ -11,7 +11,7 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>Prodi</span>
+      <span>{{ __('Logbook') }}</span>
     </li>
   </ol>
 </nav>

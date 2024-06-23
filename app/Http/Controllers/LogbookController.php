@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class LogbookController extends Controller
 {
-	protected $nim;
+	private $nim;
 
-	public function __construct()
+	public function __construct(Request $request)
 	{
-		// dd($this->userid);
+		
 	}
 
 	/**
@@ -23,11 +23,12 @@ class LogbookController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		dd(session('nim'));
+		// dd($request->attributes->get('nim')->nim);
+		$this->nim = $request->attributes->get('nim')->nim;
 		$logbook = Logbook::where('nim', $this->nim)->get();
-
+		// dd($logbook);
 		return view('logbook.index', compact('logbook'));
 	}
 
@@ -43,7 +44,7 @@ class LogbookController extends Controller
 							->join('users', 'mahasiswa.user_id', '=', 'users.user_id')
 							->where('users.user_id', $userid)
 							->get('mahasiswa.nim')->first();
-		// dd($nim);
+		// dd($userid);
 
 		return view('logbook.create', compact('nim'));
 	}
@@ -56,7 +57,7 @@ class LogbookController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		// dd($request);
+		dd($request);
 		$request->validate([
 			'nama_kegiatan' => 'required',
 			'tanggal_kegiatan' => 'required',
@@ -104,7 +105,7 @@ class LogbookController extends Controller
 	 */
 	public function edit($id)
 	{
-		$logbook = Logbook::find($logbook);
+		$logbook = Logbook::find($id);
 		
 		return view('logbook.edit', compact('logbook'));
 	}

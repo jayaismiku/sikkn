@@ -12,3 +12,13 @@ body{
   padding: 0.35rem !important;
   position: relative !important;
 }
+
+.page{  }
+
+.page nav{  }
+
+.page nav ul.pagination{  }
+
+.page nav ul.pagination li.page-item{  }
+
+.page nav ul.pagination li.page-item .page-link{ width: 24px; height: 24px; }

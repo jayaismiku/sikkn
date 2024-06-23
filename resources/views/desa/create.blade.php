@@ -53,19 +53,30 @@
           </div>
           <div class="form-group">
               <label class="form-label" for="provinsi">{{ __('Provinsi:') }}</label>
-              <input type="text" class="form-control px-2" name="provinsi"/>
+              <select class="form-control form-select px-2" aria-label=".form-select-sm example" id="provinsi" name="provinsi">
+                <option selected>- Pilih Provinsi -</option>
+                @foreach($provinsi as $prov)
+                <option value="{{ $prov->provinsi_id }}">{{ $prov->nama_provinsi }}</option>
+                @endforeach
+              </select>
           </div>
           <div class="form-group">
               <label class="form-label" for="kota">{{ __('Kota/Kabupaten:') }}</label>
-              <input type="text" class="form-control px-2" name="kota"/>
+              <select class="form-control form-select px-2" aria-label=".form-select-sm example" id="kota" name="kota">
+                <option selected>- Pilih Kota/Kabupaten -</option>
+              </select>
           </div>
           <div class="form-group">
               <label class="form-label" for="kecamatan">{{ __('Kecamatan:') }}</label>
-              <input type="text" class="form-control px-2" name="kecamatan"/>
+              <select class="form-control form-select px-2" aria-label=".form-select-sm example" id="kecamatan" name="kecamatan">
+                <option selected>- Pilih Kecamatan -</option>
+              </select>
           </div>
           <div class="form-group">
               <label class="form-label" for="kelurahan">{{ __('Kelurahan:') }}</label>
-              <input type="text" class="form-control px-2" name="kelurahan"/>
+              <select class="form-control form-select px-2" aria-label=".form-select-sm example" id="kelurahan" name="kelurahan">
+                <option selected>- Pilih Kelurahan -</option>
+              </select>
           </div>
           <div class="form-group">
               <label class="form-label" for="longitude">{{ __('Longitude') }}</label>
@@ -88,5 +99,64 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // sembunyikan form kabupaten, kecamatan dan desa
+    $("#kota").hide();
+    $("#kecamatan").hide();
+    $("#kelurahan").hide();
+
+    // ambil data kabupaten ketika data memilih provinsi
+    $('body').on("change","#provinsi",function(){
+      var id = $(this).val();
+      var data = "id="+id+"&data=kabupaten";
+      $.ajax({
+        type: 'POST',
+        url: "get_daerah.php",
+        data: data,
+        success: function(hasil) {
+          $("#form_kab").html(hasil);
+          $("#form_kab").show();
+          $("#form_kec").hide();
+          $("#form_des").hide();
+        }
+      });
+    });
+ 
+      // ambil data kecamatan/kota ketika data memilih kabupaten
+      $('body').on("change","#form_kab",function(){
+        var id = $(this).val();
+        var data = "id="+id+"&data=kecamatan";
+        $.ajax({
+          type: 'POST',
+          url: "get_daerah.php",
+          data: data,
+          success: function(hasil) {
+            $("#form_kec").html(hasil);
+            $("#form_kec").show();
+            $("#form_des").hide();
+          }
+        });
+      });
+ 
+      // ambil data desa ketika data memilih kecamatan/kota
+      $('body').on("change","#form_kec",function(){
+        var id = $(this).val();
+        var data = "id="+id+"&data=desa";
+        $.ajax({
+          type: 'POST',
+          url: "get_daerah.php",
+          data: data,
+          success: function(hasil) {
+            $("#form_des").html(hasil);
+            $("#form_des").show();
+          }
+        });
+      });
+ 
+ 
+    });
+  </script>
 @endsection
 

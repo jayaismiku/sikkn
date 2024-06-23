@@ -52,6 +52,7 @@
             <thead>
               <tr>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Desa') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Alamat') }}</th>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Longitude') }}</th>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Latitude') }}</th>
                 <th class="text-center"><i class="material-icons">draw</i></th>
@@ -61,6 +62,7 @@
               @foreach($desa as $ds)
               <tr>
                 <td class="text-xs">{{ $ds->nama_desa }}</td>
+                <td class="text-xs">{{ $ds->alamat }}</td>
                 <td class="text-xs">{{ $ds->longitude }}</td>
                 <td class="text-xs">{{ $ds->latitude }}</td>
                 <td class="text-xs text-center">
@@ -79,6 +81,9 @@
               @endforeach
             </tbody>
           </table>
+          <div class="page">
+            {{ $desa->links() }}
+          </div>
         </div>
       </div>
     </div>

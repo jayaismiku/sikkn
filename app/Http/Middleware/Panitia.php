@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Auth;
 use Closure;
+use Illuminate\Support\Facades\DB;
 
 class Panitia
 {
@@ -16,29 +17,15 @@ class Panitia
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
-        if (Auth::user()->role == 'admin') {
-            return redirect()->route('home');
-        }
-
-        if (Auth::user()->role == 'panitia') {
-            return redirect()->route('panitia.index');
-        }
-
-        if (Auth::user()->role == 'pemonev') {
-            return redirect()->route('pemonev.index');
-        }
-
-        if (Auth::user()->role == 'pendamping') {
-            return redirect()->route('pendamping.index');
-        }
-
-        if (Auth::user()->role == 'mahasiswa') {
-            return redirect()->route('mahasiswa.index');
-        }
+        $userid = Auth::user()->user_id;
+        $panitia_id =  DB::table('panitia')
+                ->join('users', 'panitia.user_id', '=', 'users.user_id')
+                ->where('users.user_id', $userid)
+                ->get('panitia.panitia_id')->first();
+        // $request->session()->put('nim', $nim);
+        // dd($request->session()->get('nim'));
+        $request->attributes->add(['id' => $panitia_id]);
+        // dd($request);
 
         return $next($request);
     }

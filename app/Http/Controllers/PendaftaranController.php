@@ -97,38 +97,54 @@ class PendaftaranController extends Controller
 	public function storemahasiswa(Request $request)
 	{
 		// dd($request);
-		// $request->validate([
-		// 	'email' => 'required|unique:users',
-		// 	'password' => 'required',
-		// 	'nim' => 'required|unique:mahasiswa|max:20',
-		// 	'nama_lengkap' => 'required',
-		// 	'fakultas' => 'required',
-		// 	'prodi' => 'required',
-		// 	'semester' => 'required',
-		// 	'telp' => 'required|unique:mahasiswa|max:15',
-		// 	'krs' => 'required|image|max:2048',
-		// 	'bayar' => 'required|image|max:2048',
-		// 	'ukt' => 'required|image|max:2048',
-		// 	'sakit' => 'image|max:2048',
+		// $this->validate($request, [
+		// 	'file' => 'required|mimes:jpeg,png,pdf',
 		// ]);
+	
+		$request->validate([
+			'nim' => 'required|unique:mahasiswa|max:15',
+			'namalengkap' => 'required',
+			'telp' => 'required|unique:mahasiswa|max:15',
+			'email' => 'required|unique:users',
+			'password' => 'required',
+			'fakultas' => 'required',
+			'prodi' => 'required',
+			'semester' => 'required',
+			'unggahkrs' => 'required|image|mimes:jpg,jpeg,png,pdf|max:5120',
+			'unggahbiaya' => 'required|image|mimes:jpg,jpeg,png,pdf|max:5120',
+			'unggahukt' => 'required|image|mimes:jpg,jpeg,png,pdf|max:5120',
+			'suratkesediaan' => 'required|image|mimes:pdf,jpeg,png,jpg|max:5120',
+			'suratijinortu' => 'required|image|mimes:pdf,jpeg,png,jpg|max:5120',
+			'unggahsuratsakit' => 'image|mimes:pdf,jpeg,png,jpg|max:5120',
+		]);
 
-		// if ($request->file('unggahkrs')->getClientOriginalName()) {
-		// 	$name_krs = $request->file('unggahkrs')->getClientOriginalName();
-		// 	$path_krs = $request->file('unggahkrs')->store($path_storage);
-		// }
-		// if ($request->file('unggahbiaya')->getClientOriginalName()) {
-		// 	$name_bayar = $request->file('unggahbiaya')->getClientOriginalName();
-		// 	$path_bayar = $request->file('unggahbiaya')->store($path_storage);
-		// }
-		// if ($request->file('unggahukt')->getClientOriginalName()) {
-		// 	$name_ukt = $request->file('unggahukt')->getClientOriginalName();
-		// 	$path_ukt = $request->file('unggahukt')->store($path_storage);
-		// }
-		// if ($request->file('unggahsuratsakit')->getClientOriginalName()) {
-		// 	$name_sakit = $request->file('unggahsuratsakit')->getClientOriginalName();
-		// 	$path_sakit = $request->file('unggahsuratsakit')->store($path_storage);
-		// }
-		// dd($path);
+		$path_storage = 'files/' . $request->get('nim');
+
+		if ($request->file('unggahkrs')->getClientOriginalName()) {
+			$name_krs = $request->file('unggahkrs')->getClientOriginalName();
+			$path_krs = $request->file('unggahkrs')->store($path_storage);
+		}
+		if ($request->file('unggahbiaya')->getClientOriginalName()) {
+			$name_bayar = $request->file('unggahbiaya')->getClientOriginalName();
+			$path_bayar = $request->file('unggahbiaya')->store($path_storage);
+		}
+		if ($request->file('unggahukt')->getClientOriginalName()) {
+			$name_ukt = $request->file('unggahukt')->getClientOriginalName();
+			$path_ukt = $request->file('unggahukt')->store($path_storage);
+		}
+		if ($request->file('suratkesediaan')->getClientOriginalName()) {
+			$name_kesediaan = $request->file('suratkesediaan')->getClientOriginalName();
+			$path_kesediaan = $request->file('suratkesediaan')->store($path_storage);
+		}
+		if ($request->file('suratijinortu')->getClientOriginalName()) {
+			$name_ijinortu = $request->file('suratijinortu')->getClientOriginalName();
+			$path_ijinortu = $request->file('suratijinortu')->store($path_storage);
+		}
+		if ($request->file('unggahsuratsakit')->getClientOriginalName()) {
+			$name_sakit = $request->file('unggahsuratsakit')->getClientOriginalName();
+			$path_sakit = $request->file('unggahsuratsakit')->store($path_storage);
+		}
+		// dd($path_krs);
 
 		// $fname = explode(" ", $request->get('namalengkap'));
 		// $length = 4; // Set the desired length of your alphanumeric string
@@ -136,8 +152,6 @@ class PendaftaranController extends Controller
 		// $alphanumericString = bin2hex($bytes);
 		// // echo $alphanumericString;
 		// $username = $fname[0] . '-' . $alphanumericString;
-
-		$path_storage = 'files/' . $request->get('nim');
 
 		$newUser = new User([
 			'username' => $request->get('username'),
@@ -160,10 +174,12 @@ class PendaftaranController extends Controller
 			'fakultas' => $request->get('fakultas'),
 			'prodi' => $request->get('prodi'),
 			'semester' => $request->get('semester'),
-			'unggah_krs' => $request->get('unggahkrs'),
-			'unggah_keuangan' => $request->get('unggahbiaya'),
-			'unggah_ukt' => $request->get('unggahukt'),
-			'sakit_berat' => $request->get('unggahsuratsakit'),
+			'unggah_krs' => $path_krs,
+			'unggah_biaya' => $path_bayar,
+			'unggah_ukt' => $path_ukt,
+			'unggah_surat_kesediaan' => $path_kesediaan,
+			'unggah_surat_ijin_ortu' => $path_ijinortu,
+			'sakit_berat' => $path_sakit,
 			'alergi' => $request->get('alergi'),
 			'user_id' => $lastInsertId,
 		]);

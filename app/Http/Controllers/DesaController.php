@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Desa;
+use App\Provinsi;
+use App\Kota;
+use App\Kecamatan;
+use App\Kelurahan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class DesaController extends Controller
 {
@@ -14,8 +19,8 @@ class DesaController extends Controller
 	 */
 	public function index()
 	{
-		$desa = Desa::all();
-
+		$desa = Desa::paginate(10);
+		// dd($desa);
 		return view('desa.index', compact('desa'));
 	}
 
@@ -26,7 +31,9 @@ class DesaController extends Controller
 	 */
 	public function create()
 	{
-		return view('desa.create');
+		$provinsi = Provinsi::all()->where('status', '1');
+
+		return view('desa.create', compact('provinsi'));
 	}
 
 	/**
@@ -74,8 +81,9 @@ class DesaController extends Controller
 	 */
 	public function edit($id)
 	{
-		$desa = Desa::find($desa);
-		
+		$desa = Desa::find($id);
+		$provinsi = Provinsi::all()->where('status', '1');
+		// dd($desa);
 		return view('desa.edit', compact('desa'));
 	}
 
@@ -88,16 +96,19 @@ class DesaController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
+		// dd($request);
 		$request->validate([
-			'kode_fakultas' => 'required',
-			'nama_fakultas' => 'required',
+			'nama_desa' => 'required',
+			'alamat' => 'required',
+			'longitude' => 'required',
+			'latitude' => 'required',
 		]);
 
-		$desa = Desa::find($desa);
-		$desa->kode_fakultas =  $request->get('kode_fakultas');
-		$desa->nama_fakultas = $request->get('nama_fakultas');
-		$desa->dekan = $request->get('dekan');
-		$desa->wadek = $request->get('wadek');
+		$desa = Desa::find($id);
+		$desa->nama_desa =  $request->get('nama_desa');
+		$desa->alamat = $request->get('alamat');
+		$desa->longitude = $request->get('longitude');
+		$desa->latitude = $request->get('latitude');
 		$desa->updated_at = date('Y-m-d H:i:s');
 		$desa->save();
 
@@ -112,7 +123,7 @@ class DesaController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$desa = Desa::find($desa);
+		$desa = Desa::find($id);
 		$desa->delete();
 		
 		return redirect('/desa')->with('success', 'Desa berhasil dihapus!');

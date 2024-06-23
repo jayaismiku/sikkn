@@ -33,6 +33,38 @@
 	<!-- Custom style -->
 	<link href="{{ asset('css/style-2.css') }}" rel="stylesheet" />
 
+	<script src="{{ asset('js/jquery-3.7.1.min.js')}}"></script>
+  <script src="{{ asset('js/popper.min.js') }}" ></script>
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('fontawesome-6.5.2/css/all.min.css') }}">
+	<script src="{{ asset('fontawesome-6.5.2/js/all.min.js') }}" crossorigin="anonymous"></script>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('bootstrap-5.3.3/css/bootstrap.min.css') }}">
+	<script src="{{ asset('bootstrap-5.3.3/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
+
+	<!-- @yield('script') -->
+
+	<!--   Core JS Files   -->
+	<script src="{{ asset('material/js/plugins/perfect-scrollbar.min.js') }}" ></script>
+	<script src="{{ asset('material/js/plugins/smooth-scrollbar.min.js') }}" ></script>
+	<script src="{{ asset('material//js/plugins/chartjs.min.js')}}"></script>
+	
+	<!-- jQuery DataTable Bootstrap -->
+	<script src="{{ asset('js/dataTables.js')}}"></script>
+	<script src="{{ asset('js/dataTables.bootstrap5.js')}}"></script>
+
+	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+	<script src="{{ asset('material/js/material-dashboard.min.js?v=3.1.0') }}"></script>
+	
+	<!-- include summernote css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+	<!-- Custom Script -->
+	<script src="{{ asset('js/custom.js')}}"></script>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -83,6 +115,11 @@
 						<span class="nav-link-text ms-1">{{ __('Dosen') }}</span>
 					</a>
 				</li>
+				@endif
+				@if(Auth::user()->role == 'panitia' || Auth::user()->role == 'admin')
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Panitia') }}</h6>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('mahasiswa.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -91,10 +128,13 @@
 						<span class="nav-link-text ms-1">{{ __('Mahasiswa') }}</span>
 					</a>
 				</li>
-				@endif
-				@if(Auth::user()->role == 'panitia' || Auth::user()->role == 'admin')
-				<li class="nav-item mt-3">
-					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Panitia') }}</h6>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('kelompok.index') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">diversity_2</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Kelompok') }}</span>
+					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('desa.index') }}">
@@ -110,14 +150,6 @@
 							<i class="material-icons opacity-10">account_circle</i>
 						</div>
 						<span class="nav-link-text ms-1">{{ __('Perangkat Desa') }}</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('kelompok.index') }}">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">diversity_2</i>
-						</div>
-						<span class="nav-link-text ms-1">{{ __('Kelompok') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
@@ -303,35 +335,6 @@
 			</footer>
 		</div>
 	</main>
-
-	<!-- @yield('script') -->
-
-	<!--   Core JS Files   -->
-	<script src="{{ asset('js/jquery-3.7.1.min.js')}}"></script>
-  <script src="{{ asset('material/js/core/popper.min.js') }}" ></script>
-	<script src="{{ asset('material/js/plugins/perfect-scrollbar.min.js') }}" ></script>
-	<script src="{{ asset('material/js/plugins/smooth-scrollbar.min.js') }}" ></script>
-	<script src="{{ asset('material//js/plugins/chartjs.min.js')}}"></script>
-	<script src="{{ asset('material/js/dataTables/jquery.dataTables.js')}}"></script>
-	<script src="{{ asset('material/js/dataTables/dataTables.bootstrap.js')}}"></script>
-
-	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="{{ asset('material/js/material-dashboard.min.js?v=3.1.0') }}"></script>
-	
-	<!-- Font Awesome -->
-	<link rel="stylesheet" type="text/css" href="{{ asset('fontawesome-6.5.2/css/all.min.css') }}">
-	<script src="{{ asset('fontawesome-6.5.2/js/all.min.js') }}" crossorigin="anonymous"></script>
-
-	<!-- Bootstrap -->
-	<link rel="stylesheet" type="text/css" href="{{ asset('bootstrap-5.3.3/css/bootstrap.min.css') }}">
-	<script src="{{ asset('bootstrap-5.3.3/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
-
-	<!-- include summernote css/js -->
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-	<!-- Custom Script -->
-	<script src="{{ asset('js/custom.js')}}"></script>
 
 </body>
 </html>

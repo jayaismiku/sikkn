@@ -17,9 +17,12 @@ class MahasiswaController extends Controller
 	 */
 	public function index()
 	{
-		$mahasiswa = User::where('role', 'mahasiswa')
-							->join('mahasiswa', 'users.user_id', '=', 'mahasiswa.user_id')
-							->get();
+		$mahasiswa = Mahasiswa::where('users.role', '=', 'mahasiswa')
+								->join('users', 'mahasiswa.user_id', '=', 'users.user_id')
+								->get();
+		// $mahasiswa = User::join('mahasiswa', 'users.user_id', '=', 'mahasiswa.user_id')
+		// 							->where('role', 'mahasiswa')->paginate(10)
+		// 							->get();
 		// dd($mahasiswa);
 
 		return view('mahasiswa.index', compact('mahasiswa'));
@@ -32,6 +35,9 @@ class MahasiswaController extends Controller
 	 */
 	public function create()
 	{
+		
+
+		
 		return view('mahasiswa.create');
 	}
 
@@ -154,6 +160,13 @@ class MahasiswaController extends Controller
 	}
 
 	public function verify($id)
+	{
+		$mahasiswa = Mahasiswa::find($id);
+		
+		return view('mahasiswa.verify', compact('mahasiswa'));
+	}
+
+	public function verified($id)
 	{
 		// dd($id);
 		$verify = User::find($id);

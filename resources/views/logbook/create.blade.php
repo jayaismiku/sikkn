@@ -60,7 +60,7 @@
               <input type="file" class="form-control px-2" name="foto_kegiatan"/>
           </div>
           <div class="form-group mt-4">
-            <input type="hidden" name="nim" value="{{ $nim->nim }}">
+            <input type="hidden" name="nim" value="{{ $nim }}">
             <button type="submit" class="btn btn-success xs">
               <span class="material-icons">save</span>
             </button>

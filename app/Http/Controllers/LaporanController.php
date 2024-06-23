@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 
 class LaporanController extends Controller
 {
-	protected $nim;
+	private $nim;
 
 	public function __construct()
 	{
-		$this->nim = Mahasiswa::join('users', 'mahasiswa.user_id', '=', 'users.user_id')
-							->where('users.user_id', Auth::user()->user_id)
-							->get('nim')->first();
+		// $this->nim = Mahasiswa::join('users', 'mahasiswa.user_id', '=', 'users.user_id')
+		// 					->where('users.user_id', Auth::user()->user_id)
+		// 					->get('nim')->first();
 	}
 
 	/**

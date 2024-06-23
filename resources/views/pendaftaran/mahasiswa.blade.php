@@ -15,10 +15,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active text-secondary" id="user-tab" data-bs-toggle="tab" data-bs-target="#user" type="button" role="tab" aria-controls="user" aria-selected="true">Akses User</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link text-secondary" id="profil-tab" data-bs-toggle="tab" data-bs-target="#profil" type="button" role="tab" aria-controls="profil" aria-selected="false">Profil</button>
+            <button class="nav-link text-secondary active" id="profil-tab" data-bs-toggle="tab" data-bs-target="#profil" type="button" role="tab" aria-controls="profil" aria-selected="false">Profil</button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link text-secondary" id="akademik-tab" data-bs-toggle="tab" data-bs-target="#akademik" type="button" role="tab" aria-controls="akademik" aria-selected="false">Akademik</button>
@@ -26,11 +23,58 @@
           <li class="nav-item" role="presentation">
             <button class="nav-link text-secondary" id="unggah-tab" data-bs-toggle="tab" data-bs-target="#unggah" type="button" role="tab" aria-controls="unggah" aria-selected="false">Unggah</button>
           </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link text-secondary" id="other-tab" data-bs-toggle="tab" data-bs-target="#other" type="button" role="tab" aria-controls="other" aria-selected="true">Lainnya</button>
+          </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane active mt-2" id="user" role="tabpanel" aria-labelledby="user-tab" tabindex="0">
+          <div class="tab-pane mt-2 active" id="profil" role="tabpanel" aria-labelledby="profil-tab" tabindex="0">
+            <div class="form-group row my-1">
+              <label for="nim" class="col-md-4 col-form-label text-md-right">{{ __('NIM') }}</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim" value="{{ old('nim') }}" autocomplete="nim" required>
+                @error('nim')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+            <div class="form-group row my-1">
+              <label for="namalengkap" class="col-md-4 col-form-label text-md-right">{{ __('Nama Lengkap') }}</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control @error('namalengkap') is-invalid @enderror" id="namalengkap" name="namalengkap" value="{{ old('namalengkap') }}" autocomplete="namalengkap" required>
+                @error('namalengkap')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+            <div class="form-group row my-1">
+              <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" value="{{ old('alamat') }}" autocomplete="alamat">
+                @error('alamat')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+            <div class="form-group row my-1">
+              <label for="telp" class="col-md-4 col-form-label text-md-right">{{ __('No Whatsapp (aktif)') }}</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" name="telp" value="{{ old('telp') }}" autocomplete="telp" required>
+                @error('telp')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
             <div class="form-group row my-1">
               <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
               <div class="col-md-6">
@@ -54,52 +98,11 @@
               </div>
             </div>
             <div class="form-group row my-1">
-              <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Konfirmasi Password') }}</label>
+              <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Konfirmasi Password') }}</label>
               <div class="col-md-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" required>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane mt-2" id="profil" role="tabpanel" aria-labelledby="profil-tab" tabindex="0">
-            <div class="form-group row my-1">
-              <label for="nim" class="col-md-4 col-form-label text-md-right">{{ __('NIM') }}</label>
-              <div class="col-md-6">
-                <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim" name="nim" autocomplete="nim" required>
-                @error('nim')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
-            </div>
-            <div class="form-group row my-1">
-              <label for="namalengkap" class="col-md-4 col-form-label text-md-right">{{ __('Nama Lengkap') }}</label>
-              <div class="col-md-6">
-                <input type="text" class="form-control @error('namalengkap') is-invalid @enderror" id="namalengkap" name="namalengkap" autocomplete="namalengkap" required>
-                @error('namalengkap')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
-            </div>
-            <div class="form-group row my-1">
-              <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
-              <div class="col-md-6">
-                <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" autocomplete="alamat">
-                @error('alamat')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
-            </div>
-            <div class="form-group row my-1">
-              <label for="telp" class="col-md-4 col-form-label text-md-right">{{ __('No Whatsapp (aktif)') }}</label>
-              <div class="col-md-6">
-                <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" name="telp" autocomplete="telp" required>
-                @error('telp')
-                  <span class="invalid-feedback" role="alert">
+                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" autocomplete="password_confirmation" required>
+                @error('password_confirmations')
+                  <span id="fb_password_confirmation" class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
                 @enderror
@@ -160,7 +163,7 @@
             <div class="form-group row my-1">
               <label for="unggahkrs" class="col-md-4 col-form-label text-md-right">{{ __('Unggah KRS') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahkrs') is-invalid @enderror" id="unggahkrs" name="unggahkrs" autocomplete="unggahkrs" required>
+                <input type="file" class="form-control @error('unggahkrs') is-invalid @enderror" id="unggahkrs" name="unggahkrs" value="{{ old('unggahkrs') }}" autocomplete="unggahkrs" required>
                 @error('unggahkrs')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -171,7 +174,7 @@
             <div class="form-group row my-1">
               <label for="unggahukt" class="col-md-4 col-form-label text-md-right">{{ __('Unggah UKT') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahukt') is-invalid @enderror" id="unggahukt" name="unggahukt" autocomplete="unggahukt" required>
+                <input type="file" class="form-control @error('unggahukt') is-invalid @enderror" id="unggahukt" name="unggahukt" value="{{ old('unggahukt') }}" autocomplete="unggahukt" required>
                 @error('unggahukt')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -182,7 +185,7 @@
             <div class="form-group row my-1">
               <label for="unggahbiaya" class="col-md-4 col-form-label text-md-right">{{ __('Unggah Biaya KKN') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahbiaya') is-invalid @enderror" id="unggahbiaya" name="unggahbiaya" autocomplete="unggahbiaya" >
+                <input type="file" class="form-control @error('unggahbiaya') is-invalid @enderror" id="unggahbiaya" name="unggahbiaya" value="{{ old('unggahbiaya') }}" autocomplete="unggahbiaya" required>
                 @error('unggahbiaya')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -191,9 +194,33 @@
               </div>
             </div>
             <div class="form-group row my-1">
+              <label for="suratkesediaan" class="col-md-4 col-form-label text-md-right">{{ __('Surat Kesediaan Peserta KKN') }}</label>
+              <div class="col-md-6">
+                <input type="file" class="form-control @error('suratkesediaan') is-invalid @enderror" id="suratkesediaan" name="suratkesediaan" value="{{ old('suratkesediaan') }}" autocomplete="suratkesediaan" required>
+                @error('suratkesediaan')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+            <div class="form-group row my-1">
+              <label for="suratijinortu" class="col-md-4 col-form-label text-md-right">{{ __('Surat Ijin Orang Tua/Wali') }}</label>
+              <div class="col-md-6">
+                <input type="file" class="form-control @error('suratijinortu') is-invalid @enderror" id="suratijinortu" name="suratijinortu" value="{{ old('suratijinortu') }}" autocomplete="suratijinortu" >
+                @error('suratijinortu')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane mt-2" id="other" role="tabpanel" aria-labelledby="other-tab" tabindex="0">
+          <div class="form-group row my-1">
               <label for="unggahsuratsakit" class="col-md-4 col-form-label text-md-right">{{ __('Unggah Surat Sakit Berat (dari Dokter)') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahsuratsakit') is-invalid @enderror" id="unggahsuratsakit" name="unggahsuratsakit" autocomplete="unggahsuratsakit">
+                <input type="file" class="form-control @error('unggahsuratsakit') is-invalid @enderror" id="unggahsuratsakit" name="unggahsuratsakit" value="{{ old('unggahsuratsakit') }}" autocomplete="unggahsuratsakit">
                 @error('unggahsuratsakit')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -204,7 +231,7 @@
             <div class="form-group row my-1">
               <label for="alergi" class="col-md-4 col-form-label text-md-right">{{ __('Alergi') }}</label>
               <div class="col-md-6">
-                <input type="text" class="form-control @error('alergi') is-invalid @enderror" id="alergi" name="alergi" autocomplete="alergi">
+                <input type="text" class="form-control @error('alergi') is-invalid @enderror" id="alergi" name="alergi" value="{{ old('alergi') }}" autocomplete="alergi">
                 @error('alergi')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -256,6 +283,30 @@
       console.log(username);
       $('#username').val(username);
     });
+
+    $('#telp').change(function(){
+      let telp = '62';
+      let angka1 = $(this).val().substring(0,1);
+      let angka2 = $(this).val().substring(1);
+      if(angka1 == 0){
+        telp = telp + angka2;
+      }else{
+        telp = angka1 + angka2;
+      }
+      $(this).val(telp);
+      console.log(telp);
+    });
+
+    $('#password_confirmation').change(function(){
+      let pass1 = $('#password').val();
+      let pass2 = $(this).val();
+      if(pass2 !== pass1){
+        console.log('password tidak sama');
+        $(this).addClass('is-invalid');
+        $('#fb_password_confirmation').show().text('password tidak sama');
+      }
+    });
+
   });
 </script>
 @endsection

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use MahasiswaController;
 use App\Http\Middleware\Mahasiswa;
 
 // use App\Http\Controllers\MahasiswaController;
@@ -38,6 +37,11 @@ Route::post('/pendaftaran/dpl', 'PendaftaranController@storedpl')->name('daftar.
 Route::get('/pendaftaran/mahasiswa', 'PendaftaranController@mahasiswa')->name('daftar.mahasiswa');
 Route::post('/pendaftaran/mahasiswa', 'PendaftaranController@storemahasiswa')->name('daftar.mahasiswa.store');
 Route::get('/pendaftaran/sukses', 'PendaftaranController@sukses')->name('daftar.sukses');
+// API Wilayah
+Route::get('/provinsi', 'WilayahController@getProvinsi')->name('provinsi');
+Route::get('/kota/{provinsi}', 'WilayahController@getKota')->name('kota');
+Route::get('/kecamatan/{kota}', 'WilayahController@getKecamatan')->name('kecamatan');
+Route::get('/kelurahan/{kecamatan}', 'WilayahController@getKelurahan')->name('kelurahan');
 
 Route::middleware('auth')->group(function(){
 	Route::get('/home', 'HomeController@index')->name('home');
@@ -46,12 +50,14 @@ Route::middleware('auth')->group(function(){
 	Route::resource('/dosen', DosenController::class);
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth', 'panitia')->group(function(){
 	Route::resource('/panitia', PanitiaController::class);
 	Route::resource('/desa', DesaController::class);
 	Route::resource('/perangkat', PerangkatDesaController::class);
 	Route::resource('/post', PostController::class);
-	Route::put('/mahasiswa/{mahasiswa}/verify', 'MahasiswaController@verify')->name('mahasiswa.verify');
+	Route::resource('/kelompok', KelompokController::class);
+	Route::get('/mahasiswa/{mahasiswa}/verify', 'MahasiswaController@verify')->name('mahasiswa.verify');
+	Route::put('/mahasiswa/{mahasiswa}/verified', 'MahasiswaController@verified')->name('mahasiswa.verified');
 	Route::get('/profil/panitia', 'ProfileController@panitia')->name('profil.penitia');
 });
 
@@ -67,7 +73,6 @@ Route::middleware('auth')->group(function(){
 
 Route::middleware(['auth', 'mahasiswa'])->group(function(){
 	Route::resource('/mahasiswa', MahasiswaController::class);
-	Route::resource('/kelompok', KelompokController::class);
 	Route::resource('/logbook', LogbookController::class);
 	Route::resource('/laporan', LaporanController::class);
 	Route::get('/profil/mahasiswa', 'ProfileController@mahasiswa')->name('profil.mahasiswa');

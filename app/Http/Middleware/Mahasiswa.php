@@ -22,8 +22,11 @@ class Mahasiswa
 				->join('users', 'mahasiswa.user_id', '=', 'users.user_id')
 				->where('users.user_id', $userid)
 				->get('mahasiswa.nim')->first();
-		$request->session()->put('nim', $nim);
-		dd($request->session()->get('nim'));
+		// $request->session()->put('nim', $nim);
+		// dd($request->session()->get('nim'));
+		$request->attributes->add(['nim' => $nim]);
+		// dd($request);
+
 		return $next($request);
 	}
 }

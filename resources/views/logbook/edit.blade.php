@@ -11,10 +11,10 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm">
-      <a class="opacity-5 text-dark" href="{{ route('prodi.index') }}">Prodi</a>
+      <a class="opacity-5 text-dark" href="{{ route('logbook.index') }}">{{ __('Logbook') }}</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>Edit Prodi</span>
+      <span>{{ __('Edit Logbook') }}</span>
     </li>
   </ol>
 </nav>

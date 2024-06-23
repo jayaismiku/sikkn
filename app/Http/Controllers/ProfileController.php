@@ -20,17 +20,46 @@ class ProfileController extends Controller
 
 	}
 
-	public function panitia()
+	public function index()
 	{
-
+		switch (Auth::user()->role) {
+			case 'panitia':
+				return redirect('profil/panitia');
+				break;
+			
+			case 'pemonev':
+				return redirect('profil/pemonev');
+				break;
+			
+			case 'pendamping':
+				return redirect('profil/dpl');
+				break;
+			
+			case 'mahasiswa':
+				return redirect('profil/mahasiswa');
+				break;
+			
+			default:
+				return view('home');
+				break;
+		}
 	}
 
-	public function pemonev()
+	public function panitia(Request $request)
+	{
+		$userid = Auth::user()->user_id;
+		$panitia = User::join('panitia', 'users.user_id', '=', 'panitia.user_id')
+					->where('users.user_id', '=', $userid)->first();
+		// dd($panitia);
+		return view('panitia.profil', compact('panitia'));
+	}
+
+	public function pemonev(Request $request)
 	{
 		
 	}
 
-	public function dpl()
+	public function dpl(Request $request)
 	{
 		
 	}
