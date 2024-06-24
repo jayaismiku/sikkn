@@ -6,6 +6,11 @@ use Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Hash;
+use Session;
+use App\User;
+// use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -35,9 +40,10 @@ class LoginController extends Controller
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(Request $request)
 	{
-		$this->middleware('guest')->except('logout');
+		$this->middleware(['guest', 'customLogin'])->except('logout');
+		dd($request);
 	}
 
 	public function redirectTo()
@@ -67,8 +73,25 @@ class LoginController extends Controller
 				$this->redirectTo = RouteServiceProvider::HOME;
 				return $this->redirectTo;
 		}
-		 
-		// return $next($request);
 	}
 
+	public function customLogin(Request $request)
+	{
+		$status = Auth::user()->status;
+		dd($status);
+		$request->validate([
+			'email' => 'required',
+			'password' => 'required',
+		]);
+
+		$credentials = $request->only('email', 'password', 'status');
+
+		if (Auth::attempt($credentials)) {
+			// return redirect()->intended('dashboard')->withSuccess('Signed in');
+			return redirect($this->redirectTo());
+		}
+
+		return redirect("login")->withSuccess('Login details are not valid');
+	}
+	
 }
