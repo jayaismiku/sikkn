@@ -19,7 +19,8 @@ class DesaController extends Controller
 	 */
 	public function index()
 	{
-		$desa = Desa::paginate(10);
+		// $desa = Desa::paginate(10);
+		$desa = Desa::all();
 		// dd($desa);
 		return view('desa.index', compact('desa'));
 	}

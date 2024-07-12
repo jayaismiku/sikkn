@@ -101,7 +101,6 @@
   </div>
 </div>
 
-<script src="{{ asset('js/jquery-3.7.1.min.js') }}" type="text/javascript" charset="utf-8" async defer></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $('#alert-success').delay(1000).fadeOut();

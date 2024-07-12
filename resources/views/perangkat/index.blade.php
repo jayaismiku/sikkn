@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Berita')
+@section('title', 'Data Perangkat Desa')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -11,7 +11,7 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>Berita</span>
+      <span>{{ __('Perangkat') }}</span>
     </li>
   </ol>
 </nav>
@@ -19,7 +19,7 @@
 
 @section('content')
 @if(session()->get('success'))
-<div class="alert alert-success alert-dismissible text-white fade show mx-3" role="alert">
+<div class="alert alert-success alert-dismissible text-white mx-3 fade show" role="alert">
   <span class="alert-icon align-middle">
     <span class="material-icons text-md">thumb_up_off_alt</span>
   </span>
@@ -36,10 +36,10 @@
         <div class="bg-gradient-secondary shadow-secondary border-radius-lg pt-4 pb-3 container">
           <div class="row">
             <div class="col-sm-8">
-              <h6 class="text-white text-capitalize ps-3">{{ __('Berita Terkini') }}</h6>
+              <h6 class="text-white text-capitalize ps-3">{{ __('Data Perangkat Desa') }}</h6>
             </div>
             <div class="col-sm-4 text-end">
-              <a class="text-warning-outline pe-4" href="{{ route('post.create') }}">
+              <a class="text-warning-outline pe-4" href="{{ route('perangkat.create') }}">
                 <span class="material-icons">add_circle</span>
               </a>
             </div>
@@ -48,40 +48,30 @@
       </div>
       <div class="card-body px-0 pb-2 mx-3">
         <div class="table-responsive p-0">
-          <table class="tblPosts table align-items-center justify-content-center mb-0">
+          <table id="tblPerangkat" class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Judul') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Deskripsi') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Lampiran') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Lengkap') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Jabatan') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Telp') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Desa') }}</th>
                 <th class="text-center"><i class="material-icons">draw</i></th>
               </tr>
             </thead>
             <tbody>
-              @foreach($posts as $post)
-              @php
-                $desc = str_replace('<p>', ' ', explode(' ', $post->deskripsi));
-                $deskripsi = '';
-                for($i = 0; $i < 15; $i++){
-                  $deskripsi .= $desc[$i] . ' ';
-                }
-                $deskripsi .= '...';
-              @endphp
+              @foreach($perangkat as $pr)
               <tr>
-                <td class="text-xs">{{ $post->judul }}</td>
-                <td class="text-xs">{{ $deskripsi }}</td>
-                <td class="text-xs">
-                  <a href="{{ asset('storage/' . $post->lampiran) }}" target="_blank">
-                    <i class="fa-solid fa-file-pdf"></i>
-                  </a>
-                </td>
+                <td class="text-xs">{{ $pr->nama_lengkap }}</td>
+                <td class="text-xs">{{ $pr->jabatan }}</td>
+                <td class="text-xs">{{ $pr->telp }}</td>
+                <td class="text-xs">{{ $pr->nama_desa }}</td>
                 <td class="text-xs text-center">
-                  <a class="text-warning" href="{{ route('post.edit', $post->post_id)}}">
+                  <a class="text-warning" href="{{ route('perangkat.edit', $pr->perangkat_id)}}">
                     <span class="material-icons">edit</span>
                   </a>
-                  <a class="nav-link text-danger" href="{{ route('post.destroy', $post->post_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $post->post_id }}').submit();">
+                  <a class="nav-link text-danger" href="{{ route('perangkat.destroy', $pr->perangkat_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $pr->perangkat_id }}').submit();">
                     <span class="material-icons">delete</span>
-                    <form id="delete-form-{{ $post->post_id }}" action="{{ route('post.destroy', $post->post_id) }}" method="POST" class="d-none">
+                    <form id="delete-form-{{ $pr->perangkat_id }}" action="{{ route('perangkat.destroy', $pr->perangkat_id) }}" method="POST" class="d-none">
                       @csrf
                       @method('DELETE')
                     </form>
@@ -99,11 +89,12 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.alert').delay(3000).fadeOut().delay(1000).removeClass("show");
+    $('.alert').delay(1000).fadeOut().removeClass("show");
   });
 
-  $('.tblPosts').DataTable();
+  $('#tblDesa').DataTable();
 </script>
+
 
 @endsection
 

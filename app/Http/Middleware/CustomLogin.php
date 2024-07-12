@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class CustomLogin
 {
+	private $defaultStatus = 0;
+
 	/**
 	 * Handle an incoming request.
 	 *
@@ -24,10 +26,10 @@ class CustomLogin
 		// dd($status);
 		$request->attributes->add(['status' => $status]);
 		// dd($request);
-		if($status == false)
-		{
-			return redirect(route('login'));
-		}
+		// if($status == $this->defaultStatus)
+		// {
+		// 	return redirect('/login');
+		// }
 		
 		return $next($request);
 	}

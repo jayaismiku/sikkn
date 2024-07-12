@@ -57,7 +57,7 @@ class LogbookController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		dd($request);
+		// dd($request->get('nim')->nim);
 		$request->validate([
 			'nama_kegiatan' => 'required',
 			'tanggal_kegiatan' => 'required',
@@ -65,7 +65,7 @@ class LogbookController extends Controller
 			'foto_kegiatan' => 'required|image|max:2048',
 		]);
 
-		$path_storage = 'logbook/' . $request->get('nim');
+		$path_storage = 'logbook/' . $request->get('nim')->nim;
 
 		if ($request->file('foto_kegiatan')->getClientOriginalName()) {
 			$name_foto = $request->file('foto_kegiatan')->getClientOriginalName();
@@ -77,7 +77,7 @@ class LogbookController extends Controller
 			'tanggal_kegiatan' => $request->get('tanggal_kegiatan'),
 			'deskripsi_kegiatan' => $request->get('deskripsi_kegiatan'),
 			'foto_kegiatan' => $path_foto,
-			'nim' => $request->get('nim'),
+			'nim' => $request->get('nim')->nim,
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
 		]);

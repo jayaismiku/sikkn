@@ -43,7 +43,7 @@ class LoginController extends Controller
 	public function __construct(Request $request)
 	{
 		$this->middleware(['guest', 'customLogin'])->except('logout');
-		dd($request);
+		// dd($request);
 	}
 
 	public function redirectTo()

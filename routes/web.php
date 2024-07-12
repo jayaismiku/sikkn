@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function(){
 Route::middleware('auth', 'panitia')->group(function(){
 	Route::resource('/panitia', PanitiaController::class);
 	Route::resource('/desa', DesaController::class);
-	Route::resource('/perangkat', PerangkatDesaController::class);
+	Route::resource('/perangkat', PerangkatController::class);
 	Route::resource('/post', PostController::class);
 	Route::resource('/kelompok', KelompokController::class);
 	Route::get('/mahasiswa/{mahasiswa}/verify', 'MahasiswaController@verify')->name('mahasiswa.verify');

@@ -13,6 +13,7 @@ class Post extends Model
         'judul',
         'slug',
         'deskripsi', 
+        'lampiran', 
         'penulis',
         'created_at', 
         'updated_at', 

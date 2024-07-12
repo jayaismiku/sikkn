@@ -8,8 +8,12 @@ class Panitia extends Model
 {
     protected $table = 'panitia';
 
+    protected $primaryKey = 'panitia_id';
+
+    public $timestamps = false;
+
     protected $fillable = [
-        'panitia_id', 'user_id', 'pekerjaan',
+        'panitia_id', 'nama_lengkap', 'pekerjaan', 'user_id',
     ];
 
 }

@@ -48,7 +48,7 @@
       </div>
       <div class="card-body px-0 pb-2 mx-3">
         <div class="table-responsive p-0">
-          <table class="table align-items-center justify-content-center mb-0">
+          <table id="tblDesa" class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Desa') }}</th>
@@ -81,13 +81,20 @@
               @endforeach
             </tbody>
           </table>
-          <div class="page">
-            {{ $desa->links() }}
-          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.alert').delay(1000).fadeOut().removeClass("show");
+  });
+
+  $('#tblDesa').DataTable();
+</script>
+
+
 @endsection
 

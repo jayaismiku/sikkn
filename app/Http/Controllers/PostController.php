@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Storage;
 use App\Post;
+use App\Panitia;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -26,7 +29,11 @@ class PostController extends Controller
 	 */
 	public function create()
 	{
-		return view('posts.create');
+		// dd(Auth::user()->user_id);
+		$penulis = Panitia::where('user_id', Auth::user()->user_id)
+								->first(['panitia_id', 'nama_lengkap']);
+		// dd($penulis->panitia_id);
+		return view('posts.create', compact('penulis'));
 	}
 
 	/**
@@ -37,22 +44,32 @@ class PostController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		// dd($request);
 		$request->validate([
-			'kode_fakultas' => 'required',
-			'nama_fakultas' => 'required',
+			'judul' => 'required',
+			'slug' => 'required',
+			'deskripsi' => 'required',
+			'penulis' => 'required',
+			'lampiran' => 'required|mimes:pdf|max:2048',
 		]);
 
-		$newFakultas = new Fakultas([
-			'kode_fakultas' => $request->get('kode_fakultas'),
-			'nama_fakultas' => $request->get('nama_fakultas'),
-			'dekan' => $request->get('dekan'),
-			'wadek' => $request->get('wadek'),
-			// 'created_at' => date('Y-m-d H:i:s'),
-			// 'updated_at' => date('Y-m-d H:i:s')
-		]);
-		$newFakultas->save();
+		if ($request->file('lampiran')) {
+			$file = $request->file('lampiran');
+			$fileName = $file->getClientOriginalName();
+			$filePath = 'berita/' . Date('Ymd') . '/' . $fileName;
+			Storage::disk('public')->put($filePath, file_get_contents($file));
+		}
 
-		return redirect('/fakultas')->with('success', 'Tambah Fakultas berhasil!');
+		$post = new Post([
+			'judul' => $request->get('judul'),
+			'slug' => $request->get('slug'),
+			'deskripsi' => $request->get('deskripsi'),
+			'lampiran' => $pathFile,
+			'penulis' => $request->get('penulis'),
+		]);
+		$post->save();
+
+		return redirect('/post')->with('success', 'Tambah Berita berhasil!');
 	}
 
 	/**
@@ -72,11 +89,13 @@ class PostController extends Controller
 	 * @param  \App\Post  $post
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit(Post $post)
+	public function edit($id)
 	{
-		$fakultas = Fakultas::find($fakultas);
+		$post = Post::find($id);
+		$penulis = Panitia::where('user_id', Auth::user()->user_id)
+								->first(['panitia_id', 'nama_lengkap']);
 		
-		return view('fakultas.edit', compact('fakultas'));
+		return view('posts.edit', compact(['post', 'penulis']));
 	}
 
 	/**
@@ -86,22 +105,35 @@ class PostController extends Controller
 	 * @param  \App\Post  $post
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, Post $post)
+	public function update(Request $request, $id)
 	{
+		// dd($request);
 		$request->validate([
-			'kode_fakultas' => 'required',
-			'nama_fakultas' => 'required',
+			'judul' => 'required',
+			'slug' => 'required',
+			'deskripsi' => 'required',
+			'penulis' => 'required',
+			'lampiran' => 'required|mimes:pdf|max:2048',
 		]);
 
-		$fakultas = Fakultas::find($fakultas);
-		$fakultas->kode_fakultas =  $request->get('kode_fakultas');
-		$fakultas->nama_fakultas = $request->get('nama_fakultas');
-		$fakultas->dekan = $request->get('dekan');
-		$fakultas->wadek = $request->get('wadek');
-		$fakultas->updated_at = date('Y-m-d H:i:s');
-		$fakultas->save();
+		// dd($request->file('lampiran'));
+		if ($request->file('lampiran')) {
+			$file = $request->file('lampiran');
+			$fileName = $file->getClientOriginalName();
+			$filePath = 'berita/' . Date('Ymd') . '/' . $fileName;
+			Storage::disk('public')->put($filePath, file_get_contents($file));
+		}
 
-		return redirect('/fakultas')->with('success', 'Fakultas berhasil diubah!');
+		$post = Post::find($id);
+		$post->judul =  $request->get('judul');
+		$post->slug = $request->get('slug');
+		$post->deskripsi = $request->get('deskripsi');
+		$post->lampiran = $filePath;
+		$post->penulis = $request->get('penulis');
+		$post->updated_at = date('Y-m-d H:i:s');
+		$post->save();
+
+		return redirect('/post')->with('success', 'Berita berhasil diubah!');
 	}
 
 	/**
@@ -110,11 +142,11 @@ class PostController extends Controller
 	 * @param  \App\Post  $post
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Post $post)
+	public function destroy($id)
 	{
-		$fakultas = Fakultas::find($fakultas);
-		$fakultas->delete();
+		$post = Post::find($id);
+		$post->delete();
 		
-		return redirect('/fakultas')->with('success', 'Fakultas berhasil dihapus!');
+		return redirect('/post')->with('success', 'Berita berhasil dihapus!');
 	}
 }

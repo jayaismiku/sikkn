@@ -54,14 +54,17 @@
           </div>
           <div class=" input-group-outline my-3">
               <label class="form-label" for="longitude">{{ __('Longitude') }}</label>
-              <input type="text" class="form-control px-2 py-2" name="longitude" value="{{ $desa->longitude }}" required/>
+              <input type="text" id="long" class="form-control px-2 py-2" name="longitude" value="{{ $desa->longitude }}" required/>
           </div>
           <div class=" input-group-outline my-3">
               <label class="form-label" for="latitude">{{ __('Latitude') }}</label>
-              <input type="text" class="form-control px-2 py-2" name="latitude" value="{{ $desa->latitude }}" required/>
+              <input type="text" id="lat" class="form-control px-2 py-2" name="latitude" value="{{ $desa->latitude }}" required/>
           </div>
           <div class="form-group mt-4">
             <input type="hidden" class="form-control px-2 py-2" name="desa_id" value="{{ $desa->desa_id }}" />
+            <a class="btn btn-warning xs" onclick="getLocation()">
+              <span class="material-icons">pin_drop</span>
+            </a>
             <button type="submit" class="btn btn-success xs">
               <span class="material-icons">save</span>
             </button>
@@ -74,5 +77,23 @@
     </div>
   </div>
 </div>
+<script>
+var long = document.getElementById("long");
+var lat = document.getElementById("lat");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    console.log(navigator.geolocation.getCurrentPosition(showPosition));
+  } else { 
+    alert("Geolocation is not supported by this browser.");
+  }
+}
+
+function showPosition(position) {
+  document.getElementById("long").value = position.coords.longitude;
+  document.getElementById("lat").value = position.coords.latitude;
+}
+</script>
 @endsection
 

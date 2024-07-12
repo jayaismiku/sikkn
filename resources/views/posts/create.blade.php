@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Dashboard Admin')
+@section('title', 'Tambah Berita')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -41,23 +41,29 @@
         </div>
         <br />
         @endif
-        <form method="post" action="{{ route('post.store') }}">
+        
+        <form method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
             <label class="form-label" for="judul">{{ __('Judul Berita:') }}</label>
-            <input type="text" class="form-control" name="judul" required/>
+            <input type="text" class="form-control" id="judul" name="judul" required/>
           </div>
           <div class="form-group">
               <label class="form-label" for="slug">{{ __('Slug Berita:') }}</label>
-              <input type="text" class="form-control" name="slug" required/>
+              <input type="text" class="form-control" id="slug" name="slug" readonly/>
           </div>
           <div class="form-group">
               <label class="form-label" for="deskripsi">{{ __('Deskripsi:') }}</label>
               <textarea class="form-control" name="deskripsi" id="deskripsi" rows="3"></textarea>
           </div>
           <div class="form-group">
+              <label class="form-label" for="penulis">{{ __('File Lampiran') }}</label>
+              <input type="file" class="form-control" accept="application/pdf" id="lampiran" name="lampiran"/>
+          </div>
+          <div class="form-group">
               <label class="form-label" for="penulis">{{ __('Penulis') }}</label>
-              <input type="text" class="form-control" name="penulis"/>
+              <input type="text" class="form-control" value="{{ $penulis->nama_lengkap }}" disabled/>
+              <input type="hidden" class="form-control" name="penulis" value="{{ $penulis->panitia_id }}"/>
           </div>
           <div class="form-group mt-4">
             <button type="submit" class="btn btn-success xs">
@@ -72,19 +78,17 @@
     </div>
   </div>
 </div>
-@push('scripts')
-  <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-  <script>
-    ClassicEditor
-      .create( document.querySelector('#deskripsi') )
-      .then( editor => {
-        console.log( editor );
-      } )
-      .catch( error => {
-        console.error( error );
-      } );
-  </script>
-@endpush
+
+<script>
+$(document).ready(function () {
+  $('#deskripsi').summernote();
+  $('#judul').change(function (e) { 
+    // e.preventDefault();
+    let slug = $(this).val().toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-');
+    $('#slug').val(slug);
+    console.log(slug)
+  });
+});
+</script>
 
 @endsection
-
