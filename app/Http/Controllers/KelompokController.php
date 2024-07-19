@@ -27,8 +27,8 @@ class KelompokController extends Controller
 	 */
 	public function create()
 	{
-		$mahasiswa = Mahasiswa::all();
-		// dd($kelompok);
+		$mahasiswa = Mahasiswa::all(['nim', 'jenis_kelamin', 'prodi']);
+		// dd($mahasiswa);
 		return view('kelompok.create', compact('mahasiswa'));
 	}
 

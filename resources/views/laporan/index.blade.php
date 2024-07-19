@@ -11,7 +11,7 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>Prodi</span>
+      <span>{{ __('Logbook') }}</span>
     </li>
   </ol>
 </nav>
@@ -51,7 +51,6 @@
           <table class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('No.') }}</th>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Tanggal Kegiatan') }}</th>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Kegiatan') }}</th>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Deskripsi Kegiatan') }}</th>
@@ -60,15 +59,11 @@
               </tr>
             </thead>
             <tbody>
-              @php
-              $i = 1;
-              @endphp
               @foreach($logbook as $lb)
               <tr>
-                <td class="text-xs">{{ $i }}</td>
                 <td class="text-xs">{{ date('d M Y', strtotime($lb->tanggal_kegiatan)) }}</td>
-                <td class="text-xs">{{ $lb->nama_kegiatan }}</td>
-                <td class="text-xs">{{ $lb->nama_kegiatan }}</td>
+                <td class="text-xs nama">{{ $lb->nama_kegiatan }}</td>
+                <td class="text-xs deskripsi">{!! $lb->deskripsi_kegiatan !!}</td>
                 <td class="text-xs">{!! ($lb->validasi == 0)?'<i class="fa-solid fa-triangle-exclamation text-warning"></i>':'<i class="fa-solid fa-clipboard-check text-success"></i>' !!}</td>
                 <td class="text-xs text-center">
                   <!-- <a class="text-warning" href="{{ route('logbook.edit', $lb->logbook_id)}}"><span class="material-icons">edit</span></a> -->
@@ -81,7 +76,6 @@
                   </a>
                 </td>
               </tr>
-              @php $i++ @endphp
               @endforeach
             </tbody>
           </table>
@@ -90,5 +84,14 @@
     </div>
   </div>
 </div>
+
+<style>
+.deskripsi p{
+  font-family: Roboto;
+  font-size: 0.75rem !important;
+  font-weight: 100;
+}
+</style>
+
 @endsection
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Storage;
 use App\User;
 use App\Mahasiswa;
 use App\Laporan;
@@ -24,8 +25,9 @@ class LaporanController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
+		$this->nim = $request->attributes->get('nim')->nim;
 		$laporan = Laporan::where('nim', $this->nim)->get();
 		dd($laporan);
 

@@ -1,8 +1,6 @@
 $(document).ready(function () {
   $('#dataTables-example').dataTable();
 
-  $('#deskripsi-kegiatan').summernote();
-
   $('#alert-success').delay(800).fadeOut(800);
 });
 

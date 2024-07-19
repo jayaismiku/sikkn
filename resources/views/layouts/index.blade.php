@@ -59,11 +59,11 @@
 	<script src="{{ asset('material/js/material-dashboard.min.js?v=3.1.0') }}"></script>
 	
 	<!-- include summernote css/js -->
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	<link href="{{ asset('summernote/summernote-lite.css') }}" rel="stylesheet">
+	<script src="{{ asset('summernote/summernote-lite.js') }}"></script>
 
 	<!-- Custom Script -->
-	<script src="{{ asset('js/custom.js')}}"></script>
+	<!-- <script src="{{ asset('js/custom.js')}}"></script> -->
 
 </head>
 

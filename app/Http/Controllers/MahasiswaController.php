@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
+	public function getMahasiswa()
+	{
+		$mahasiswa = Mahasiswa::all(['nim', 'nama_lengkap', 'jenis_kelamin', 'prodi']);
+		// dd($mahasiswa);
+		return response()->json($mahasiswa);
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *

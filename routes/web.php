@@ -87,3 +87,5 @@ Route::get('/broadcastmessage', 'broadcastmessageController@index')->name('broad
 // Route::get('/timpemonev', 'TimpemonevController@index')->name('timpemonev');
 // Route::get('/editpanitia', 'EditpanitiaController@index')->name('editpanitia');
 // Route::get('/pendamping', 'PendampingController@index')->name('pendamping')->middleware('pendamping');
+# API
+Route::get('/getmahasiswa', 'MahasiswaController@getMahasiswa')->name('getMahasiswa');

@@ -54,6 +54,21 @@
               </div>
             </div>
             <div class="form-group row my-1">
+              <label for="jenis_kelamin" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
+              <div class="col-md-6">
+                <select class="form-select form-control @error('jenis_kelamin') is-invalid @enderror" id="jenis_kelamin" name="jenis_kelamin" aria-label="select jenis_kelamin" required>
+                  <option selected>- Pilih Jenis Kelamin -</option>
+                  <option value="L">{{ __('Laki-laki') }}</option>
+                  <option value="P">{{ __('Perempuan') }}</option>
+                </select>
+                @error('jenis_kelamin')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+            <div class="form-group row my-1">
               <label for="alamat" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
               <div class="col-md-6">
                 <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" value="{{ old('alamat') }}" autocomplete="alamat">
@@ -158,12 +173,28 @@
                 @enderror
               </div>
             </div>
+            <div class="form-group row my-1">
+              <label for="jenis_kkn" class="col-md-4 col-form-label text-md-right">{{ __('Jenis KKN') }}</label>
+              <div class="col-md-6">
+                <select class="form-select form-control @error('jenis_kkn') is-invalid @enderror" id="jenis_kkn" name="jenis_kkn" aria-label="select jenis kkn" required>
+                  <option selected>- Pilih Jenis KKN -</option>
+                  <option value="Reguler">{{ __('Reguler') }}</option>
+                  <option value="nonreguler">{{ __('Non Reguler') }}</option>
+                  <option value="tematik">{{ __('Tematik') }}</option>
+                </select>
+                @error('jenis_kkn')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
           </div>
           <div class="tab-pane mt-2" id="unggah" role="tabpanel" aria-labelledby="unggah-tab" tabindex="0">
             <div class="form-group row my-1">
               <label for="unggahkrs" class="col-md-4 col-form-label text-md-right">{{ __('Unggah KRS') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahkrs') is-invalid @enderror" id="unggahkrs" name="unggahkrs" value="{{ old('unggahkrs') }}" autocomplete="unggahkrs" required>
+                <input type="file" class="form-control @error('unggahkrs') is-invalid @enderror" id="unggahkrs" name="unggahkrs" value="{{ old('unggahkrs') }}" autocomplete="unggahkrs" accept="image/*" required>
                 @error('unggahkrs')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -174,7 +205,7 @@
             <div class="form-group row my-1">
               <label for="unggahukt" class="col-md-4 col-form-label text-md-right">{{ __('Unggah UKT') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahukt') is-invalid @enderror" id="unggahukt" name="unggahukt" value="{{ old('unggahukt') }}" autocomplete="unggahukt" required>
+                <input type="file" class="form-control @error('unggahukt') is-invalid @enderror" id="unggahukt" name="unggahukt" value="{{ old('unggahukt') }}" autocomplete="unggahukt" accept="image/*" required>
                 @error('unggahukt')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -185,7 +216,7 @@
             <div class="form-group row my-1">
               <label for="unggahbiaya" class="col-md-4 col-form-label text-md-right">{{ __('Unggah Biaya KKN') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahbiaya') is-invalid @enderror" id="unggahbiaya" name="unggahbiaya" value="{{ old('unggahbiaya') }}" autocomplete="unggahbiaya" required>
+                <input type="file" class="form-control @error('unggahbiaya') is-invalid @enderror" id="unggahbiaya" name="unggahbiaya" value="{{ old('unggahbiaya') }}" autocomplete="unggahbiaya" accept="image/*" required>
                 @error('unggahbiaya')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -196,7 +227,7 @@
             <div class="form-group row my-1">
               <label for="suratkesediaan" class="col-md-4 col-form-label text-md-right">{{ __('Surat Kesediaan Peserta KKN') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('suratkesediaan') is-invalid @enderror" id="suratkesediaan" name="suratkesediaan" value="{{ old('suratkesediaan') }}" autocomplete="suratkesediaan" required>
+                <input type="file" class="form-control @error('suratkesediaan') is-invalid @enderror" id="suratkesediaan" name="suratkesediaan" value="{{ old('suratkesediaan') }}" autocomplete="suratkesediaan" accept="image/*" required>
                 @error('suratkesediaan')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -207,7 +238,7 @@
             <div class="form-group row my-1">
               <label for="suratijinortu" class="col-md-4 col-form-label text-md-right">{{ __('Surat Ijin Orang Tua/Wali') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('suratijinortu') is-invalid @enderror" id="suratijinortu" name="suratijinortu" value="{{ old('suratijinortu') }}" autocomplete="suratijinortu" >
+                <input type="file" class="form-control @error('suratijinortu') is-invalid @enderror" id="suratijinortu" name="suratijinortu" value="{{ old('suratijinortu') }}" autocomplete="suratijinortu" accept="image/*" required>
                 @error('suratijinortu')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -220,7 +251,7 @@
           <div class="form-group row my-1">
               <label for="unggahsuratsakit" class="col-md-4 col-form-label text-md-right">{{ __('Unggah Surat Sakit Berat (dari Dokter)') }}</label>
               <div class="col-md-6">
-                <input type="file" class="form-control @error('unggahsuratsakit') is-invalid @enderror" id="unggahsuratsakit" name="unggahsuratsakit" value="{{ old('unggahsuratsakit') }}" autocomplete="unggahsuratsakit">
+                <input type="file" class="form-control @error('unggahsuratsakit') is-invalid @enderror" id="unggahsuratsakit" name="unggahsuratsakit" value="{{ old('unggahsuratsakit') }}" autocomplete="unggahsuratsakit" accept="image/*">
                 @error('unggahsuratsakit')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -239,6 +270,29 @@
                 @enderror
               </div>
             </div>
+            <div class="form-group row my-1">
+              <label for="nama_ortu" class="col-md-4 col-form-label text-md-right">{{ __('Nama Orang Tua/Wali') }}</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control @error('nama_ortu') is-invalid @enderror" id="nama_ortu" name="nama_ortu" value="{{ old('nama_ortu') }}" autocomplete="nama_ortu">
+                @error('nama_ortu')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+            <div class="form-group row my-1">
+              <label for="telp_ortu" class="col-md-4 col-form-label text-md-right">{{ __('No.Telp Orang Tua/Wali') }}</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control @error('telp_ortu') is-invalid @enderror" id="telp_ortu" name="telp_ortu" value="{{ old('telp_ortu') }}" autocomplete="telp_ortu">
+                @error('telp_ortu')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+
           </div>
         </div>
         
@@ -262,8 +316,6 @@
   </div>
 </div>
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" type="text/javascript" charset="utf-8" async defer></script>
 <script type="text/javascript">
   function generateRandomString(length) {
     let result = '';
@@ -297,7 +349,20 @@
       console.log(telp);
     });
 
-    $('#password_confirmation').change(function(){
+    $('#telp_ortu').change(function(){
+      let telp = '62';
+      let angka1 = $(this).val().substring(0,1);
+      let angka2 = $(this).val().substring(1);
+      if(angka1 == 0){
+        telp = telp + angka2;
+      }else{
+        telp = angka1 + angka2;
+      }
+      $(this).val(telp);
+      console.log(telp);
+    });
+
+   $('#password_confirmation').change(function(){
       let pass1 = $('#password').val();
       let pass2 = $(this).val();
       if(pass2 !== pass1){

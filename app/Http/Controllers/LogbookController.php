@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Storage;
 use App\User;
 use App\Mahasiswa;
 use App\Logbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class LogbookController extends Controller
 {
@@ -65,18 +67,25 @@ class LogbookController extends Controller
 			'foto_kegiatan' => 'required|image|max:2048',
 		]);
 
-		$path_storage = 'logbook/' . $request->get('nim')->nim;
-
-		if ($request->file('foto_kegiatan')->getClientOriginalName()) {
-			$name_foto = $request->file('foto_kegiatan')->getClientOriginalName();
-			$path_foto = $request->file('foto_kegiatan')->store($path_storage);
+		if ($request->file('foto_kegiatan')) {
+			$file = $request->file('foto_kegiatan');
+			$fileName = strtolower(preg_replace('/\s+/', '', $file->getClientOriginalName()));
+			$filePath = 'logbook/' . $request->get('nim')->nim . '/' . $fileName;
+			Storage::disk('public')->put($filePath, file_get_contents($file));
 		}
+
+		// $path_storage = 'logbook/' . $request->get('nim')->nim;
+		// if ($request->file('foto_kegiatan')->getClientOriginalName()) {
+		// 	$name_foto = $request->file('foto_kegiatan')->getClientOriginalName();
+		// 	$path_foto = $request->file('foto_kegiatan')->store($path_storage);
+		// }
 
 		$newLogBook = new Logbook([
 			'nama_kegiatan' => $request->get('nama_kegiatan'),
+			'slug_kegiatan' => $request->get('slug_kegiatan'),
 			'tanggal_kegiatan' => $request->get('tanggal_kegiatan'),
 			'deskripsi_kegiatan' => $request->get('deskripsi_kegiatan'),
-			'foto_kegiatan' => $path_foto,
+			'foto_kegiatan' => $filePath,
 			'nim' => $request->get('nim')->nim,
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')

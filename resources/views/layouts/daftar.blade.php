@@ -34,6 +34,14 @@
 
 	<!-- Custom style -->
 	<link href="{{ asset('css/style-2.css') }}" rel="stylesheet" />
+
+	<!-- jQuery -->
+	<script src="{{ asset('js/jquery-3.7.1.min.js')}}"></script>
+
+	<!--   Core JS Files   -->
+  <script src="{{ asset('material/js/core/popper.min.js') }}" ></script>
+	<script src="{{ asset('material/js/core/bootstrap.min.js') }}" ></script>
+
 </head>
 
 <body class="pendaftaran">
@@ -54,13 +62,5 @@
     </section>
   </main>
   
-	<!--   Core JS Files   -->
-  <script src="{{ asset('material/js/core/popper.min.js') }}" ></script>
-	<script src="{{ asset('material/js/core/bootstrap.min.js') }}" ></script>
-
-  <!-- Nepcha Analytics (nepcha.com) -->
-  <script defer data-site="www.umbandung.ac.id" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-
 </body>
-
 </html>

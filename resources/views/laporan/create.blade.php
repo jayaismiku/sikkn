@@ -45,11 +45,11 @@
           @csrf
           <div class="form-group">
             <label class="form-label" for="nama_kegiatan">{{ __('Nama Kegiatan:') }}</label>
-            <input type="text" class="form-control px-2" name="nama_kegiatan"/>
+            <input type="text" class="form-control px-2" id="nama_kegiatan" name="nama_kegiatan"/>
           </div>
           <div class="form-group">
               <label class="form-label" for="tanggal_kegiatan">{{ __('Tanggal Kegiatan:') }}</label>
-              <input type="datetime-local" class="form-control px-2" name="tanggal_kegiatan"/>
+              <input type="datetime-local" class="form-control px-2" id="tanggal_kegiatan" name="tanggal_kegiatan"/>
           </div>
           <div class="form-group">
               <label class="form-label" for="deskripsi_kegiatan">{{ __('Deskripsi Kegiatan:') }}</label>
@@ -57,10 +57,11 @@
           </div>
           <div class="form-group">
               <label class="form-label" for="foto_kegiatan">{{ __('Foto Kegiatan') }}</label>
-              <input type="file" class="form-control px-2" name="foto_kegiatan"/>
+              <input type="file" class="form-control px-2" accept="image/*" name="foto_kegiatan"/>
           </div>
           <div class="form-group mt-4">
-            <input type="hidden" name="nim" value="{{ $nim->nim }}">
+            <input type="hidden" name="nim" value="{{ $nim }}">
+            <input type="hidden" id="slug_kegiatan" name="slug_kegiatan" value="">
             <button type="submit" class="btn btn-success xs">
               <span class="material-icons">save</span>
             </button>
@@ -73,6 +74,17 @@
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function () {
+  $('#deskripsi-kegiatan').summernote();
+  $('#nama_kegiatan').change(function (e) { 
+    let slug = $(this).val().toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-');
+    $('#slug_kegiatan').val(slug);
+    console.log(slug)
+  });
+});
+</script>
 
 @endsection
 
