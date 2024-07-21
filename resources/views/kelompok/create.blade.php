@@ -83,6 +83,10 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	const url = "{{ url('/getmahasiswa') }}";
+	const students;
+	const groupedStudents;
+	const numGroups = 6;
+	const dividedGroups;
 	// console.log(url);
 	let jmlkel = 5;
 
@@ -94,9 +98,9 @@ $(document).ready(function() {
 		$('#jmlkel').append('<strong>' + jmlkel + ' kelompok</strong>')
 	});
 
-	$('#preview').click(function () { 
+	$('#preview').click(function () {
 		$.getJSON(url, function(data) {
-			const students = data;
+			students = data;
 
 			// Fungsi untuk mengelompokkan data mahasiswa
 			function groupStudents(students) {
@@ -122,7 +126,7 @@ $(document).ready(function() {
 			}
 
 			// Mengelompokkan mahasiswa
-			const groupedStudents = groupStudents(students);
+			groupedStudents = groupStudents(students);
 
 			// Fungsi untuk membagi data menjadi 6 kelompok
 			function divideIntoGroups(groupedStudents, numGroups) {
@@ -142,8 +146,7 @@ $(document).ready(function() {
 			}
 
 			// Membagi data menjadi 6 kelompok
-			const numGroups = 6;
-			const dividedGroups = divideIntoGroups(groupedStudents, numGroups);
+			dividedGroups = divideIntoGroups(groupedStudents, numGroups);
 
 			// Fungsi untuk menampilkan hasil pengelompokan
 			function displayGroups(groups) {
@@ -164,10 +167,34 @@ $(document).ready(function() {
 
 			// Menampilkan hasil pengelompokan di tabel
 			displayGroups(dividedGroups);
+
 		}).fail(function() {
 			console.error("Error fetching data from API");
 		});
 	});
+
+	$('#submit').on('click', function() {
+		const formattedData = dividedGroups.map((group, index) => {
+			return group.map(student => ({
+				kelompok: index + 1,
+				nim: student.nim
+			}));
+		}).flat();
+
+		$.ajax({
+			type: 'POST',
+			url: 'save_to_mysql.php',
+			data: JSON.stringify(formattedData),
+			contentType: 'application/json',
+			success: function(response) {
+				alert('Data berhasil disimpan ke MySQL');
+			},
+			error: function(error) {
+				console.error('Error:', error);
+			}
+		});
+	});
+
 });
 </script>
 
