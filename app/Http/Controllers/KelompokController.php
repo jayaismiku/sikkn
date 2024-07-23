@@ -58,8 +58,9 @@ class KelompokController extends Controller
 		return redirect('/kelompok')->with('success', 'Tambah Kelompok berhasil!');
 	}
 
-	public function storeapi($data)
+	public function storeapi(Request $request)
 	{
+		dd($request);
 		$data = json_decode(file_get_contents('php://input'), true);
 
 		if (!empty($data)) {
@@ -67,16 +68,12 @@ class KelompokController extends Controller
 				$kelompok = $row['kelompok'];
 				$nim = $row['nim'];
 
-				$newProdi = new Kelompok([
-					'kode_prodi' => $request->get('kode_prodi'),
-					'nama_prodi' => $request->get('nama_prodi'),
-					'kaprodi' => $request->get('kaprodi'),
-					'sekprodi' => $request->get('sekprodi'),
-					'fakultas' => $request->get('fakultas'),
+				$pengelompokan = new Pengelompokan([
+					'nim' => $row['nim'],
+					'kelompok_id' => $row['kelompok'],
 				]);
 				$newProdi->save();
 			}
-			$stmt->close();
 		}
 	}
 
