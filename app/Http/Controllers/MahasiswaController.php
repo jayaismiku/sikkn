@@ -12,7 +12,7 @@ class MahasiswaController extends Controller
 {
 	public function getMahasiswa()
 	{
-		$mahasiswa = Mahasiswa::all(['nim', 'nama_lengkap', 'jenis_kelamin', 'prodi']);
+		$mahasiswa = Mahasiswa::all(['jenis_kkn', 'prodi', 'nim', 'semester', 'nama_lengkap', 'jenis_kelamin']);
 		// dd($mahasiswa);
 		return response()->json($mahasiswa);
 	}

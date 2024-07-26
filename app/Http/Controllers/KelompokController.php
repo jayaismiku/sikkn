@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Kelompok;
 use App\Mahasiswa;
+use App\Pengelompokan;
 use Illuminate\Http\Request;
 
 class KelompokController extends Controller
@@ -15,7 +16,8 @@ class KelompokController extends Controller
 	 */
 	public function index()
 	{
-		$mahasiswa = Mahasiswa::paginate(15);
+		$mahasiswa = Mahasiswa::join('pengelompokan', 'mahasiswa.nim', '=', 'pengelompokan.nim')
+								->get();
 		// dd($kelompok);
 		return view('kelompok.index', compact('mahasiswa'));
 	}
@@ -60,21 +62,39 @@ class KelompokController extends Controller
 
 	public function storeapi(Request $request)
 	{
-		dd($request);
-		$data = json_decode(file_get_contents('php://input'), true);
+		// $data = $request->all();
+		$data = $request->input('data');
+		// dd($data);
+		$nama_kelompok = "";
+		$kelompok_id = 0;
 
 		if (!empty($data)) {
-			foreach ($data as $row) {
-				$kelompok = $row['kelompok'];
-				$nim = $row['nim'];
+			Pengelompokan::truncate();
+			// Kelompok::delete();
 
-				$pengelompokan = new Pengelompokan([
-					'nim' => $row['nim'],
-					'kelompok_id' => $row['kelompok'],
+			foreach ($data as $item) {
+				// $kelompok = $row['kelompok'];
+				// $nim = $row['nim'];
+				if ($item['nama_kelompok'] != $nama_kelompok) {
+					$nama_kelompok = $item['nama_kelompok'];
+
+					$kelompok = new Kelompok([
+						'nama_kelompok' => $nama_kelompok,
+					]);
+					$kelompok->save();
+					$kelompok_id = $kelompok->kelompok_id;
+				}
+
+				Pengelompokan::create([
+					'nim' => $item['nim']
+					'kelompok_id' => $kelompok_id,
+					'nama_kelompok' => $nama_kelompok,
 				]);
-				$newProdi->save();
 			}
 		}
+		
+		// return response()->json(['message' => 'Data berhasil disimpan ke MySQL'], 200);
+		return redirect('/kelompok')->with('success', 'Tambah Kelompok berhasil!');
 	}
 
 	/**

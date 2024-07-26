@@ -14,9 +14,10 @@ class Pengelompokan extends Model
 
     protected $fillable = [
         'pengelompokan_id', 
+        'kelompok_id',
+        'nama_kelompok', 
         'nim', 
         'ketua_kelompok', 
-        'kelompok_id', 
     ];
 
 }

@@ -48,7 +48,7 @@
       </div>
       <div class="card-body px-0 pb-2 mx-3">
         <div class="table-responsive p-0">
-          <table class="table align-items-center justify-content-center mb-0">
+          <table id="tblMahasiswa" class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Kelompok') }}</th>
@@ -61,7 +61,7 @@
             <tbody>
               @foreach($mahasiswa as $mhs)
               <tr>
-                <td class="text-xs">{{ $mhs->kelompok }}</td>
+                <td class="text-xs">{{ $mhs->nama_kelompok }}</td>
                 <td class="text-xs">{{ $mhs->nim }}</td>
                 <td class="text-xs">{{ $mhs->nama_lengkap }}</td>
                 <td class="text-xs">{{ $mhs->fakultas }}</td>
@@ -70,13 +70,20 @@
               @endforeach
             </tbody>
           </table>
-          <div class="page">
-            {{ $mahasiswa->links() }}
-          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.alert').delay(1000).fadeOut().removeClass("show");
+  });
+
+  $('#tblMahasiswa').DataTable();
+</script>
+
+
 @endsection
 
