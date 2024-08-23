@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Edit Prodi')
+@section('title', 'Edit Kelompok')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -11,10 +11,10 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm">
-      <a class="opacity-5 text-dark" href="{{ route('desa.index') }}">{{ __('Desa') }}</a>
+      <a class="opacity-5 text-dark" href="{{ route('kelompok.index') }}">{{ __('Kelompok') }}</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>{{ __('Ubah Desa') }}</span>
+      <span>{{ __('Ubah Kelompok') }}</span>
     </li>
   </ol>
 </nav>
@@ -27,7 +27,7 @@
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-secondary shadow-secondary border-radius-lg pt-4 pb-3">
-          <h6 class="text-white text-capitalize ps-3">Ubah Data Desa</h6>
+          <h6 class="text-white text-capitalize ps-3">Ubah Data Kelompok</h6>
         </div>
       </div>
       <div class="card-body px-0 pb-2 mx-3 ">
@@ -41,31 +41,51 @@
         </div>
         <br />
         @endif
-        <form id="editDesa" method="post" action="{{ route('desa.update', $desa->desa_id) }}">
+        <form id="editKelompok" method="post" action="{{ route('kelompok.update', $kelompok->kelompok_id) }}">
           @csrf
           @method('PUT')
           <div class=" input-group-outline my-3">
-              <label class="form-label" for="nama_desa">{{ __('Nama Desa:') }}</label>
-              <input type="text" class="form-control px-2 py-2" name="nama_desa" value="{{ $desa->nama_desa }}" required/>
+              <label class="form-label" for="nama_kelompok">{{ __('Nama Kelompok:') }}</label>
+              <input type="text" class="form-control px-2 py-2" name="nama_kelompok" value="{{ $kelompok->nama_kelompok }}" required readonly />
           </div>
           <div class=" input-group-outline my-3">
-              <label class="form-label" for="alamat">{{ __('Alamat:') }}</label>
-              <input type="text" class="form-control px-2 py-2" name="alamat" value="{{ $desa->alamat }}" required/>
+            <label class="form-label" for="jenis_kkn">{{ __('Jenis KKN') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="jenis_kkn" name="jenis_kkn" required>
+              <option value="Reguler" {{ $kelompok->jenis_kkn=='Reguler'?'selected':'' }}>Reguler</option>
+              <option value="Non-Reguler" {{ $kelompok->jenis_kkn=='Non-Reguler'?'selected':'' }}>Non-Reguler</option>
+              <option value="Tematik" {{ $kelompok->jenis_kkn=='Tematik'?'selected':'' }}>Tematik</option>
+            </select>
           </div>
           <div class=" input-group-outline my-3">
-              <label class="form-label" for="longitude">{{ __('Longitude') }}</label>
-              <input type="text" class="form-control px-2 py-2" name="longitude" value="{{ $desa->longitude }}" required/>
+            <label class="form-label" for="pemonev">{{ __('Pemonev:') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" name="pemonev" required>
+              @foreach($pemonev as $pm)
+              <option value="{{ $pm->pemonev_id }}" {{ $kelompok->pemonev_id==$pm->pemonev_id?'selected':'' }}>{{ $pm->nama_pemonev }}</option>
+              @endforeach
+            </select>
           </div>
           <div class=" input-group-outline my-3">
-              <label class="form-label" for="latitude">{{ __('Latitude') }}</label>
-              <input type="text" class="form-control px-2 py-2" name="latitude" value="{{ $desa->latitude }}" required/>
+            <label class="form-label" for="pendamping">{{ __('Pendamping') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" name="pendamping" required>
+              @foreach($pendamping as $dpl)
+              <option value="{{ $dpl->pendamping_id }}" {{ $kelompok->pendamping_id==$dpl->pendamping_id?'selected':'' }}>{{ $dpl->nama_dosen }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="desa">{{ __('Desa') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-desa" name="desa" required>
+              @foreach($desa as $ds)
+              <option value="{{ $ds->desa_id }}" {{ $ds->desa_id==$kelompok->desa_id?'selected':'' }}>{{ $ds->nama_desa }}</option>
+              @endforeach
+            </select>
           </div>
           <div class="form-group mt-4">
-            <input type="hidden" class="form-control px-2 py-2" name="desa_id" value="{{ $desa->desa_id }}" />
+            <input type="hidden" class="form-control px-2 py-2" name="kelompok_id" value="{{ $kelompok->kelompok_id }}" />
             <button type="submit" class="btn btn-success xs">
               <span class="material-icons">save</span>
             </button>
-            <a class="btn btn-info xs" href="{{ route('desa.index') }}">
+            <a class="btn btn-info xs" href="{{ route('kelompok.index') }}">
               <span class="material-icons">undo</span>
             </a>
           </div>         

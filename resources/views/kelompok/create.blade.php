@@ -14,7 +14,7 @@
 			<a class="opacity-5 text-dark" href="{{ route('kelompok.index') }}">{{ __('Kelompok') }}</a>
 		</li>
 		<li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-			<span>{{ __('Generate Kelompok') }}</span>
+			<span>{{ __('Tambah Kelompok') }}</span>
 		</li>
 	</ol>
 </nav>
@@ -27,7 +27,7 @@
 		<div class="card my-4">
 			<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
 				<div class="bg-gradient-secondary shadow-secondary border-radius-lg pt-4 pb-3">
-					<h6 class="text-white text-capitalize ps-3">{{ __('Generate Kelompok') }}</h6>
+					<h6 class="text-white text-capitalize ps-3">{{ __('Tambah Kelompok') }}</h6>
 				</div>
 			</div>
 			<div class="card-body px-0 pb-2 mx-3 ">
@@ -41,40 +41,57 @@
 				</div>
 				<br />
 				@endif
-				<form id="" method="post" action="{{ route('kelompok.store') }}">
+				<form id="formTambahKelompok" method="post" action="{{ route('kelompok.store') }}">
 					@csrf
-					<p class="form-label">Jumlah yang mendaftar per {{ date('d M Y') }} sejumlah {{ count($mahasiswa) }} orang</p>
-					<div class="form-group">
-						<label class="form-label" for="jumlah_orang">{{ __('Berapa orang dalam satu kelompok yang ingin dibuat?') }}</label>
-						<input type="number" class="form-control px-2" id="jumlah_orang" name="jumlah_orang" value="10" />
-					</div>
-					<br><p id="jmlkel" class="form-label">{{ __('Kemungkinan banyaknya kelompok ada: ') }}</p>
-					<div class="form-group mt-4">
-						<input type="hidden" id="jmlmhs" name="jmlmhs" value="{{ count($mahasiswa) }}">
-						<a id="preview" class="btn btn-warning xs">
-							<i class="fa-solid fa-user-check"></i> <span class="fs-5">{{ __('Preview') }}</span>
-						</a>
-						<a id="submit" class="btn btn-success xs" onclick="formsubmit()">
-							<i class="fa-solid fa-people-line"></i> <span class="fs-5">{{ __('Simpan Kelompok') }}</span>
-						</a>
-						<a id="back" class="btn btn-info xs" onclick="window.history.back()">
-							<i class="fa-solid fa-rotate-left"></i> <span class="fs-5">{{ __('Kembali') }}</span>
-						</a>
-					</div>         
+          <div class=" input-group-outline my-3">
+              <label class="form-label" for="nama_kelompok">{{ __('Nama Kelompok:') }}</label>
+              <input type="text" class="form-control px-2 py-2" id="nama_kelompok" name="nama_kelompok" required/>
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="jenis_kkn">{{ __('Jenis KKN') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="jenis_kkn" name="jenis_kkn" required>
+            	<option value="" selected>-Pilih Jenis KKN-</option>
+            	<option value="Reguler">Reguler</option>
+            	<option value="Non-Reguler">Non-Reguler</option>
+            	<option value="Tematik">Tematik</option>
+            </select>
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="pemonev">{{ __('Pemonev:') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pemonev" name="pemonev" required>
+            	<option value="" selected>-Pilih Pemonev-</option>
+              @foreach($pemonev as $pm)
+              <option value="{{ $pm->pemonev_id }}">{{ $pm->nama_pemonev }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="pendamping">{{ __('Pendamping') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pendamping" name="pendamping" required>
+            	<option value="" selected>-Pilih Pendamping-</option>
+              @foreach($pendamping as $dpl)
+              <option value="{{ $dpl->pendamping_id }}">{{ $dpl->nama_dosen }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="desa">{{ __('Desa') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-desa" id="desa" name="desa" required>
+            	<option value="" selected>-Pilih Desa-</option>
+              @foreach($desa as $ds)
+              <option value="{{ $ds->desa_id }}">{{ $ds->nama_desa }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success-outline">
+            	<span class="material-icons">save</span>
+            </button>
+            <a href="{{ route('kelompok.index') }}">
+            	<span class="material-icons">undo</span>
+            </a>
+          </div>         
 				</form>
-				<table id="studentTable" class="table">
-	        <thead>
-	        	<tr>
-	        		<th scope="col">Kelompok</th>
-	        		<th scope="col">NIM</th>
-	        		<th scope="col">Nama Mahasiswa</th>
-	        		<th scope="col">#</th>
-	        	</tr>
-	        </thead>
-	        <tbody>
-	            <!-- Data akan dimasukkan di sini oleh JavaScript -->
-	        </tbody>
-	    	</table>
 			</div>
 		</div>
 	</div>
@@ -82,118 +99,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	const url = "{{ url('/getmahasiswa') }}";
-	const students;
-	const groupedStudents;
-	const numGroups = 6;
-	const dividedGroups;
-	// console.log(url);
-	let jmlkel = 5;
-
-	$('#jumlah_orang').change(function () {
-		let jmlOrg = $(this).val();
-		let jmlMhs = $('#jmlmhs').val();
-		jmlkel = Math.round(jmlMhs / jmlOrg);
-		console.log(jmlkel);
-		$('#jmlkel').append('<strong>' + jmlkel + ' kelompok</strong>')
-	});
-
-	$('#preview').click(function () {
-		$.getJSON(url, function(data) {
-			students = data;
-
-			// Fungsi untuk mengelompokkan data mahasiswa
-			function groupStudents(students) {
-				const grouped = {};
-
-				students.forEach(
-					student => {
-						const prodi = student.prodi;
-						const gender = student.jenis_kelamin;
-
-						if (!grouped[prodi]) {
-							grouped[prodi] = {};
-						}
-
-						if (!grouped[prodi][gender]) {
-							grouped[prodi][gender] = [];
-						}
-
-						grouped[prodi][gender].push(student);
-				});
-
-				return grouped;
-			}
-
-			// Mengelompokkan mahasiswa
-			groupedStudents = groupStudents(students);
-
-			// Fungsi untuk membagi data menjadi 6 kelompok
-			function divideIntoGroups(groupedStudents, numGroups) {
-				const groups = Array.from({ length: numGroups }, () => []);
-				let groupIndex = 0;
-
-				for (const prodi in groupedStudents) {
-					for (const gender in groupedStudents[prodi]) {
-						groupedStudents[prodi][gender].forEach(student => {
-							groups[groupIndex].push(student);
-							groupIndex = (groupIndex + 1) % numGroups;
-						});
-					}
-				}
-
-				return groups;
-			}
-
-			// Membagi data menjadi 6 kelompok
-			dividedGroups = divideIntoGroups(groupedStudents, numGroups);
-
-			// Fungsi untuk menampilkan hasil pengelompokan
-			function displayGroups(groups) {
-				const tableBody = $('#studentTable tbody');
-				tableBody.empty();
-
-				groups.forEach((group, index) => {
-					group.forEach(student => {
-						const row = `<tr>
-														<td>Kelompok ${index + 1}</td>
-														<td>${student.nim}</td>
-														<td>${student.nama_lengkap}</td>
-													</tr>`;
-						tableBody.append(row);
-					});
-				});
-			}
-
-			// Menampilkan hasil pengelompokan di tabel
-			displayGroups(dividedGroups);
-
-		}).fail(function() {
-			console.error("Error fetching data from API");
-		});
-	});
-
-	$('#submit').on('click', function() {
-		const formattedData = dividedGroups.map((group, index) => {
-			return group.map(student => ({
-				kelompok: index + 1,
-				nim: student.nim
-			}));
-		}).flat();
-
-		$.ajax({
-			type: 'POST',
-			url: 'save_to_mysql.php',
-			data: JSON.stringify(formattedData),
-			contentType: 'application/json',
-			success: function(response) {
-				alert('Data berhasil disimpan ke MySQL');
-			},
-			error: function(error) {
-				console.error('Error:', error);
-			}
-		});
-	});
 
 });
 </script>

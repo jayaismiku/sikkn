@@ -8,8 +8,13 @@ class Pendamping extends Model
 {
     protected $table = 'pendamping';
 
+    protected $primaryKey = 'pendamping_id';
+
+    public $timestamps = false;
+
     protected $fillable = [
-        'pendamping_id', 'user_id'
+        'pendamping_id', 
+        'dosen_id', 
     ];
 
 }

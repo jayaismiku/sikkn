@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use Storage;
 use App\User;
 use App\Mahasiswa;
 use App\Laporan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class LaporanController extends Controller
 {
-	private $nim;
+	protected $nim;
+	protected $kelompok;
 
 	public function __construct()
 	{
@@ -28,8 +30,13 @@ class LaporanController extends Controller
 	public function index(Request $request)
 	{
 		$this->nim = $request->attributes->get('nim')->nim;
-		$laporan = Laporan::where('nim', $this->nim)->get();
-		dd($laporan);
+		// dd($this->nim);
+		$this->kelompok = Mahasiswa::join('pengelompokan', 'mahasiswa.nim', '=', 'pengelompokan.nim')
+							->where('mahasiswa.nim', $this->nim)
+							->pluck('pengelompokan.kelompok_id')->first();
+		// dd($this->kelompok);
+		$laporan = Laporan::where('kelompok_id', $this->kelompok)->get();
+		// dd($laporan);
 
 		return view('laporan.index', compact('laporan'));
 	}
@@ -39,16 +46,15 @@ class LaporanController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
-		$userid = Auth::user()->user_id;
-		$nim = Laporan::join('mahasiswa', 'laporan.nim', '=', 'mahasiswa.nim')
-							->join('users', 'mahasiswa.user_id', '=', 'users.user_id')
-							->where('users.user_id', $userid)
-							->get('mahasiswa.nim')->first();
-		// dd($nim);
+		$nim = $request->attributes->get('nim')->nim;
+		$kelompok = Mahasiswa::join('pengelompokan', 'mahasiswa.nim', '=', 'pengelompokan.nim')
+							->where('mahasiswa.nim', $nim)
+							->get(['pengelompokan.kelompok_id','pengelompokan.nama_kelompok'])->first();
+		// dd($kelompok);
 
-		return view('laporan.create', compact('nim'));
+		return view('laporan.create', compact('kelompok'));
 	}
 
 	/**
@@ -61,29 +67,27 @@ class LaporanController extends Controller
 	{
 		// dd($request);
 		$request->validate([
-			'nama_kegiatan' => 'required',
-			'tanggal_kegiatan' => 'required',
-			'deskripsi_kegiatan' => 'required',
-			'foto_kegiatan' => 'required|image|max:2048',
+			'judul_laporan' => 'required',
+			'tipe_laporan' => 'required',
+			'unggah_laporan' => 'required|mimes:pdf|max:10000',
 		]);
 
-		$path_storage = 'laporan/' . $request->get('nim');
+		$path_storage = 'laporan/' . $request->get('nama_kelompok'). '/';
+		$filelap = $request->file('unggah_laporan');
+        $fileName = date('YmdHis').'.'.$filelap->getClientOriginalExtension();
+        $filePath = $path_storage . $fileName;
+        Storage::disk('public')->put($filePath, file_get_contents($filelap));
 
-		if ($request->file('foto_kegiatan')->getClientOriginalName()) {
-			$name_foto = $request->file('foto_kegiatan')->getClientOriginalName();
-			$path_foto = $request->file('foto_kegiatan')->store($path_storage);
-		}
-
-		$newLogBook = new Laporan([
-			'nama_kegiatan' => $request->get('nama_kegiatan'),
-			'tanggal_kegiatan' => $request->get('tanggal_kegiatan'),
-			'deskripsi_kegiatan' => $request->get('deskripsi_kegiatan'),
-			'foto_kegiatan' => $path_foto,
-			'nim' => $request->get('nim'),
+		$simpanLaporan = new Laporan([
+			'judul_laporan' => $request->get('judul_laporan'),
+			'tipe_laporan' => $request->get('tipe_laporan'),
+			'unggah_file' => $filePath,
+			'tanggal_unggah' => $request->get('tanggal_unggah'),
+			'kelompok_id' => $request->get('kelompok_id'),
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
 		]);
-		$newLogBook->save();
+		$simpanLaporan->save();
 
 		return redirect('/laporan')->with('success', 'Tambah Laporan berhasil!');
 	}
@@ -107,7 +111,9 @@ class LaporanController extends Controller
 	 */
 	public function edit($id)
 	{
-		$laporan = Laporan::find($laporan);
+		$laporan = Laporan::join('kelompok', 'laporan.kelompok_id', '=', 'kelompok.kelompok_id')
+					->find($id);
+		// dd($laporan);
 		
 		return view('laporan.edit', compact('laporan'));
 	}
@@ -121,18 +127,25 @@ class LaporanController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
+		// dd($request);
 		$request->validate([
-			'kode_laporan' => 'required',
-			'nama_laporan' => 'required',
+			'judul_laporan' => 'required',
+			'tipe_laporan' => 'required',
+			'unggah_laporan' => 'required|mimes:pdf|max:10000',
 		]);
 
-		$laporan = Laporan::find($laporan);
-		$laporan->kode_laporan =  $request->get('kode_laporan');
-		$laporan->nama_laporan = $request->get('nama_laporan');
-		$laporan->dekan = $request->get('dekan');
-		$laporan->wadek = $request->get('wadek');
-		$laporan->updated_at = date('Y-m-d H:i:s');
-		$laporan->save();
+		$path_storage = 'laporan/' . $request->get('nama_kelompok'). '/';
+		$filelap = $request->file('unggah_laporan');
+        $fileName = date('YmdHis').'.'.$filelap->getClientOriginalExtension();
+        $filePath = $path_storage . $fileName;
+        Storage::disk('public')->put($filePath, file_get_contents($filelap));
+
+		$ubahLaporan = Laporan::find($id);
+		$ubahLaporan->judul_laporan =  $request->get('judul_laporan');
+		$ubahLaporan->tipe_laporan = $request->get('tipe_laporan');
+		$ubahLaporan->unggah_file = $filePath;
+		$ubahLaporan->updated_at = date('Y-m-d H:i:s');
+		$ubahLaporan->save();
 
 		return redirect('/laporan')->with('success', 'Laporan berhasil diubah!');
 	}

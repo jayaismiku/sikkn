@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Kelompok;
 use App\Mahasiswa;
+use App\Pengelompokan;
+use App\Pemonev;
+use App\Pendamping;
+use App\Desa;
 use Illuminate\Http\Request;
 
 class KelompokController extends Controller
@@ -15,9 +19,14 @@ class KelompokController extends Controller
 	 */
 	public function index()
 	{
-		$mahasiswa = Mahasiswa::paginate(15);
+		$kelompok = Kelompok::leftjoin('pendamping', 'kelompok.pendamping_id', '=', 'pendamping.pendamping_id')
+					->leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')
+					->leftjoin('pemonev', 'kelompok.pemonev_id', '=', 'pemonev.pemonev_id')
+					->leftjoin('desa', 'kelompok.desa_id', '=', 'desa.desa_id')
+					->orderBy('kelompok.kelompok_id', 'asc')
+					->get();
 		// dd($kelompok);
-		return view('kelompok.index', compact('mahasiswa'));
+		return view('kelompok.index', compact('kelompok'));
 	}
 
 	/**
@@ -27,9 +36,11 @@ class KelompokController extends Controller
 	 */
 	public function create()
 	{
-		$mahasiswa = Mahasiswa::all(['nim', 'jenis_kelamin', 'prodi']);
-		// dd($mahasiswa);
-		return view('kelompok.create', compact('mahasiswa'));
+		$pemonev = Pemonev::all();
+		$pendamping = Pendamping::leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')->get();
+		$desa = Desa::all();
+
+		return view('kelompok.create', compact('pemonev','pendamping','desa'));
 	}
 
 	/**
@@ -40,41 +51,62 @@ class KelompokController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		// dd($request->get('desa'));
 		$request->validate([
-			'kode_prodi' => 'required',
-			'nama_prodi' => 'required',
-			'fakultas' => 'required'
+			'nama_kelompok' => 'required',
+			'jenis_kkn' => 'required',
+			'pemonev' => 'required',
+			'pendamping' => 'required',
+			'desa' => 'required'
 		]);
 
-		$newProdi = new Kelompok([
-			'kode_prodi' => $request->get('kode_prodi'),
-			'nama_prodi' => $request->get('nama_prodi'),
-			'kaprodi' => $request->get('kaprodi'),
-			'sekprodi' => $request->get('sekprodi'),
-			'fakultas' => $request->get('fakultas'),
+		$simpanKelompok = new Kelompok([
+			'nama_kelompok' => $request->get('nama_kelompok'),
+			'jenis_kkn' => $request->get('jenis_kkn'),
+			'pemonev_id' => $request->get('pemonev'),
+			'pendamping_id' => $request->get('pendamping'),
+			'desa_id' => $request->get('desa'),
 		]);
-		$newProdi->save();
+		$simpanKelompok->save();
 
 		return redirect('/kelompok')->with('success', 'Tambah Kelompok berhasil!');
 	}
 
 	public function storeapi(Request $request)
 	{
-		dd($request);
-		$data = json_decode(file_get_contents('php://input'), true);
+		// $data = $request->all();
+		$data = $request->input('data');
+		// dd($data);
+		$nama_kelompok = "";
+		$kelompok_id = 0;
 
 		if (!empty($data)) {
-			foreach ($data as $row) {
-				$kelompok = $row['kelompok'];
-				$nim = $row['nim'];
+			Pengelompokan::truncate();
+			// Kelompok::delete();
 
-				$pengelompokan = new Pengelompokan([
-					'nim' => $row['nim'],
-					'kelompok_id' => $row['kelompok'],
+			foreach ($data as $item) {
+				// $kelompok = $row['kelompok'];
+				// $nim = $row['nim'];
+				if ($item['nama_kelompok'] != $nama_kelompok) {
+					$nama_kelompok = $item['nama_kelompok'];
+
+					$kelompok = new Kelompok([
+						'nama_kelompok' => $nama_kelompok,
+					]);
+					$kelompok->save();
+					$kelompok_id = $kelompok->kelompok_id;
+				}
+
+				Pengelompokan::create([
+					'kelompok_id' => $kelompok_id,
+					'nama_kelompok' => $nama_kelompok,
+					'nim' => $item['nim']
 				]);
-				$newProdi->save();
 			}
 		}
+		
+		// return response()->json(['message' => 'Data berhasil disimpan ke MySQL'], 200);
+		return redirect('/kelompok')->with('success', 'Tambah Kelompok berhasil!');
 	}
 
 	/**
@@ -97,9 +129,12 @@ class KelompokController extends Controller
 	public function edit($id)
 	{
 		$kelompok = Kelompok::find($id);
-		$provinsi = Provinsi::all()->where('status', '1');
-		// dd($kelompok);
-		return view('kelompok.edit', compact('kelompok'));
+		$pemonev = Pemonev::all();
+		$pendamping = Pendamping::leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')->get();
+		$desa = Desa::all();
+		// dd($desa);
+
+		return view('kelompok.edit', compact('kelompok','pemonev','pendamping','desa'));
 	}
 
 	/**
@@ -114,16 +149,18 @@ class KelompokController extends Controller
 		// dd($request);
 		$request->validate([
 			'nama_kelompok' => 'required',
-			'alamat' => 'required',
-			'longitude' => 'required',
-			'latitude' => 'required',
+			'jenis_kkn' => 'required',
+			'pendamping' => 'required',
+			'pemonev' => 'required',
+			'desa' => 'required',
 		]);
 
 		$kelompok = Kelompok::find($id);
 		$kelompok->nama_kelompok =  $request->get('nama_kelompok');
-		$kelompok->alamat = $request->get('alamat');
-		$kelompok->longitude = $request->get('longitude');
-		$kelompok->latitude = $request->get('latitude');
+		$kelompok->jenis_kkn =  $request->get('jenis_kkn');
+		$kelompok->pendamping_id = $request->get('pendamping');
+		$kelompok->pemonev_id = $request->get('pemonev');
+		$kelompok->desa_id = $request->get('desa');
 		$kelompok->updated_at = date('Y-m-d H:i:s');
 		$kelompok->save();
 

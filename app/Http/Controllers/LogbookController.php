@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use Storage;
 use App\User;
 use App\Mahasiswa;
 use App\Logbook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class LogbookController extends Controller
 {
@@ -64,28 +65,46 @@ class LogbookController extends Controller
 			'nama_kegiatan' => 'required',
 			'tanggal_kegiatan' => 'required',
 			'deskripsi_kegiatan' => 'required',
-			'foto_kegiatan' => 'required|image|max:2048',
+			'foto_kegiatan' => 'required|image',
 		]);
 
-		if ($request->file('foto_kegiatan')) {
-			$file = $request->file('foto_kegiatan');
-			$fileName = strtolower(preg_replace('/\s+/', '', $file->getClientOriginalName()));
-			$filePath = 'logbook/' . $request->get('nim')->nim . '/' . $fileName;
-			Storage::disk('public')->put($filePath, file_get_contents($file));
-		}
+		// if ($request->file('foto_kegiatan')) {
+		// 	$file = $request->file('foto_kegiatan');
+		// 	$fileName = strtolower(preg_replace('/\s+/', '', $file->getClientOriginalName()));
+		// 	$filePath = 'logbook/' . $request->get('nim')->nim . '/' . $fileName;
+		// 	Storage::disk('public')->put($filePath, file_get_contents($file));
+		// }
 
-		// $path_storage = 'logbook/' . $request->get('nim')->nim;
+		$path_storage = 'logbook/' . $request->get('nim')->nim . '/';
+
 		// if ($request->file('foto_kegiatan')->getClientOriginalName()) {
 		// 	$name_foto = $request->file('foto_kegiatan')->getClientOriginalName();
 		// 	$path_foto = $request->file('foto_kegiatan')->store($path_storage);
 		// }
+		$image = $request->file('foto_kegiatan');
+        $imageName = date('YmdHis').'.'.$image->getClientOriginalExtension();
+        $filePath = $path_storage . $imageName;
+        // dd($imageName);
+        if ($image->getSize() > 2 * 1024 * 1024) {
+            $imageCompressed = Image::make($image)->orientate()
+                ->resize(1024, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->encode('jpg', 80); // Kompresi gambar
+            Storage::disk('public')->put($filePath, (string) $imageCompressed);
+            // Storage::put($path_storage . $imageName, (string) $imageCompressed);
+        } else {
+            // Simpan gambar langsung tanpa kompresi
+            // $image->storeAs($path_storage, $imageName);
+            Storage::disk('public')->put($filePath, file_get_contents($image));
+        }
 
 		$newLogBook = new Logbook([
 			'nama_kegiatan' => $request->get('nama_kegiatan'),
 			'slug_kegiatan' => $request->get('slug_kegiatan'),
 			'tanggal_kegiatan' => $request->get('tanggal_kegiatan'),
 			'deskripsi_kegiatan' => $request->get('deskripsi_kegiatan'),
-			'foto_kegiatan' => $filePath,
+			'foto_kegiatan' => $path_storage . $imageName,
 			'nim' => $request->get('nim')->nim,
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')

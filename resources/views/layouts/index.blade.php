@@ -123,9 +123,17 @@
 				<li class="nav-item">
 					<a class="nav-link text-white " href="{{ route('mahasiswa.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">diversity_3</i>
+							<i class="material-icons opacity-10">account_box</i>
 						</div>
 						<span class="nav-link-text ms-1">{{ __('Mahasiswa') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('pengelompokan.index') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">diversity_3</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Pengelompokan') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
@@ -166,19 +174,19 @@
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Pemonev') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('pemonev.index') }}">
+					<a class="nav-link text-white " href="{{ route('dasbor.pemonev') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">supervisor_account</i>
 						</div>
-						<span class="nav-link-text ms-1">{{ __('Tim Pemonev') }}</span>
+						<span class="nav-link-text ms-1">{{ __('Dashboard') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('panitia.index') }}">
+					<a class="nav-link text-white " href="{{ route('monev.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">verified</i>
 						</div>
-						<span class="nav-link-text ms-1">{{ __('Validasi') }}</span>
+						<span class="nav-link-text ms-1">{{ __('Monev Kegiatan') }}</span>
 					</a>
 				</li>
 				@endif
@@ -208,11 +216,11 @@
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Mahasiswa') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('profil.mahasiswa') }}">
+					<a class="nav-link text-white " href="{{ route('dasbor.mahasiswa') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">manage_accounts</i>
 						</div>
-						<span class="nav-link-text ms-1">{{ __('Data Saya') }}</span>
+						<span class="nav-link-text ms-1">{{ __('Dashboard') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">

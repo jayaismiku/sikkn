@@ -50,22 +50,22 @@ class LoginController extends Controller
 	{
 		switch(Auth::user()->role){
 			case 'panitia':
-				$this->redirectTo = '/profil/panitia';
+				$this->redirectTo = '/dasbor/panitia';
 				return $this->redirectTo;
 				break;
 
 			case 'pemonev':
-				$this->redirectTo = '/profil/pemonev';
+				$this->redirectTo = '/dasbor/pemonev';
 				return $this->redirectTo;
 				break;
 
 			case 'dpl':
-				$this->redirectTo = '/profil/dpl';
+				$this->redirectTo = '/dasbor/dpl';
 				return $this->redirectTo;
 				break;
 
 			case 'mahasiswa':
-				$this->redirectTo = '/profil/mahasiswa';
+				$this->redirectTo = '/dasbor/mahasiswa';
 				return $this->redirectTo;
 				break;
 

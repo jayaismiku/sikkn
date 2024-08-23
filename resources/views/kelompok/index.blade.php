@@ -40,7 +40,7 @@
             </div>
             <div class="col-sm-4 text-end">
               <a class="text-warning pe-4" href="{{ route('kelompok.create') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
-                <i class="fa-solid fa-users-line"></i>
+                <i class="fa-solid fa-person-circle-plus"></i>
               </a>
             </div>
           </div>
@@ -48,35 +48,55 @@
       </div>
       <div class="card-body px-0 pb-2 mx-3">
         <div class="table-responsive p-0">
-          <table class="table align-items-center justify-content-center mb-0">
+          <table id="tblKelompok" class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Kelompok') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('NIM') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Lengkap') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Fakultas') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Program Studi') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Kelompok') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Jenis KKN') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('DPL') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Pemonev') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Desa') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2"><i class="material-icons">draw</i></th>
               </tr>
             </thead>
             <tbody>
-              @foreach($mahasiswa as $mhs)
+              @foreach($kelompok as $kel)
               <tr>
-                <td class="text-xs">{{ $mhs->kelompok }}</td>
-                <td class="text-xs">{{ $mhs->nim }}</td>
-                <td class="text-xs">{{ $mhs->nama_lengkap }}</td>
-                <td class="text-xs">{{ $mhs->fakultas }}</td>
-                <td class="text-xs">{{ $mhs->prodi }}</td>
+                <td class="text-xs">{{ $kel->nama_kelompok }}</td>
+                <td class="text-xs">{{ $kel->jenis_kkn }}</td>
+                <td class="text-xs">{{ $kel->nama_dosen }}</td>
+                <td class="text-xs">{{ $kel->nama_pemonev }}</td>
+                <td class="text-xs">{{ $kel->nama_desa }}</td>
+                <td class="text-xs text-center">
+                  <a class="text-warning" href="{{ route('kelompok.edit', $kel->kelompok_id)}}">
+                    <span class="material-icons">edit</span>
+                  </a>
+                  <a class="nav-link text-danger" href="{{ route('kelompok.destroy', $kel->kelompok_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $kel->kelompok_id }}').submit();">
+                    <span class="material-icons">delete</span>
+                    <form id="delete-form-{{ $kel->kelompok_id }}" action="{{ route('kelompok.destroy', $kel->kelompok_id) }}" method="POST" class="d-none">
+                      @csrf
+                      @method('DELETE')
+                    </form>
+                  </a>
+                </td>
               </tr>
               @endforeach
             </tbody>
           </table>
-          <div class="page">
-            {{ $mahasiswa->links() }}
-          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.alert').delay(1000).fadeOut().removeClass("show");
+  });
+
+  $('#tblKelompok').DataTable();
+</script>
+
+
 @endsection
 

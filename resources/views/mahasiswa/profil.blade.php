@@ -51,7 +51,7 @@
               <ul class="list-group">
                 <li class="list-group-item border-0 px-0">
                   <div class="form-check form-switch ps-0">
-                    <span class="ms-2 text-xs font-weight-bolder">{{ __('Nama Kelompok: ') }}</span>
+                    <span class="ms-2 text-xs font-weight-bolder">{{ __('Nama Kelompok: ') }} {{ $mahasiswa->nama_kelompok }}</span>
                   </div>
                 </li>
               </ul>

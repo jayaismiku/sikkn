@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\DB;
 class ProfileController extends Controller
 {
 
-
 	public function __construct()
 	{
-
+		$this->middleware('auth');
 	}
 
 	public function index()
@@ -69,6 +68,9 @@ class ProfileController extends Controller
 		// dd(Auth::user());
 		$mahasiswaID = Auth::user()->user_id;
 		$mahasiswa = User::join('mahasiswa', 'users.user_id', '=', 'mahasiswa.user_id')
+					->leftjoin('pengelompokan', 'mahasiswa.nim', '=', 'pengelompokan.nim')
+					->leftjoin('kelompok', 'pengelompokan.kelompok_id', '=', 'kelompok.kelompok_id')
+					->leftjoin('desa', 'kelompok.desa_id', '=', 'desa.desa_id')
 					->where('users.user_id', '=', $mahasiswaID)->first();
 		// dd($mahasiswa);
 

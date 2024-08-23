@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Program Studi')
+@section('title', 'Monitoring & Evaluasi')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -11,7 +11,7 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>{{ __('Laporan') }}</span>
+      <span>{{ __('Monitoring Evaluasi') }}</span>
     </li>
   </ol>
 </nav>
@@ -36,44 +36,46 @@
         <div class="bg-gradient-secondary shadow-secondary border-radius-lg pt-4 pb-3 container">
           <div class="row">
             <div class="col-sm-8">
-              <h6 class="text-white text-capitalize ps-3">{{ __('Laporan Kelompok ') }}</h6>
+              <h6 class="text-white text-capitalize ps-3">{{ __('Monitoring dan Evaluasi') }}</h6>
             </div>
             <div class="col-sm-4 text-end">
-              <a class="text-white pe-3" href="{{ route('laporan.create') }}">
+              <!-- <a class="text-white pe-3" href="{{ route('kelompok.create') }}">
                 <i class="fa-solid fa-file-circle-plus"></i>
-              </a>
+              </a> -->
             </div>
           </div>
         </div>
       </div>
       <div class="card-body px-0 pb-2 mx-3">
         <div class="table-responsive p-0">
-          <table class="table align-items-center justify-content-center mb-0">
+          <table id="tblKelompok" class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Judul Laporan') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Tipe Laporan') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('File Laporan') }}</th>
-                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Validasi DPL') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Kelompok') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Jenis KKN') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('DPL') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Desa') }}</th>
                 <th class="text-center"><i class="fa-solid fa-file-pen"></i></th>
               </tr>
             </thead>
             <tbody>
-              @foreach($laporan as $lap)
+              @foreach($kelompok as $kel)
               <tr>
-                <td class="text-xs">{{ $lap->judul_laporan }}</td>
-                <td class="text-xs nama">{{ $lap->tipe_laporan }}</td>
-                <td class="text-xs deskripsi"><a target="_blank" href="{{ Storage::url($lap->unggah_file) }}"><i class="fa-solid fa-file-pdf"></i></a></td>
-                <td class="text-xs">{!! ($lap->validasi == 0)?'<i class="fa-solid fa-triangle-exclamation text-warning"></i>':'<i class="fa-solid fa-clipboard-check text-success"></i>' !!}</td>
+                <td class="text-xs">{{ $kel->nama_kelompok }}</td>
+                <td class="text-xs nama">{{ $kel->jenis_kkn }}</td>
+                <td class="text-xs nama">{{ $kel->nama_dosen }}</td>
+                <td class="text-xs nama">{{ $kel->nama_desa }}</td>
                 <td class="text-xs text-center">
-                  <a class="text-warning" href="{{ route('laporan.edit', $lap->laporan_id)}}"><span class="material-icons">edit</span></a>
-                  <a class="nav-link text-danger" href="{{ route('laporan.destroy', $lap->laporan_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $lap->laporan_id }}').submit();">
+                  <a class="text-warning" href="{{ route('monev.create', $kel->kelompok_id)}}">
+                    <i class="fa-solid fa-users-viewfinder"></i>
+                  </a>
+                  <!-- <a class="nav-link text-danger" href="{{ route('kelompok.destroy', $kel->kelompok_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $kel->kelompok_id }}').submit();">
                     <span class="material-icons">delete</span>
-                    <form id="delete-form-{{ $lap->laporan_id }}" action="{{ route('laporan.destroy', $lap->laporan_id) }}" method="POST" class="d-none">
+                    <form id="delete-form-{{ $kel->kelompok_id }}" action="{{ route('kelompok.destroy', $kel->kelompok_id) }}" method="POST" class="d-none">
                       @csrf
                       @method('DELETE')
                     </form>
-                  </a>
+                  </a> -->
                 </td>
               </tr>
               @endforeach

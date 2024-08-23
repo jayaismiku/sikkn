@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Tambah Logbook')
+@section('title', 'Tambah Laporan')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -11,10 +11,10 @@
       </a>
     </li>
     <li class="breadcrumb-item text-sm">
-      <a class="opacity-5 text-dark" href="{{ route('logbook.index') }}">{{ __('Logbook') }}</a>
+      <a class="opacity-5 text-dark" href="{{ route('laporan.index') }}">{{ __('Laporan') }}</a>
     </li>
     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-      <span>{{ __('Tambah Logbook') }}</span>
+      <span>{{ __('Tambah Laporan') }}</span>
     </li>
   </ol>
 </nav>
@@ -27,7 +27,7 @@
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-secondary shadow-secondary border-radius-lg pt-4 pb-3">
-          <h6 class="text-white text-capitalize ps-3">Tambah Logbook</h6>
+          <h6 class="text-white text-capitalize ps-3">Tambah Laporan</h6>
         </div>
       </div>
       <div class="card-body px-0 pb-2 mx-3 ">
@@ -41,31 +41,33 @@
         </div>
         <br />
         @endif
-        <form id="tambah-logbook" method="post" action="{{ route('logbook.store') }}" enctype="multipart/form-data">
+        <form id="tambah-laporan" method="post" action="{{ route('laporan.store') }}" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
-            <label class="form-label" for="nama_kegiatan">{{ __('Nama Kegiatan:') }}</label>
-            <input type="text" class="form-control px-2" id="nama_kegiatan" name="nama_kegiatan"/>
+            <label class="form-label" for="judul_laporan">{{ __('Judul Laporan:') }}</label>
+            <input type="text" class="form-control px-2" id="judul_laporan" name="judul_laporan"/>
           </div>
           <div class="form-group">
-              <label class="form-label" for="tanggal_kegiatan">{{ __('Tanggal Kegiatan:') }}</label>
-              <input type="datetime-local" class="form-control px-2" id="tanggal_kegiatan" name="tanggal_kegiatan"/>
+              <label class="form-label" for="tipe_laporan">{{ __('Tipe Laporan:') }}</label>
+              <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-fakultas" id="tipe_laporan" name="tipe_laporan" required>
+                <option value="">{{ __('-Pilih Tipe Laporan-') }}</option>
+                <option value="kemajuan">{{ __('Kemajuan') }}</option>
+                <option value="akhir">{{ __('Akhir') }}</option>
+                <option value="jurnal">{{ __('Jurnal') }}</option>
+              </select>
           </div>
           <div class="form-group">
-              <label class="form-label" for="deskripsi_kegiatan">{{ __('Deskripsi Kegiatan:') }}</label>
-              <textarea id="deskripsi-kegiatan" class="form-control px-2" name="deskripsi_kegiatan" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-              <label class="form-label" for="foto_kegiatan">{{ __('Foto Kegiatan') }}</label>
-              <input type="file" class="form-control px-2" accept="image/*" name="foto_kegiatan"/>
+              <label class="form-label" for="unggah_laporan">{{ __('Unggah Laporan') }}</label>
+              <input type="file" class="form-control px-2" accept="application/pdf" id="unggah_laporan" name="unggah_laporan"/>
           </div>
           <div class="form-group mt-4">
-            <input type="hidden" name="nim" value="{{ $nim }}">
-            <input type="hidden" id="slug_kegiatan" name="slug_kegiatan" value="">
+            <input type="hidden" name="kelompok_id" value="{{ $kelompok->kelompok_id }}">
+            <input type="hidden" name="nama_kelompok" value="{{ $kelompok->nama_kelompok }}">
+            <input type="hidden" name="tanggal_unggah" value="{{ date('Y-m-d H:i:s') }}">
             <button type="submit" class="btn btn-success xs">
               <span class="material-icons">save</span>
             </button>
-            <a class="btn btn-info xs" href="{{ route('logbook.index') }}">
+            <a class="btn btn-info xs" href="{{ route('laporan.index') }}">
               <span class="material-icons">undo</span>
             </a>
           </div>         
@@ -77,12 +79,7 @@
 
 <script>
 $(document).ready(function () {
-  $('#deskripsi-kegiatan').summernote();
-  $('#nama_kegiatan').change(function (e) { 
-    let slug = $(this).val().toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-');
-    $('#slug_kegiatan').val(slug);
-    console.log(slug)
-  });
+
 });
 </script>
 

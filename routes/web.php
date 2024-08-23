@@ -51,24 +51,35 @@ Route::middleware('auth')->group(function(){
 });
 
 Route::middleware('auth', 'panitia')->group(function(){
+	Route::get('/dasbor/panitia', 'DashboardController@panitia')->name('dasbor.panitia');
+	Route::get('/profil/panitia', 'ProfileController@panitia')->name('profil.penitia');
 	Route::resource('/panitia', PanitiaController::class);
 	Route::resource('/desa', DesaController::class);
 	Route::resource('/perangkat', PerangkatController::class);
 	Route::resource('/post', PostController::class);
+	Route::resource('/pengelompokan', PengelompokanController::class);
 	Route::resource('/kelompok', KelompokController::class);
+	Route::post('/pengelompokan/storeapi', 'PengelompokanController@storeapi')->name('pengelompokan.storeapi');
 	Route::get('/mahasiswa/{mahasiswa}/verify', 'MahasiswaController@verify')->name('mahasiswa.verify');
 	Route::put('/mahasiswa/{mahasiswa}/verified', 'MahasiswaController@verified')->name('mahasiswa.verified');
-	Route::get('/profil/panitia', 'ProfileController@panitia')->name('profil.penitia');
 });
 
 Route::middleware('auth')->group(function(){
-	Route::resource('/pemonev', PemonevController::class);
+	Route::get('/dasbor/pemonev', 'DashboardController@pemonev')->name('dasbor.pemonev');
 	Route::get('/profil/pemonev', 'ProfileController@pemonev')->name('profil.pemonev');
+	Route::resource('/pemonev', PemonevController::class);
+	// Route::resource('/monev', MonevController::class);
+	Route::get('/monev', 'MonevController@index')->name('monev.index');
+	Route::get('/monev/create/{monev}', 'MonevController@create')->name('monev.create');
+	Route::post('/monev', 'MonevController@store')->name('monev.store');
+	Route::get('/monev/{monev}/edit', 'MonevController@edit')->name('monev.edit');
+	Route::put('/monev/{monev}', 'MonevController@update')->name('monev.update');
 });
 
 Route::middleware('auth')->group(function(){
-	Route::resource('/pendamping', PendampingController::class);
+	Route::get('/dasbor/dpl', 'DashboardController@dpl')->name('dasbor.dpl');
 	Route::get('/profil/dpl', 'ProfileController@dpl')->name('profil.dpl');
+	Route::resource('/pendamping', PendampingController::class);
 });
 
 Route::middleware(['auth', 'mahasiswa'])->group(function(){
@@ -76,6 +87,7 @@ Route::middleware(['auth', 'mahasiswa'])->group(function(){
 	Route::resource('/logbook', LogbookController::class);
 	Route::resource('/laporan', LaporanController::class);
 	Route::get('/profil/mahasiswa', 'ProfileController@mahasiswa')->name('profil.mahasiswa');
+	Route::get('/dasbor/mahasiswa', 'DashboardController@mahasiswa')->name('dasbor.mahasiswa');
 });
 
 # Custom Route

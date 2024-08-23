@@ -17,7 +17,7 @@ class Dosen extends Model
         'nidn', 
         'nip', 
         'user_id', 
-        'nama_lengkap',
+        'nama_dosen',
         'gelar_depan', 
         'gelar_belakang', 
         'pangkat', 
