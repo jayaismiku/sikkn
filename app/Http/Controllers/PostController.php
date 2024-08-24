@@ -50,9 +50,10 @@ class PostController extends Controller
 			'slug' => 'required',
 			'deskripsi' => 'required',
 			'penulis' => 'required',
-			'lampiran' => 'required|mimes:pdf|max:2048',
+			// 'lampiran' => 'required|mimes:pdf|max:2048',
 		]);
 
+		$filePath = null;
 		if ($request->file('lampiran')) {
 			$file = $request->file('lampiran');
 			$fileName = $file->getClientOriginalName();
@@ -64,8 +65,8 @@ class PostController extends Controller
 			'judul' => $request->get('judul'),
 			'slug' => $request->get('slug'),
 			'deskripsi' => $request->get('deskripsi'),
-			'lampiran' => $pathFile,
 			'penulis' => $request->get('penulis'),
+			'lampiran' => $filePath,
 		]);
 		$post->save();
 

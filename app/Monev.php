@@ -11,7 +11,14 @@ class Monev extends Model
     protected $primaryKey = 'monev_id';
 
     protected $fillable = [
-        'panitia_id', 'nama_lengkap', 'pekerjaan', 'user_id',
+        'pemonev_id', 
+        'kelompok_id', 
+        'keadaan_mahasiswa', 
+        'penilaian',
+        'nilai',
+        'catatan',
+        'created_at',
+        'updated_at',
     ];
 
 }

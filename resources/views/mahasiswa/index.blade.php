@@ -65,7 +65,7 @@
             <tbody>
               @foreach($mahasiswa as $mhs)
               <tr>
-                <td class="text-xs">{{ $mhs->nama_lengkap }}</td>
+                <td class="text-xs">{{ $mhs->nama_mhs }}</td>
                 <td class="text-xs">{{ $mhs->email }}</td>
                 <td class="text-xs">{{ $mhs->fakultas }}</td>
                 <td class="text-xs">{{ $mhs->prodi }}</td>

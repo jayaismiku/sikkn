@@ -94,7 +94,7 @@
               <ul class="list-group">
                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">{{ __('Username: ') }}</strong> {{ $mahasiswa->username }}</li>
                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">{{ __('Email: ') }}</strong> {{ $mahasiswa->email }}</li>
-                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">{{ __('Telp (WA): ') }}</strong> {{ $mahasiswa->telp }}</li>
+                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">{{ __('Telp (WA): ') }}</strong> {{ $mahasiswa->telp_mhs }}</li>
                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">{{ __('Fakultas: ') }}</strong> {{ $mahasiswa->fakultas }}</li>
                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">{{ __('Program Studi: ') }}</strong> {{ $mahasiswa->prodi }}</li>
                 <li class="list-group-item border-0 ps-0 pb-0">

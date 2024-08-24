@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title', 'Tambah Desa')
+@section('title', 'Generate Kelompok')
 
 @section('pathway')
 <nav aria-label="breadcrumb">
@@ -63,19 +63,19 @@
 					</div>         
 				</form>
 				<table id="studentTable" class="table">
-			        <thead>
-			        	<tr>
-			        		<th scope="col">Kelompok</th>
-			        		<th scope="col">Nama Lengkap</th>
-			        		<th scope="col">NIM</th>
-			        		<th scope="col">Prodi</th>
-			        		<th scope="col">Jenis KKN</th>
-			        	</tr>
-			        </thead>
-			        <tbody>
-			            <!-- Data akan dimasukkan di sini oleh JavaScript -->
-			        </tbody>
-	    		</table>
+					  <thead>
+						<tr>
+							<th scope="col">Kelompok</th>
+							<th scope="col">Nama Lengkap</th>
+							<th scope="col">NIM</th>
+							<th scope="col">Prodi</th>
+							<th scope="col">Jenis KKN</th>
+						</tr>
+					  </thead>
+					  <tbody>
+							<!-- Data akan dimasukkan di sini oleh JavaScript -->
+					  </tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -91,38 +91,38 @@ $(document).ready(function() {
 	let student;
 	let namakelompok;
 	let groupedStudents;
-    const finalGroups = [];
+	 const finalGroups = [];
 	// let numGroups = 6;
 	let dividedGroups;
 	let jmlkel = 5;
 
 	function groupByJenisKKN(data) {
-        const groups = {};
+		  const groups = {};
 
-        data.forEach(student => {
-            const jenis_kkn = student.jenis_kkn;
+		  data.forEach(student => {
+				const jenis_kkn = student.jenis_kkn;
 
-            if (!groups[jenis_kkn]) {
-                groups[jenis_kkn] = [];
-            }
+				if (!groups[jenis_kkn]) {
+					 groups[jenis_kkn] = [];
+				}
 
-            groups[jenis_kkn].push(student);
-        });
+				groups[jenis_kkn].push(student);
+		  });
 
-        return groups;
-    }
+		  return groups;
+	 }
 
-    function divideIntoGroups(students, numGroups) {
-        const groups = Array.from({ length: numGroups }, () => []);
-        let groupIndex = 0;
+	 function divideIntoGroups(students, numGroups) {
+		  const groups = Array.from({ length: numGroups }, () => []);
+		  let groupIndex = 0;
 
-        students.forEach(student => {
-            groups[groupIndex].push(student);
-            groupIndex = (groupIndex + 1) % numGroups;
-        });
+		  students.forEach(student => {
+				groups[groupIndex].push(student);
+				groupIndex = (groupIndex + 1) % numGroups;
+		  });
 
-        return groups;
-    }
+		  return groups;
+	 }
 
 	$('#jumlah_orang').change(function () {
 		let jmlOrg = $(this).val();
@@ -137,49 +137,49 @@ $(document).ready(function() {
 			// const students = data;
 			const groupedByJenisKKN = groupByJenisKKN(data);
 
-	        for (const jenis_kkn in groupedByJenisKKN) {
-	        	if(jenis_kkn == "Reguler"){
-	        		namakelompok = "Reg";
-	        	}else if (jenis_kkn == "Non Reguler") {
-	        		namakelompok = "Nonreg";
-	        	}else{
-	        		namakelompok = "Tematik";
-	        	}
+			  for (const jenis_kkn in groupedByJenisKKN) {
+					if(jenis_kkn == "Reguler"){
+						namakelompok = "Reg";
+					}else if (jenis_kkn == "Non Reguler") {
+						namakelompok = "Nonreg";
+					}else{
+						namakelompok = "Tematik";
+					}
 
-	            const numGroups = jmlkel; // Jumlah kelompok yang ingin dibagi
-	            const dividedGroups = divideIntoGroups(groupedByJenisKKN[jenis_kkn], numGroups);
+					const numGroups = jmlkel; // Jumlah kelompok yang ingin dibagi
+					const dividedGroups = divideIntoGroups(groupedByJenisKKN[jenis_kkn], numGroups);
 
-	            dividedGroups.forEach((group, index) => {
-	                group.forEach(student => {
-	                    finalGroups.push({
-	                        nama_kelompok: `${namakelompok}-${index + 1}`,
-	                        nama_mahasiswa: student.nama_lengkap,
-	                        nim: student.nim,
-	                        prodi: student.prodi,
-	                        jenis_kkn: student.jenis_kkn,
-	                        jenis_kelamin: student.jenis_kelamin
-	                    });
-	                });
-	            });
-	        }
+					dividedGroups.forEach((group, index) => {
+						 group.forEach(student => {
+							  finalGroups.push({
+									nama_kelompok: `${namakelompok}-${index + 1}`,
+									nama_mahasiswa: student.nama_mhs,
+									nim: student.nim,
+									prodi: student.prodi,
+									jenis_kkn: student.jenis_kkn,
+									jenis_kelamin: student.jenis_kelamin
+							  });
+						 });
+					});
+			  }
 
-	        // Clear existing table rows
-	        $('#studentTable tbody').empty();
+			  // Clear existing table rows
+			  $('#studentTable tbody').empty();
 
-	        // Append new rows to the table
-	        finalGroups.forEach(group => {
-	            $('#studentTable tbody').append(`
-	                <tr>
-	                    <td>${group.nama_kelompok}</td>
-	                    <td>${group.nama_mahasiswa}</td>
-	                    <td>${group.nim}</td>
-	                    <td>${group.prodi}</td>
-	                    <td>${group.jenis_kkn}</td>
-	                </tr>
-	            `);
-	        });
+			  // Append new rows to the table
+			  finalGroups.forEach(group => {
+					$('#studentTable tbody').append(`
+						 <tr>
+							  <td>${group.nama_kelompok}</td>
+							  <td>${group.nama_mahasiswa}</td>
+							  <td>${group.nim}</td>
+							  <td>${group.prodi}</td>
+							  <td>${group.jenis_kkn}</td>
+						 </tr>
+					`);
+			  });
 		});
-    });
+	 });
 
 	$('#submit').on('click', function() {
 		// console.log(finalGroups);
@@ -188,15 +188,15 @@ $(document).ready(function() {
 			method: 'POST',
 			data: {
 				_token: '{{ csrf_token() }}',
-                data: finalGroups
+					 data: finalGroups
 			},
 			success: function(response) {
 				// alert(response.message);
 				window.location.replace("{{ route('pengelompokan.index') }}")
 			},
 			error: function(xhr) {
-                console.error(xhr.responseText);
-            }
+					 console.error(xhr.responseText);
+				}
 		});
 	});
 

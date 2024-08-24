@@ -70,7 +70,9 @@ class DashboardController extends Controller
 
     public function dpl(Request $request)
     {
-        
+        $user = Auth::user()->user_id;
+
+        return view('dasbor.dpl', compact('user'));
     }
 
     public function mahasiswa(Request $request)
@@ -82,7 +84,7 @@ class DashboardController extends Controller
                     ->where('users.user_id', '=', $mahasiswaID)->first();
         $posts = Post::join('panitia', 'posts.penulis', '=', 'panitia.panitia_id')
                  ->orderBy('posts.created_at', 'desc')->take(3)->get();
-       // dd($mahasiswa);
+        // dd($posts);
 
         return view('dasbor.mahasiswa', compact('mahasiswa', 'posts'));
     }

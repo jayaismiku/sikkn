@@ -25,7 +25,9 @@ Auth::routes();
 // Route::get('admin/login', 'Auth\AdminAuthController@getLogin')->name('admin.login');
 // Route::post('admin/login', 'Auth\AdminAuthController@postLogin');
 
-Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::get('/profile', 'ProfileController@index')->middleware('auth')->name('profile');
+Route::get('/profile/ubahkatasandi', 'ProfileController@ubahkatasandi')->middleware('auth')->name('profile.ubah.katasandi');
+Route::put('/profile/{userid}/ubahkatasandi', 'ProfileController@updatekatasandi')->middleware('auth')->name('profile.update.katasandi');
 // Pendaftaran User
 Route::get('/pendaftaran', 'PendaftaranController@index')->name('daftar');
 Route::get('/pendaftaran/panitia', 'PendaftaranController@panitia')->name('daftar.panitia');
@@ -38,10 +40,10 @@ Route::get('/pendaftaran/mahasiswa', 'PendaftaranController@mahasiswa')->name('d
 Route::post('/pendaftaran/mahasiswa', 'PendaftaranController@storemahasiswa')->name('daftar.mahasiswa.store');
 Route::get('/pendaftaran/sukses', 'PendaftaranController@sukses')->name('daftar.sukses');
 // API Wilayah
-Route::get('/provinsi', 'WilayahController@getProvinsi')->name('provinsi');
-Route::get('/kota/{provinsi}', 'WilayahController@getKota')->name('kota');
-Route::get('/kecamatan/{kota}', 'WilayahController@getKecamatan')->name('kecamatan');
-Route::get('/kelurahan/{kecamatan}', 'WilayahController@getKelurahan')->name('kelurahan');
+Route::get('/get-provinsi', 'WilayahController@getProvinsi')->name('provinsi');
+Route::get('/get-kota/{provinsi}', 'WilayahController@getKota')->name('kota');
+Route::get('/get-kecamatan/{kota}', 'WilayahController@getKecamatan')->name('kecamatan');
+Route::get('/get-kelurahan/{kecamatan}', 'WilayahController@getKelurahan')->name('kelurahan');
 
 Route::middleware('auth')->group(function(){
 	Route::get('/home', 'HomeController@index')->name('home');
@@ -80,6 +82,12 @@ Route::middleware('auth')->group(function(){
 	Route::get('/dasbor/dpl', 'DashboardController@dpl')->name('dasbor.dpl');
 	Route::get('/profil/dpl', 'ProfileController@dpl')->name('profil.dpl');
 	Route::resource('/pendamping', PendampingController::class);
+	Route::resource('/kunjungan', KunjunganController::class);
+	// Route::resource('/validasi', ValidasiController::class);
+	Route::get('/logbook/validasi', 'LogbookController@validasi')->name('logbook.validasi');
+	Route::put('/logbook/{logbook}/validasi', 'LogbookController@tervalidasi')->name('logbook.tervalidasi');
+	Route::get('/laporan/validasi', 'LaporanController@validasi')->name('laporan.validasi');
+	Route::put('/laporan/{laporan}/validasi', 'LaporanController@tervalidasi')->name('laporan.tervalidasi');
 });
 
 Route::middleware(['auth', 'mahasiswa'])->group(function(){

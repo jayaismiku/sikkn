@@ -17,14 +17,16 @@ class Mahasiswa
 	 */
 	public function handle($request, Closure $next)
 	{
-		$userid = Auth::user()->user_id;
+		$userid = Auth::id();
 		$nim = 	DB::table('mahasiswa')
 				->join('users', 'mahasiswa.user_id', '=', 'users.user_id')
 				->where('users.user_id', $userid)
-				->get('mahasiswa.nim')->first();
+				->pluck('mahasiswa.nim')->first();
 		// $request->session()->put('nim', $nim);
 		// dd($request->session()->get('nim'));
-		$request->attributes->add(['nim' => $nim]);
+		if ($nim > 0) {
+			$request->attributes->add(['nim' => $nim]);
+		}
 		// dd($request);
 
 		return $next($request);

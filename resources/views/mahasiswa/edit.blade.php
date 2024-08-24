@@ -46,14 +46,21 @@
           @method('PUT')
           <div class=" input-group-outline my-3">
             <label class="form-label" for="nim">{{ __('NIM:') }}</label>
-            <input type="text" class="form-control form-control-sm p-2" name="nim" value="{{ $mahasiswa->nim }}" required/>
+            <input type="text" class="form-control form-control-sm p-2" id="nim" name="nim" value="{{ $mahasiswa->nim }}" required/>
           </div>
           <div class=" input-group-outline my-3">
-            <label class="form-label" for="nama_lengkap">{{ __('Nama Lengkap:') }}</label>
-            <input type="text" class="form-control form-control-sm p-2" name="nama_lengkap" value="{{ $mahasiswa->nama_lengkap }}" required/>
+            <label class="form-label" for="nama_lengkap">{{ __('Nama Mahasiswa:') }}</label>
+            <input type="text" class="form-control form-control-sm p-2" id="nama_mhs" name="nama_mhs" value="{{ $mahasiswa->nama_mhs }}" required/>
           </div>
           <div class=" input-group-outline my-3">
-            <label class="form-label" for="fakultas">{{ __('Fakultas') }}</label>
+            <label class="form-label" for="jenis_kelamin">{{ __('Jenis Kelamin:') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-jenis-kelamin" id="jenis_kelamin" name="jenis_kelamin" required>
+              <option value="L" {{ $mahasiswa->jenis_kelamin=='L'?'selected':'' }}>{{ __('Laki-Laki') }}</option>
+              <option value="P" {{ $mahasiswa->jenis_kelamin=='P'?'selected':'' }}>{{ __('Perempuan') }}</option>
+            </select>
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="fakultas">{{ __('Fakultas:') }}</label>
             <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-fakultas" name="fakultas" required>
               <option value="FST" {{ $mahasiswa->fakultas=='FST'?'selected':'' }}>{{ __('Fakultas Sains dan Teknologi') }}</option>
               <option value="FSH" {{ $mahasiswa->fakultas=='FSH'?'selected':'' }}>{{ __('Fakultas Sosial Humaniora') }}</option>
@@ -62,7 +69,7 @@
             </select>
           </div>
           <div class=" input-group-outline my-3">
-            <label class="form-label" for="prodi">{{ __('Program Studi') }}</label>
+            <label class="form-label" for="prodi">{{ __('Program Studi:') }}</label>
             <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-prodi" name="prodi" required>
               <option value="TE" {{ $mahasiswa->prodi=='TE'?'selected':'' }}>{{ __('Teknik Elektro') }}</option>
               <option value="IF" {{ $mahasiswa->prodi=='IF'?'selected':'' }}>{{ __('Teknik Informatika') }}</option>
@@ -85,64 +92,112 @@
             </select>
           </div>
           <div class=" input-group-outline my-3">
-            <label class="form-label" for="semester">{{ __('Semester') }}</label>
-            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-semester" name="semester" required>
+            <label class="form-label" for="semester">{{ __('Semester:') }}</label>
+            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-semester" id="semester" name="semester" required>
               <option value="4" {{ $mahasiswa->semester=='4'?'selected':'' }}>{{ __('Semester 4') }}</option>
               <option value="6" {{ $mahasiswa->semester=='6'?'selected':'' }}>{{ __('Semester 6') }}</option>
               <option value="8" {{ $mahasiswa->semester=='8'?'selected':'' }}>{{ __('Semester 8') }}</option>
             </select>
-          <div class=" input-group-outline my-3">
-            <label class="form-label" for="telp">{{ __('Telp (WA)') }}</label>
-            <div class="input-group mb-3">
-              <span class="input-group-text text-sm" id="basic-addon1">+62</span>
-              <input type="text" class="form-control form-control-sm" placeholder="telp" aria-label="telp" aria-describedby="basic-addon1" name="telp" value="{{ $mahasiswa->telp }}" required>
-            </div>
           </div>
           <div class=" input-group-outline my-3">
-            <label class="form-label" for="alamat">{{ __('Alamat') }}</label>
+            <label class="form-label" for="telp">{{ __('Telp (WA):') }}</label>
+            <input type="text" class="form-control form-control-sm p-2" placeholder="62xxxyyyzzz" id="telp_mhs" name="telp_mhs" value="{{ $mahasiswa->telp_mhs }}" required>
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="alamat">{{ __('Alamat:') }}</label>
             <input type="text" class="form-control form-control-sm p-2" name="alamat" value="{{ $mahasiswa->alamat }}"/>
           </div>
           <div class=" input-group-outline my-3">
-            <label class="form-label" for="krs">{{ __('Unggah Bukti KRS') }}</label>
-            <input type="file" class="form-control form-control-sm p-2" name="krs" value="{{ $mahasiswa->krs }}" required/>
+            <label class="form-label" for="krs">{{ __('Unggah Bukti KRS:') }}</label>
+            <input type="file" class="form-control form-control-sm p-2" accept="image/*" id="krs" name="krs" value="{{ $mahasiswa->krs }}"/>
           </div>
           <div class=" input-group-outline my-3">
-            <label class="form-label" for="bayar">{{ __('Unggah Bukti Bayar KKN') }}</label>
-            <input type="file" class="form-control form-control-sm p-2" name="bayar" value="{{ $mahasiswa->bayar }}"/>
+            <label class="form-label" for="bayar">{{ __('Unggah Bukti Bayar KKN:') }}</label>
+            <input type="file" class="form-control form-control-sm p-2" accept="image/*" name="bayar" value="{{ $mahasiswa->bayar }}"/>
           </div>
           <div class=" input-group-outline my-3">
-            <label class="form-label" for="ukt">{{ __('Unggah Bukti Bayar UKT') }}</label>
-            <input type="file" class="form-control form-control-sm p-2" name="ukt" value="{{ $mahasiswa->ukt }}" />
+            <label class="form-label" for="ukt">{{ __('Unggah Bukti Bayar UKT:') }}</label>
+            <input type="file" class="form-control form-control-sm p-2" accept="image/*" name="ukt" value="{{ $mahasiswa->ukt }}" />
           </div>
           <div class=" input-group-outline my-3">
-            <label class="form-label" for="sakit">{{ __('Unggah Surat Sakit (Berat)') }}</label>
-            <input type="file" class="form-control form-control-sm p-2" name="sakit" value="{{ $mahasiswa->sakit }}"/>
+            <label class="form-label" for="suratkesediaan">{{ __('Unggah Surat Kesediaan:') }}</label>
+            <input type="file" class="form-control form-control-sm p-2" accept="image/*" name="suratkesediaan" value="{{ $mahasiswa->suratkesediaan }}" />
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="suratijinortu">{{ __('Unggah Surat Ijin Orang Tua/Wali:') }}</label>
+            <input type="file" class="form-control form-control-sm p-2" accept="image/*" name="suratijinortu" value="{{ $mahasiswa->suratijinortu }}" />
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="sakit">{{ __('Unggah Surat Sakit (Berat):') }}</label>
+            <input type="file" class="form-control form-control-sm p-2" accept="image/*" name="sakit" value="{{ $mahasiswa->sakit }}"/>
           </div>
           <div class=" input-group-outline my-3">
             <label class="form-label" for="alergi">{{ __('Silahkan dituliskan jika punya alergi:') }}</label>
-            <input type="text" class="form-control form-control-sm p-2" name="alergi" value="{{ $mahasiswa->alergi }}"/>
+            <input type="text" class="form-control form-control-sm p-2" accept="image/*" name="alergi" value="{{ $mahasiswa->alergi }}"/>
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="nama_ortu">{{ __('Nama Orang Tua/Wali:') }}</label>
+            <input type="text" class="form-control form-control-sm p-2" name="nama_ortu" value="{{ $mahasiswa->nama_ortu }}" required/>
+          </div>
+          <div class=" input-group-outline my-3">
+            <label class="form-label" for="telp_ortu">{{ __('Telp (WA) Orang Tua/Wali:') }}</label>
+            <input type="text" class="form-control form-control-sm p-2" placeholder="62xxxyyyzzz" id="telp_ortu" name="telp_ortu" value="{{ $mahasiswa->telp_ortu }}" required>
           </div>
           <div class="form-group">
             <input type="hidden" class="form-control px-2 py-2" name="mahasiswa_id" value="{{ $mahasiswa->mahasiswa_id }}" />
+            <input type="hidden" class="form-control px-2 py-2" name="user_id" value="{{ $mahasiswa->user_id }}" />
             <button type="submit" class="btn btn-success xs">
               <span class="material-icons">save</span>
             </button>
             <a class="btn btn-info xs" href="{{ route('mahasiswa.index') }}">
               <span class="material-icons">undo</span>
             </a>
+            @if(Auth::user()->role == 'dpl')
             <a class="btn btn-warning xs" href="{{ route('mahasiswa.verify', $mahasiswa->user_id) }}" onclick="event.preventDefault(); document.getElementById('verify-account').submit();">
               <span class="material-icons">verified</span>
             </a>
+            @endif
           </div>         
         </form>
+        @if(Auth::user()->role == 'dpl')
         <form id="verify-account" action="{{ route('mahasiswa.verify', $mahasiswa->user_id) }}" method="POST" class="d-none">
           @csrf
           @method('PUT')
         </form>
+        @endif
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    $('#telp_mhs').change(function(){
+      let telp = '62';
+      let angka1 = $(this).val().substring(0,1);
+      let angka2 = $(this).val().substring(1);
+      if(angka1 == 0){
+        telp = telp + angka2;
+      }else{
+        telp = angka1 + angka2;
+      }
+      $(this).val(telp);
+      console.log(telp);
+    });
+    $('#telp_ortu').change(function(){
+      let telp = '62';
+      let angka1 = $(this).val().substring(0,1);
+      let angka2 = $(this).val().substring(1);
+      if(angka1 == 0){
+        telp = telp + angka2;
+      }else{
+        telp = angka1 + angka2;
+      }
+      $(this).val(telp);
+      console.log(telp);
+    });
+  });
+</script>
 
 @endsection
 

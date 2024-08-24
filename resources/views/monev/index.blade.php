@@ -55,6 +55,7 @@
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Jenis KKN') }}</th>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('DPL') }}</th>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Desa') }}</th>
+                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nilai') }}</th>
                 <th class="text-center"><i class="fa-solid fa-file-pen"></i></th>
               </tr>
             </thead>
@@ -65,6 +66,7 @@
                 <td class="text-xs nama">{{ $kel->jenis_kkn }}</td>
                 <td class="text-xs nama">{{ $kel->nama_dosen }}</td>
                 <td class="text-xs nama">{{ $kel->nama_desa }}</td>
+                <td class="text-xs nama">{{ $kel->nilai }}</td>
                 <td class="text-xs text-center">
                   <a class="text-warning" href="{{ route('monev.create', $kel->kelompok_id)}}">
                     <i class="fa-solid fa-users-viewfinder"></i>

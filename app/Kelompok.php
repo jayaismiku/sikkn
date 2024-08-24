@@ -19,4 +19,9 @@ class Kelompok extends Model
         'desa_id', 
     ];
 
+    public function pengelompokan()
+    {
+        return $this->hasMany(Pengelompokan::class, 'kelompok_id', 'kelompok_id');
+    } 
+
 }

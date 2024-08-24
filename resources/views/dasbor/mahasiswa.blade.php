@@ -29,14 +29,18 @@
       <h5 class="mb-0">{{ __('Berita Terkini') }}</h5>
     </div>
     <div class="card-body p-3 pb-0">
-      @foreach($posts as $post)
-      <article class="post">
-        <h2 class="post-title display-6 link-body-emphasis mb-1">{{ $post->judul }}</h2>
-        <p class="post-meta">{{ $post->created_at }} by <a href="#">{{ $post->nama_lengkap }}</a></p>
-        {!! $post->deskripsi !!}
-        <br>
-      </article>
-      @endforeach
+      @if ($posts)
+        @foreach($posts as $post)
+        <article class="post">
+          <h2 class="post-title display-6 link-body-emphasis mb-1">{{ $post->judul }}</h2>
+          <p class="post-meta">{{ $post->created_at }} by <a href="#">{{ $post->nama_lengkap }}</a></p>
+          {!! $post->deskripsi !!}
+          <br>
+        </article>
+        @endforeach
+      @else
+        <p>{{ __('Tidak ada berita untuk saat ini!!') }}</p>
+      @endif
     </div>
   </div>
 </div>

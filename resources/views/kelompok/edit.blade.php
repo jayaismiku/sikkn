@@ -59,6 +59,7 @@
           <div class=" input-group-outline my-3">
             <label class="form-label" for="pemonev">{{ __('Pemonev:') }}</label>
             <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" name="pemonev" required>
+              <option value="">{{ __('-Pilih Pemonev-') }}</option>
               @foreach($pemonev as $pm)
               <option value="{{ $pm->pemonev_id }}" {{ $kelompok->pemonev_id==$pm->pemonev_id?'selected':'' }}>{{ $pm->nama_pemonev }}</option>
               @endforeach
@@ -67,6 +68,7 @@
           <div class=" input-group-outline my-3">
             <label class="form-label" for="pendamping">{{ __('Pendamping') }}</label>
             <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" name="pendamping" required>
+              <option value="">{{ __('-Pilih Pendamping-') }}</option>
               @foreach($pendamping as $dpl)
               <option value="{{ $dpl->pendamping_id }}" {{ $kelompok->pendamping_id==$dpl->pendamping_id?'selected':'' }}>{{ $dpl->nama_dosen }}</option>
               @endforeach
@@ -75,6 +77,7 @@
           <div class=" input-group-outline my-3">
             <label class="form-label" for="desa">{{ __('Desa') }}</label>
             <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-desa" name="desa" required>
+              <option value="">{{ __('-Pilih Desa-') }}</option>
               @foreach($desa as $ds)
               <option value="{{ $ds->desa_id }}" {{ $ds->desa_id==$kelompok->desa_id?'selected':'' }}>{{ $ds->nama_desa }}</option>
               @endforeach

@@ -12,7 +12,7 @@ class MahasiswaController extends Controller
 {
 	public function getMahasiswa()
 	{
-		$mahasiswa = Mahasiswa::all(['jenis_kkn', 'prodi', 'nim', 'semester', 'nama_lengkap', 'jenis_kelamin']);
+		$mahasiswa = Mahasiswa::all(['jenis_kkn', 'prodi', 'nim', 'semester', 'nama_mhs', 'jenis_kelamin']);
 		// dd($mahasiswa);
 		return response()->json($mahasiswa);
 	}
@@ -92,51 +92,90 @@ class MahasiswaController extends Controller
 	{
 		// dd($request);
 		$request->validate([
-			'nim' => 'required|unique:mahasiswa|max:20',
-			'nama_lengkap' => 'required',
+			'nim' => 'required|unique:mahasiswa|max:15',
+			'nama_mhs' => 'required',
+			'jenis_kelamin' => 'required',
 			'fakultas' => 'required',
 			'prodi' => 'required',
 			'semester' => 'required',
-			'telp' => 'required|unique:mahasiswa|max:15',
-			'krs' => 'required|image|max:2048',
-			'bayar' => 'required|image|max:2048',
-			'ukt' => 'required|image|max:2048',
-			'sakit' => 'image|max:2048',
+			'telp_mhs' => 'required|max:15',
+			'nama_ortu' => 'required',
+			'telp_ortu' => 'required|max:15',
 		]);
 
-		$path_storage = 'files/' . $request->get('nim');
+		$rootUnggah = 'mahasiswa/' . Auth::id() . '/';
+		if ($request->file('krs')) {
+			$fileKRS = $request->file('krs');
+			$fileNameKRS = date('YmdHis').'.'.$fileKRS->getClientOriginalExtension();
+			$filePathKRS = $rootUnggah . $fileNameKRS;
+			Storage::disk('public')->put($filePathKRS, file_get_contents($fileKRS));
+		}else{
+			$filePathKRS = null;
+		}
 
-		if ($request->file('krs')->getClientOriginalName()) {
-			$name_krs = $request->file('krs')->getClientOriginalName();
-			$path_krs = $request->file('krs')->store($path_storage);
+		if ($request->file('ukt')) {
+			$fileUKT = $request->file('ukt');
+			$fileNameUKT = date('YmdHis').'.'.$fileUKT->getClientOriginalExtension();
+			$filePathUKT = $rootUnggah . $fileNameUKT;
+			Storage::disk('public')->put($filePathUKT, file_get_contents($fileUKT));
+		}else{
+			$filePathUKT = null;
 		}
-		if ($request->file('bayar')->getClientOriginalName()) {
-			$name_bayar = $request->file('bayar')->getClientOriginalName();
-			$path_bayar = $request->file('bayar')->store($path_storage);
+
+		if ($request->file('bayar')) {
+			$fileBiaya = $request->file('bayar');
+			$fileNameBiaya = date('YmdHis').'.'.$fileBiaya->getClientOriginalExtension();
+			$filePathBiaya = $rootUnggah . $fileNameBiaya;
+			Storage::disk('public')->put($filePathBiaya, file_get_contents($fileBiaya));
+		}else{
+			$filePathBiaya = null;
 		}
-		if ($request->file('ukt')->getClientOriginalName()) {
-			$name_ukt = $request->file('ukt')->getClientOriginalName();
-			$path_ukt = $request->file('ukt')->store($path_storage);
+
+		if ($request->file('suratkesediaan')) {
+			$fileKesediaan = $request->file('suratkesediaan');
+			$fileNameKesediaan = date('YmdHis').'.'.$fileKesediaan->getClientOriginalExtension();
+			$filePathKesediaan = $rootUnggah . $fileNameKesediaan;
+			Storage::disk('public')->put($filePathKesediaan, file_get_contents($fileKesediaan));
+		}else{
+			$filePathKesediaan = null;
 		}
-		if ($request->file('sakit')->getClientOriginalName()) {
-			$name_sakit = $request->file('sakit')->getClientOriginalName();
-			$path_sakit = $request->file('sakit')->store($path_storage);
+
+		if ($request->file('suratijinortu')) {
+			$fileIjinOrtu = $request->file('suratijinortu');
+			$fileNameIjinOrtu = date('YmdHis').'.'.$fileIjinOrtu->getClientOriginalExtension();
+			$filePathIjinOrtu = $rootUnggah . $fileNameIjinOrtu;
+			Storage::disk('public')->put($filePathIjinOrtu, file_get_contents($fileIjinOrtu));
+		}else{
+			$filePathIjinOrtu = null;
 		}
-		// dd($path);
+
+		if ($request->file('sakit')) {
+			$fileSuratSakit = $request->file('sakit');
+			$fileNameSuratSakit = date('YmdHis').'.'.$fileSuratSakit->getClientOriginalExtension();
+			$filePathSuratSakit = $rootUnggah . $fileNameSuratSakit;
+			Storage::disk('public')->put($filePathSuratSakit, file_get_contents($fileSuratSakit));
+		}else{
+			$filePathSuratSakit = null;
+		}
 
 		$mahasiswa = Mahasiswa::find($id);
 		$mahasiswa->nim =  $request->get('nim');
-		$mahasiswa->nama_lengkap = $request->get('nama_lengkap');
+		$mahasiswa->nama_mhs = $request->get('nama_mhs');
+		$mahasiswa->jenis_kelamin = $request->get('jenis_kelamin');
 		$mahasiswa->alamat = $request->get('alamat');
-		$mahasiswa->telp = $request->get('telp');
+		$mahasiswa->telp_mhs = $request->get('telp_mhs');
 		$mahasiswa->fakultas = $request->get('fakultas');
 		$mahasiswa->prodi = $request->get('prodi');
 		$mahasiswa->semester = $request->get('semester');
-		$mahasiswa->unggah_krs = $path_krs;
-		$mahasiswa->unggah_keuangan = $path_bayar;
-		$mahasiswa->unggah_ukt = $path_ukt;
-		$mahasiswa->sakit_berat = $path_sakit;
+		$mahasiswa->nama_ortu = $request->get('nama_ortu');
+		$mahasiswa->telp_ortu = $request->get('telp_ortu');
 		$mahasiswa->alergi = $request->get('alergi');
+		$mahasiswa->unggah_krs = $filePathKRS;
+		$mahasiswa->unggah_biaya = $filePathBiaya;
+		$mahasiswa->unggah_ukt = $filePathUKT;
+		$mahasiswa->unggah_surat_kesediaan = $filePathKesediaan;
+		$mahasiswa->unggah_surat_ijin_ortu = $filePathIjinOrtu;
+		$mahasiswa->sakit_berat = $filePathSuratSakit;
 		$mahasiswa->save();
 
 		if (Auth::user()->role == 'mahasiswa') {

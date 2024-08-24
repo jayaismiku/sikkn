@@ -68,12 +68,12 @@
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="nama_kelompok">{{ __('Nama Kelompok:') }}</label>
-                    <input type="text" class="form-control px-2" id="nama_kelompok" name="nama_kelompok" value="{{ $kelompok->nama_kelompok }}" readonly/>
-                    <input type="hidden" name="kelompok_id" value="{{ $kelompok->kelompok_id }}"/>
+                    <input type="text" class="form-control px-2" id="nama_kelompok" name="kelompok['nama_kelompok']" value="{{ $kelompok->nama_kelompok }}" readonly/>
+                    <input type="hidden" name="kelompok['kelompok_id']" value="{{ $kelompok->kelompok_id }}"/>
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="jenis_kkn">{{ __('Jenis KKN:') }}</label>
-                    <input type="text" class="form-control px-2" id="jenis_kkn" name="jenis_kkn" value="{{ $kelompok->jenis_kkn }}" readonly />
+                    <input type="text" class="form-control px-2" id="jenis_kkn" name="kelompok['jenis_kkn']" value="{{ $kelompok->jenis_kkn }}" readonly />
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="ketua_kelompok">{{ __('Ketua Kelompok:') }}</label>
@@ -85,11 +85,11 @@
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="anggota_hadir">{{ __('Jumlah Anggota Hadir:') }}</label>
-                    <input type="number" class="form-control px-2" id="anggota_hadir" name="kelompok['hadir']" />
+                    <input type="number" class="form-control px-2" id="anggota_hadir" name="kelompok['hadir']" value="{{ count($detailkelompok) }}" />
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="anggota_absen">{{ __('Jumlah Anggota Tidak Hadir:') }}</label>
-                    <input type="number" class="form-control px-2" id="anggota_absen" name="kelompok['absen']" />
+                    <input type="number" class="form-control px-2" id="anggota_absen" name="kelompok['absen']" value="0" />
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="nama_absen">{{ __('Nama Anggota Tidak Hadir:') }}</label>
@@ -102,12 +102,14 @@
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <button class="accordion-button collapsed bg-gray-400" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                   {{ __('Penilaian') }}
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body container">
+                  <p class="fs-6">Mohon dijawab pertanyaan berikut sesuai kondisi di lapangan dan dinilai dengan menggunakan skala seperti berikut:</p>
+                  <p class="fs-6">5. Sangat Setuju, 4. Setuju, 3. Biasa, 2. Tidak Setuju, 1. Sangat Tidak Setuju.</p>
                   <p class="fs-6 fw-bold">{{ __('Kedisiplinan dan Keseriusan (10%)') }}</p>
                   <div class="form-group">
                     <label class="form-label" for="anggota_absen">{{ __('A.1. Seluruh mahasiswa mengikuti kegiatan dan program utama : ') }} <span class="form-label fw-bold" id="ratingValue_a1">3</span></label>
@@ -216,15 +218,23 @@
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                <button class="accordion-button collapsed bg-gray-200" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                   {{ __('Total Nilai') }}
                 </button>
               </h2>
               <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="form-group">
-                  <label class="form-label" for="nilai">{{ __('Total Nilai:') }}</label>
-                  <div id="nama_absen_container">
-                    <input type="text" class="form-control px-2" id="nilai" name="nilai" />
+                <div class="accordion-body container">
+                  <div class="form-group">
+                    <label class="form-label" for="nilai">{{ __('Total Nilai: ') }}<a id="score" class="text-warning">{{ __('Klik untuk generate nilai') }}</a></label>
+                    <div id="nama_absen_container">
+                      <input type="text" class="form-control px-2" id="nilai" name="nilai" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="nilai">{{ __('Catatan:') }}</label>
+                    <div id="nama_absen_container">
+                      <textarea class="form-control px-2" id="catatan" name="catatan" rows="4"></textarea>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -232,6 +242,7 @@
           </div>
           
           <div class="form-group mt-4">
+            <input type="hidden" name="pemonev_id" value="{{ $kelompok->pemonev_id }}">
             <input type="hidden" name="kelompok_id" value="{{ $kelompok->kelompok_id }}">
             <input type="hidden" name="nama_kelompok" value="{{ $kelompok->nama_kelompok }}">
             <input type="hidden" name="tanggal_unggah" value="{{ date('Y-m-d H:i:s') }}">
@@ -250,6 +261,7 @@
 
 <script>
 $(document).ready(function () {
+  $('#catatan').summernote();
   $('#anggota_absen').on('input', function() {
     var jumlahAnggota = $(this).val();
     var $namaAbsenContainer = $('#nama_absen_container');
@@ -264,20 +276,53 @@ $(document).ready(function () {
   for (let i = 1; i <= 5; i++) {
     $('#penilaian_a'+i).on('input', function() {
       $('#ratingValue_a'+i).text($(this).val());
+      // jmlNilaiA += $(this).val();
+      // console.log(jmlNilaiA);
     });
   }
   
   for (let i = 1; i <= 10; i++) {
     $('#penilaian_b'+i).on('input', function() {
       $('#ratingValue_b'+i).text($(this).val());
+      // jmlNilaiB += $(this).val();
+      // console.log(jmlNilaiB);
     });
   }
   
   for (let i = 1; i <= 10; i++) {
     $('#penilaian_c'+i).on('input', function() {
       $('#ratingValue_c'+i).text($(this).val());
+      // jmlNilaiC += $(this).val();
+      // console.log(jmlNilaiC);
     });
   }
+
+  $('#score').on('click', function() {
+    var jmlNilaiA = 0;
+    var jmlNilaiB = 0;
+    var jmlNilaiC = 0;
+    var nilai = 0;
+
+    for (let i = 1; i <= 5; i++) {
+      jmlNilaiA += parseInt($('#penilaian_a'+i).val());      
+    }
+    // console.log(jmlNilaiA);
+  
+    for (let i = 1; i <= 10; i++) {
+      jmlNilaiB += parseInt($('#penilaian_b'+i).val());      
+    }
+    // console.log(jmlNilaiB);
+  
+    for (let i = 1; i <= 10; i++) {
+      jmlNilaiC += parseInt($('#penilaian_c'+i).val());      
+    }
+    // console.log(jmlNilaiC);
+
+    nilai = 2 * ( (0.1*jmlNilaiA) + (0.4*jmlNilaiB) + (0.5*jmlNilaiC) + 2.5);
+    console.log(nilai);
+    $('#nilai').val(nilai);
+
+  })
   
 });
 </script>

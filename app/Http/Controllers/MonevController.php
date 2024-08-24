@@ -23,7 +23,8 @@ class MonevController extends Controller
                     ->leftjoin('desa', 'kelompok.desa_id', '=', 'desa.desa_id')
                     ->leftjoin('pendamping', 'kelompok.pendamping_id', '=', 'pendamping.pendamping_id')
                     ->leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')
-                    ->where('users.user_id', $userid)->get();
+                    ->leftjoin('monev', 'kelompok.kelompok_id', '=', 'monev.kelompok_id')
+                    ->where('users.user_id', $userid)->get(['kelompok.kelompok_id', 'kelompok.nama_kelompok', 'kelompok.jenis_kkn', 'dosen.nama_dosen', 'desa.nama_desa', 'monev.nilai']);
         // dd($kelompok);
 
         return view('monev.index', compact('kelompok'));
@@ -62,7 +63,28 @@ class MonevController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        // $request->validate([
+        //     'judul' => 'required',
+        //     'slug' => 'required',
+        //     'deskripsi' => 'required',
+        //     'penulis' => 'required',
+        //     'lampiran' => 'required|mimes:pdf|max:2048',
+        // ]);
+
+        $monev = new Monev([
+            'pemonev_id' => $request->get('pemonev_id'), 
+            'kelompok_id' => $request->get('kelompok_id'), 
+            'keadaan_mahasiswa' => serialize($request->get('kelompok')), 
+            'penilaian' => serialize($request->get('penilaian')),
+            'nilai' => $request->get('nilai'),
+            'catatan' => $request->get('catatan'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+        $monev->save();
+
+        return redirect('/monev')->with('success', 'Buat Monev berhasil!');
     }
 
     /**

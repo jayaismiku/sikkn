@@ -10,6 +10,8 @@ use App\Fakultas;
 use App\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -66,14 +68,47 @@ class ProfileController extends Controller
 	public function mahasiswa(Request $request)
 	{
 		// dd(Auth::user());
-		$mahasiswaID = Auth::user()->user_id;
+		$mahasiswaID = Auth::id();
 		$mahasiswa = User::join('mahasiswa', 'users.user_id', '=', 'mahasiswa.user_id')
-					->leftjoin('pengelompokan', 'mahasiswa.nim', '=', 'pengelompokan.nim')
-					->leftjoin('kelompok', 'pengelompokan.kelompok_id', '=', 'kelompok.kelompok_id')
-					->leftjoin('desa', 'kelompok.desa_id', '=', 'desa.desa_id')
+					// ->leftjoin('pengelompokan', 'mahasiswa.nim', '=', 'pengelompokan.nim')
+					// ->leftjoin('kelompok', 'pengelompokan.kelompok_id', '=', 'kelompok.kelompok_id')
+					// ->leftjoin('desa', 'kelompok.desa_id', '=', 'desa.desa_id')
 					->where('users.user_id', '=', $mahasiswaID)->first();
 		// dd($mahasiswa);
 
 		return view('mahasiswa.profil', compact('mahasiswa'));
+	}
+
+	public function ubahkatasandi()
+	{
+		$userid = Auth::id();
+
+		return view('ubahkatasandi', compact('userid'));
+	}
+
+	public function updatekatasandi(Request $request, $userid)
+	{
+		// dd($request);
+		// Validasi input
+		$request->validate([
+			'current_password' => 'required',
+			'new_password' => 'required|min:8|confirmed',
+		]);
+
+		$user = Auth::user();
+
+		// Verifikasi kata sandi saat ini
+		if (!Hash::check($request->current_password, $user->password)) {
+			throw ValidationException::withMessages([
+				'current_password' => 'The current password is incorrect.',
+			]);
+		}
+
+		// Update kata sandi
+		$user->password = Hash::make($request->new_password);
+		$user->save();
+
+		// return back()->with('status', 'Password berhasil diubah!');	
+		return redirect('/profile')->with('success', 'Kata Sandi berhasil diubah!');
 	}
 }

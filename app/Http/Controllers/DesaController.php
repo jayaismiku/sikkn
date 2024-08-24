@@ -19,8 +19,11 @@ class DesaController extends Controller
 	 */
 	public function index()
 	{
-		// $desa = Desa::paginate(10);
-		$desa = Desa::all();
+		$desa = Desa::leftjoin('provinsi', 'desa.provinsi_id', '=', 'provinsi.provinsi_id')
+					->leftjoin('kota', 'desa.kota_id', '=', 'kota.kota_id')
+					->leftjoin('kecamatan', 'desa.kecamatan_id', '=', 'kecamatan.kecamatan_id')
+					->leftjoin('kelurahan', 'desa.kelurahan_id', '=', 'kelurahan.kelurahan_id')
+					->get(['desa.*', 'provinsi.nama_provinsi', 'kota.nama_kota', 'kecamatan.nama_kecamatan', 'kelurahan.nama_kelurahan']);
 		// dd($desa);
 		return view('desa.index', compact('desa'));
 	}
@@ -45,20 +48,23 @@ class DesaController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		// dd($request);
 		$request->validate([
-			'kode_prodi' => 'required',
-			'nama_prodi' => 'required',
-			'fakultas' => 'required'
+			'nama_desa' => 'required',
+			'alamat' => 'required',
 		]);
 
-		$newProdi = new Desa([
-			'kode_prodi' => $request->get('kode_prodi'),
-			'nama_prodi' => $request->get('nama_prodi'),
-			'kaprodi' => $request->get('kaprodi'),
-			'sekprodi' => $request->get('sekprodi'),
-			'fakultas' => $request->get('fakultas'),
+		$TambahDesa = new Desa([
+			'nama_desa' => $request->get('nama_desa'),
+			'alamat' => $request->get('alamat'),
+			'kelurahan_id' => $request->get('kelurahan'),
+			'kecamatan_id' => $request->get('kecamatan'),
+			'kota_id' => $request->get('kota'),
+			'provinsi_id' => $request->get('provinsi'),
+			'longitude' => $request->get('longitude'),
+			'latitude' => $request->get('latitude'),
 		]);
-		$newProdi->save();
+		$TambahDesa->save();
 
 		return redirect('/desa')->with('success', 'Tambah Desa berhasil!');
 	}
@@ -82,8 +88,12 @@ class DesaController extends Controller
 	 */
 	public function edit($id)
 	{
-		$desa = Desa::find($id);
-		$provinsi = Provinsi::all()->where('status', '1');
+		$desa = Desa::join('provinsi', 'desa.provinsi_id', '=', 'provinsi.provinsi_id')
+					->join('kota', 'desa.kota_id', '=', 'kota.kota_id')
+					->join('kecamatan', 'desa.kecamatan_id', '=', 'kecamatan.kecamatan_id')
+					->join('kelurahan', 'desa.kelurahan_id', '=', 'kelurahan.kelurahan_id')
+					->first(['desa.*', 'provinsi.nama_provinsi', 'kota.nama_kota', 'kecamatan.nama_kecamatan', 'kelurahan.nama_kelurahan']);
+		
 		// dd($desa);
 		return view('desa.edit', compact('desa'));
 	}

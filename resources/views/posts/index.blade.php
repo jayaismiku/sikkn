@@ -71,9 +71,11 @@
                 <td class="text-xs">{{ $post->judul }}</td>
                 <td class="text-xs">{{ $deskripsi }}</td>
                 <td class="text-xs">
+                  @if($post->lampiran !== null)
                   <a href="{{ asset('storage/' . $post->lampiran) }}" target="_blank">
                     <i class="fa-solid fa-file-pdf"></i>
                   </a>
+                  @endif
                 </td>
                 <td class="text-xs text-center">
                   <a class="text-warning" href="{{ route('post.edit', $post->post_id)}}">

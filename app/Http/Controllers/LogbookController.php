@@ -6,6 +6,9 @@ use Auth;
 use App\User;
 use App\Mahasiswa;
 use App\Logbook;
+use App\Pendamping;
+use App\Kelompok;
+use App\Pengelompokan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -176,5 +179,37 @@ class LogbookController extends Controller
 		$logbook->delete();
 		
 		return redirect('/logbook')->with('success', 'Logbook berhasil dihapus!');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function validasi()
+	{
+        $userid = Auth::id();
+        $dpl = Pendamping::join('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')
+                ->leftjoin('users', 'dosen.user_id', '=', 'users.user_id')
+                ->where('users.user_id', $userid)->pluck('pendamping.pendamping_id')->first();
+        $logbook = Kelompok::join('pengelompokan', 'kelompok.kelompok_id', '=', 'pengelompokan.kelompok_id')
+        			->join('mahasiswa', 'pengelompokan.nim', '=', 'mahasiswa.nim')
+        			->leftjoin('logbook', 'pengelompokan.nim', '=', 'logbook.nim')
+        			->where('kelompok.pendamping_id', '=', $dpl)->get();
+      //   dd($logbook);
+
+        return view('logbook.validasi', compact('dpl', 'logbook'));
+	}
+
+	public function tervalidasi($id)
+	{
+		// dd($logbook);exit();
+		$logbook = Logbook::find($id);
+		$logbook->validasi =  true;
+		$logbook->tanggal_validasi =  date('Y:m:d H:i:s');
+		$logbook->save();
+		
+		return redirect(route('logbook.validasi'))->with('success', 'Validasi logbook berhasil!');
 	}
 }

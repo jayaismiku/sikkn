@@ -190,24 +190,56 @@
 					</a>
 				</li>
 				@endif
-				@if(Auth::user()->role == 'pendamping' || Auth::user()->role == 'admin')
-        <li class="nav-item mt-3">
+				@if(Auth::user()->role == 'dpl' || Auth::user()->role == 'admin')
+        		<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">{{ __('Dosen Pendamping Lapangan') }}</h6>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('pendamping.index') }}">
+					<a class="nav-link text-white " href="{{ route('dasbor.dpl') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">supervisor_account</i>
 						</div>
-						<span class="nav-link-text ms-1">{{ __('Data DPL') }}</span>
+						<span class="nav-link-text ms-1">{{ __('Dashboard') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white " href="{{ route('home') }}">
+					<a class="nav-link text-white " href="{{ route('kunjungan.index') }}">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">fact_check</i>
+							<i class="material-icons opacity-10">commute</i>
 						</div>
-						<span class="nav-link-text ms-1">{{ __('Validasi Kegiatan') }}</span>
+						<span class="nav-link-text ms-1">{{ __('Kunjungan') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('logbook.validasi') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">menu_book</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Validasi Logbook') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('laporan.validasi') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">library_books</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Validasi Laporan') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('desa.index') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">holiday_village</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Desa') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('perangkat.index') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">account_circle</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Perangkat Desa') }}</span>
 					</a>
 				</li>
 				@endif
@@ -249,6 +281,14 @@
 							<i class="material-icons opacity-10">person</i>
 						</div>
 						<span class="nav-link-text ms-1">{{ __('Profil') }}</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white " href="{{ route('profile.ubah.katasandi') }}">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">person</i>
+						</div>
+						<span class="nav-link-text ms-1">{{ __('Ubah Kata Sandi') }}</span>
 					</a>
 				</li>
 				<li class="nav-item">

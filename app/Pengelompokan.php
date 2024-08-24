@@ -20,4 +20,9 @@ class Pengelompokan extends Model
         'ketua_kelompok', 
     ];
 
+    public function kelompok()
+    {
+        return $this->belongsTo(Kelompok::class, 'kelompok_id', 'kelompok_id');
+    }
+
 }

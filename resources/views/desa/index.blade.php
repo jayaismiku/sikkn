@@ -62,7 +62,7 @@
               @foreach($desa as $ds)
               <tr>
                 <td class="text-xs">{{ $ds->nama_desa }}</td>
-                <td class="text-xs">{{ $ds->alamat }}</td>
+                <td class="text-xs">{{ $ds->alamat }}, {{ ucfirst(strtolower($ds->nama_kelurahan)) }}, {{ ucfirst(strtolower($ds->nama_kecamatan)) }}, {{ ucfirst(strtolower($ds->nama_kota)) }}</td>
                 <td class="text-xs">{{ $ds->longitude }}</td>
                 <td class="text-xs">{{ $ds->latitude }}</td>
                 <td class="text-xs text-center">

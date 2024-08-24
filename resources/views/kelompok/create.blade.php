@@ -43,54 +43,54 @@
 				@endif
 				<form id="formTambahKelompok" method="post" action="{{ route('kelompok.store') }}">
 					@csrf
-          <div class=" input-group-outline my-3">
-              <label class="form-label" for="nama_kelompok">{{ __('Nama Kelompok:') }}</label>
-              <input type="text" class="form-control px-2 py-2" id="nama_kelompok" name="nama_kelompok" required/>
-          </div>
-          <div class=" input-group-outline my-3">
-            <label class="form-label" for="jenis_kkn">{{ __('Jenis KKN') }}</label>
-            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="jenis_kkn" name="jenis_kkn" required>
-            	<option value="" selected>-Pilih Jenis KKN-</option>
-            	<option value="Reguler">Reguler</option>
-            	<option value="Non-Reguler">Non-Reguler</option>
-            	<option value="Tematik">Tematik</option>
-            </select>
-          </div>
-          <div class=" input-group-outline my-3">
-            <label class="form-label" for="pemonev">{{ __('Pemonev:') }}</label>
-            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pemonev" name="pemonev" required>
-            	<option value="" selected>-Pilih Pemonev-</option>
-              @foreach($pemonev as $pm)
-              <option value="{{ $pm->pemonev_id }}">{{ $pm->nama_pemonev }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class=" input-group-outline my-3">
-            <label class="form-label" for="pendamping">{{ __('Pendamping') }}</label>
-            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pendamping" name="pendamping" required>
-            	<option value="" selected>-Pilih Pendamping-</option>
-              @foreach($pendamping as $dpl)
-              <option value="{{ $dpl->pendamping_id }}">{{ $dpl->nama_dosen }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class=" input-group-outline my-3">
-            <label class="form-label" for="desa">{{ __('Desa') }}</label>
-            <select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-desa" id="desa" name="desa" required>
-            	<option value="" selected>-Pilih Desa-</option>
-              @foreach($desa as $ds)
-              <option value="{{ $ds->desa_id }}">{{ $ds->nama_desa }}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-success-outline">
-            	<span class="material-icons">save</span>
-            </button>
-            <a href="{{ route('kelompok.index') }}">
-            	<span class="material-icons">undo</span>
-            </a>
-          </div>         
+					<div class=" input-group-outline my-3">
+						<label class="form-label" for="nama_kelompok">{{ __('Nama Kelompok:') }}</label>
+						<input type="text" class="form-control px-2 py-2" id="nama_kelompok" name="nama_kelompok" required/>
+					</div>
+					<div class=" input-group-outline my-3">
+						<label class="form-label" for="jenis_kkn">{{ __('Jenis KKN') }}</label>
+						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="jenis_kkn" name="jenis_kkn" required>
+							<option value="" selected>-Pilih Jenis KKN-</option>
+							<option value="Reguler">Reguler</option>
+							<option value="Non-Reguler">Non-Reguler</option>
+							<option value="Tematik">Tematik</option>
+						</select>
+					</div>
+					<div class=" input-group-outline my-3">
+						<label class="form-label" for="pemonev">{{ __('Pemonev:') }}</label>
+						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pemonev" name="pemonev" required>
+							<option value="" selected>-Pilih Pemonev-</option>
+						@foreach($pemonev as $pm)
+						<option value="{{ $pm->pemonev_id }}">{{ $pm->nama_pemonev }}</option>
+						@endforeach
+						</select>
+					</div>
+					<div class=" input-group-outline my-3">
+						<label class="form-label" for="pendamping">{{ __('Pendamping') }}</label>
+						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pendamping" name="pendamping" required>
+							<option value="" selected>-Pilih Pendamping-</option>
+						@foreach($pendamping as $dpl)
+						<option value="{{ $dpl->pendamping_id }}">{{ $dpl->nama_dosen }}</option>
+						@endforeach
+						</select>
+					</div>
+					<div class=" input-group-outline my-3">
+						<label class="form-label" for="desa">{{ __('Desa') }}</label>
+						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-desa" id="desa" name="desa" required>
+							<option value="" selected>-Pilih Desa-</option>
+						@foreach($desa as $ds)
+						<option value="{{ $ds->desa_id }}">{{ $ds->nama_desa }}</option>
+						@endforeach
+						</select>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success xs">
+							<span class="material-icons">save</span>
+						</button>
+						<a class="btn btn-info xs" href="{{ route('kelompok.index') }}">
+							<span class="material-icons">undo</span>
+						</a>
+					</div>         
 				</form>
 			</div>
 		</div>
