@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Kelompok;
 use App\Mahasiswa;
-use App\Pengelompokan;
-use App\Pemonev;
-use App\Pendamping;
-use App\Desa;
 use Illuminate\Http\Request;
 
 class KelompokController extends Controller
@@ -19,12 +15,7 @@ class KelompokController extends Controller
 	 */
 	public function index()
 	{
-		$kelompok = Kelompok::leftjoin('pendamping', 'kelompok.pendamping_id', '=', 'pendamping.pendamping_id')
-					->leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')
-					->leftjoin('pemonev', 'kelompok.pemonev_id', '=', 'pemonev.pemonev_id')
-					->leftjoin('desa', 'kelompok.desa_id', '=', 'desa.desa_id')
-					->orderBy('kelompok.kelompok_id', 'asc')
-					->get();
+		$mahasiswa = Mahasiswa::paginate(15);
 		// dd($kelompok);
 		return view('kelompok.index', compact('kelompok'));
 	}
@@ -81,32 +72,17 @@ class KelompokController extends Controller
 		$kelompok_id = 0;
 
 		if (!empty($data)) {
-			Pengelompokan::truncate();
-			// Kelompok::delete();
+			foreach ($data as $row) {
+				$kelompok = $row['kelompok'];
+				$nim = $row['nim'];
 
-			foreach ($data as $item) {
-				// $kelompok = $row['kelompok'];
-				// $nim = $row['nim'];
-				if ($item['nama_kelompok'] != $nama_kelompok) {
-					$nama_kelompok = $item['nama_kelompok'];
-
-					$kelompok = new Kelompok([
-						'nama_kelompok' => $nama_kelompok,
-					]);
-					$kelompok->save();
-					$kelompok_id = $kelompok->kelompok_id;
-				}
-
-				Pengelompokan::create([
-					'kelompok_id' => $kelompok_id,
-					'nama_kelompok' => $nama_kelompok,
-					'nim' => $item['nim']
+				$pengelompokan = new Pengelompokan([
+					'nim' => $row['nim'],
+					'kelompok_id' => $row['kelompok'],
 				]);
+				$newProdi->save();
 			}
 		}
-		
-		// return response()->json(['message' => 'Data berhasil disimpan ke MySQL'], 200);
-		return redirect('/kelompok')->with('success', 'Tambah Kelompok berhasil!');
 	}
 
 	/**

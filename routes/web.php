@@ -61,7 +61,6 @@ Route::middleware('auth', 'panitia')->group(function(){
 	Route::resource('/post', PostController::class);
 	Route::resource('/pengelompokan', PengelompokanController::class);
 	Route::resource('/kelompok', KelompokController::class);
-	Route::post('/pengelompokan/storeapi', 'PengelompokanController@storeapi')->name('pengelompokan.storeapi');
 	Route::get('/mahasiswa/{mahasiswa}/verify', 'MahasiswaController@verify')->name('mahasiswa.verify');
 	Route::put('/mahasiswa/{mahasiswa}/verified', 'MahasiswaController@verified')->name('mahasiswa.verified');
 });

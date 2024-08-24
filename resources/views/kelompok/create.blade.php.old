@@ -14,7 +14,7 @@
 			<a class="opacity-5 text-dark" href="{{ route('kelompok.index') }}">{{ __('Kelompok') }}</a>
 		</li>
 		<li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-			<span>{{ __('Tambah Kelompok') }}</span>
+			<span>{{ __('Generate Kelompok') }}</span>
 		</li>
 	</ol>
 </nav>
@@ -27,7 +27,7 @@
 		<div class="card my-4">
 			<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
 				<div class="bg-gradient-secondary shadow-secondary border-radius-lg pt-4 pb-3">
-					<h6 class="text-white text-capitalize ps-3">{{ __('Tambah Kelompok') }}</h6>
+					<h6 class="text-white text-capitalize ps-3">{{ __('Generate Kelompok') }}</h6>
 				</div>
 			</div>
 			<div class="card-body px-0 pb-2 mx-3 ">
@@ -41,48 +41,9 @@
 				</div>
 				<br />
 				@endif
-				<form id="" method="post" action="{{ route('kelompok.store') }}">
+				<form id="" method="post" action="{{ route('kelompok.storeapi') }}">
 					@csrf
-					<div class=" input-group-outline my-3">
-						<label class="form-label" for="nama_kelompok">{{ __('Nama Kelompok:') }}</label>
-						<input type="text" class="form-control px-2 py-2" id="nama_kelompok" name="nama_kelompok" required/>
-					</div>
-					<div class=" input-group-outline my-3">
-						<label class="form-label" for="jenis_kkn">{{ __('Jenis KKN') }}</label>
-						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="jenis_kkn" name="jenis_kkn" required>
-							<option value="" selected>-Pilih Jenis KKN-</option>
-							<option value="Reguler">Reguler</option>
-							<option value="Non-Reguler">Non-Reguler</option>
-							<option value="Tematik">Tematik</option>
-						</select>
-					</div>
-					<div class=" input-group-outline my-3">
-						<label class="form-label" for="pemonev">{{ __('Pemonev:') }}</label>
-						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pemonev" name="pemonev" required>
-							<option value="" selected>-Pilih Pemonev-</option>
-						@foreach($pemonev as $pm)
-						<option value="{{ $pm->pemonev_id }}">{{ $pm->nama_pemonev }}</option>
-						@endforeach
-						</select>
-					</div>
-					<div class=" input-group-outline my-3">
-						<label class="form-label" for="pendamping">{{ __('Pendamping') }}</label>
-						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pendamping" name="pendamping" required>
-							<option value="" selected>-Pilih Pendamping-</option>
-						@foreach($pendamping as $dpl)
-						<option value="{{ $dpl->pendamping_id }}">{{ $dpl->nama_dosen }}</option>
-						@endforeach
-						</select>
-					</div>
-					<div class=" input-group-outline my-3">
-						<label class="form-label" for="desa">{{ __('Desa') }}</label>
-						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-desa" id="desa" name="desa" required>
-							<option value="" selected>-Pilih Desa-</option>
-						@foreach($desa as $ds)
-						<option value="{{ $ds->desa_id }}">{{ $ds->nama_desa }}</option>
-						@endforeach
-						</select>
-					</div>
+					<p class="form-label">Jumlah yang mendaftar per {{ date('d M Y') }} sejumlah {{ count($mahasiswa) }} orang</p>
 					<div class="form-group">
 						<label class="form-label" for="jumlah_orang">{{ __('Berapa orang dalam satu kelompok yang ingin dibuat?') }}</label>
 						<input type="number" class="form-control px-2" id="jumlah_orang" name="jumlah_orang" value="10" />
@@ -93,7 +54,7 @@
 						<a id="preview" class="btn btn-warning xs">
 							<i class="fa-solid fa-user-check"></i> <span class="fs-5">{{ __('Preview') }}</span>
 						</a>
-						<a id="submit" class="btn btn-success xs" onclick="formsubmit()">
+						<a id="submit" class="btn btn-success xs">
 							<i class="fa-solid fa-people-line"></i> <span class="fs-5">{{ __('Simpan Kelompok') }}</span>
 						</a>
 						<a id="back" class="btn btn-info xs" onclick="window.history.back()">
@@ -122,10 +83,12 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	const url = "{{ url('/getmahasiswa') }}";
-	const students;
-	const groupedStudents;
-	const numGroups = 6;
-	const dividedGroups;
+	const csrfToken = $("input[name='_token']").val();
+	console.log(csrfToken);
+	// const students = data;
+	// const groupedStudents;
+	// const numGroups = 6;
+	let dividedGroups;
 	// console.log(url);
 	let jmlkel = 5;
 
@@ -139,7 +102,7 @@ $(document).ready(function() {
 
 	$('#preview').click(function () {
 		$.getJSON(url, function(data) {
-			students = data;
+			const students = data;
 
 			// Fungsi untuk mengelompokkan data mahasiswa
 			function groupStudents(students) {
@@ -165,7 +128,8 @@ $(document).ready(function() {
 			}
 
 			// Mengelompokkan mahasiswa
-			groupedStudents = groupStudents(students);
+			const numGroups = jmlkel;
+			const groupedStudents = groupStudents(students);
 
 			// Fungsi untuk membagi data menjadi 6 kelompok
 			function divideIntoGroups(groupedStudents, numGroups) {
@@ -185,6 +149,7 @@ $(document).ready(function() {
 			}
 
 			// Membagi data menjadi 6 kelompok
+			// const dividedGroups = divideIntoGroups(groupedStudents, numGroups);
 			dividedGroups = divideIntoGroups(groupedStudents, numGroups);
 
 			// Fungsi untuk menampilkan hasil pengelompokan
@@ -193,13 +158,16 @@ $(document).ready(function() {
 				tableBody.empty();
 
 				groups.forEach((group, index) => {
+					console.log(`Kelompok ${index + 1}: `);
 					group.forEach(student => {
 						const row = `<tr>
 														<td>Kelompok ${index + 1}</td>
 														<td>${student.nim}</td>
 														<td>${student.nama_lengkap}</td>
+														<td>${student.jenis_kelamin}</td>
 													</tr>`;
 						tableBody.append(row);
+						console.log(`${student.nim}` + ', ');
 					});
 				});
 			}
@@ -219,12 +187,15 @@ $(document).ready(function() {
 				nim: student.nim
 			}));
 		}).flat();
-
+		// console.log(formattedData);
 		$.ajax({
 			type: 'POST',
-			url: 'save_to_mysql.php',
+			url: "{{ route('kelompok.storeapi') }}",
 			data: JSON.stringify(formattedData),
 			contentType: 'application/json',
+			headers: {
+				'X-CSRF-TOKEN': csrfToken
+			},
 			success: function(response) {
 				alert('Data berhasil disimpan ke MySQL');
 			},

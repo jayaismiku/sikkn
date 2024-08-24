@@ -48,7 +48,7 @@
       </div>
       <div class="card-body px-0 pb-2 mx-3">
         <div class="table-responsive p-0">
-          <table id="tblKelompok" class="table align-items-center justify-content-center mb-0">
+          <table class="table align-items-center justify-content-center mb-0">
             <thead>
               <tr>
                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 px-2">{{ __('Nama Kelompok') }}</th>
@@ -62,23 +62,11 @@
             <tbody>
               @foreach($kelompok as $kel)
               <tr>
-                <td class="text-xs">{{ $kel->nama_kelompok }}</td>
-                <td class="text-xs">{{ $kel->jenis_kkn }}</td>
-                <td class="text-xs">{{ $kel->nama_dosen }}</td>
-                <td class="text-xs">{{ $kel->nama_pemonev }}</td>
-                <td class="text-xs">{{ $kel->nama_desa }}</td>
-                <td class="text-xs text-center">
-                  <a class="text-warning" href="{{ route('kelompok.edit', $kel->kelompok_id)}}">
-                    <span class="material-icons">edit</span>
-                  </a>
-                  <a class="nav-link text-danger" href="{{ route('kelompok.destroy', $kel->kelompok_id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $kel->kelompok_id }}').submit();">
-                    <span class="material-icons">delete</span>
-                    <form id="delete-form-{{ $kel->kelompok_id }}" action="{{ route('kelompok.destroy', $kel->kelompok_id) }}" method="POST" class="d-none">
-                      @csrf
-                      @method('DELETE')
-                    </form>
-                  </a>
-                </td>
+                <td class="text-xs">{{ $mhs->kelompok }}</td>
+                <td class="text-xs">{{ $mhs->nim }}</td>
+                <td class="text-xs">{{ $mhs->nama_lengkap }}</td>
+                <td class="text-xs">{{ $mhs->fakultas }}</td>
+                <td class="text-xs">{{ $mhs->prodi }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -88,15 +76,5 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('.alert').delay(1000).fadeOut().removeClass("show");
-  });
-
-  $('#tblKelompok').DataTable();
-</script>
-
-
 @endsection
 
