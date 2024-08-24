@@ -95,6 +95,5 @@
   $('#tblDesa').DataTable();
 </script>
 
-
 @endsection
 

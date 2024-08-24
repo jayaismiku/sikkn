@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Kelompok;
 use App\Mahasiswa;
+use App\Pengelompokan;
+use App\Pendamping;
+use App\Pemonev;
+use App\Desa;
 use Illuminate\Http\Request;
 
 class KelompokController extends Controller
@@ -15,7 +19,7 @@ class KelompokController extends Controller
 	 */
 	public function index()
 	{
-		$mahasiswa = Mahasiswa::paginate(15);
+		$kelompok = Kelompok::all();
 		// dd($kelompok);
 		return view('kelompok.index', compact('kelompok'));
 	}
@@ -30,8 +34,9 @@ class KelompokController extends Controller
 		$pemonev = Pemonev::all();
 		$pendamping = Pendamping::leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')->get();
 		$desa = Desa::all();
+		$mahasiswa = Mahasiswa::all();
 
-		return view('kelompok.create', compact('pemonev','pendamping','desa'));
+		return view('kelompok.create', compact('pemonev', 'pendamping', 'desa', 'mahasiswa'));
 	}
 
 	/**

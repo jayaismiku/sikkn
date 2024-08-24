@@ -43,11 +43,11 @@
 				@endif
 				<form id="" method="post" action="{{ route('kelompok.store') }}">
 					@csrf
-					<div class=" input-group-outline my-3">
+					<div class=" input-group-outline my-2">
 						<label class="form-label" for="nama_kelompok">{{ __('Nama Kelompok:') }}</label>
 						<input type="text" class="form-control px-2 py-2" id="nama_kelompok" name="nama_kelompok" required/>
 					</div>
-					<div class=" input-group-outline my-3">
+					<div class=" input-group-outline my-2">
 						<label class="form-label" for="jenis_kkn">{{ __('Jenis KKN') }}</label>
 						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="jenis_kkn" name="jenis_kkn" required>
 							<option value="" selected>-Pilih Jenis KKN-</option>
@@ -56,64 +56,51 @@
 							<option value="Tematik">Tematik</option>
 						</select>
 					</div>
-					<div class=" input-group-outline my-3">
+					<div class=" input-group-outline my-2">
 						<label class="form-label" for="pemonev">{{ __('Pemonev:') }}</label>
 						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pemonev" name="pemonev" required>
 							<option value="" selected>-Pilih Pemonev-</option>
-						@foreach($pemonev as $pm)
-						<option value="{{ $pm->pemonev_id }}">{{ $pm->nama_pemonev }}</option>
-						@endforeach
+							@foreach($pemonev as $pm)
+							<option value="{{ $pm->pemonev_id }}">{{ ucfirst(strtolower($pm->nama_pemonev)) }}</option>
+							@endforeach
 						</select>
 					</div>
-					<div class=" input-group-outline my-3">
+					<div class=" input-group-outline my-2">
 						<label class="form-label" for="pendamping">{{ __('Pendamping') }}</label>
 						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-pemonev" id="pendamping" name="pendamping" required>
 							<option value="" selected>-Pilih Pendamping-</option>
-						@foreach($pendamping as $dpl)
-						<option value="{{ $dpl->pendamping_id }}">{{ $dpl->nama_dosen }}</option>
-						@endforeach
+							@foreach($pendamping as $dpl)
+							<option value="{{ $dpl->pendamping_id }}">{{ ucfirst(strtolower($dpl->nama_dosen)) }}</option>
+							@endforeach
 						</select>
 					</div>
-					<div class=" input-group-outline my-3">
+					<div class=" input-group-outline my-2">
 						<label class="form-label" for="desa">{{ __('Desa') }}</label>
 						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-desa" id="desa" name="desa" required>
 							<option value="" selected>-Pilih Desa-</option>
-						@foreach($desa as $ds)
-						<option value="{{ $ds->desa_id }}">{{ $ds->nama_desa }}</option>
-						@endforeach
+							@foreach($desa as $ds)
+							<option value="{{ $ds->desa_id }}">{{ $ds->nama_desa }}</option>
+							@endforeach
 						</select>
 					</div>
-					<div class="form-group">
-						<label class="form-label" for="jumlah_orang">{{ __('Berapa orang dalam satu kelompok yang ingin dibuat?') }}</label>
-						<input type="number" class="form-control px-2" id="jumlah_orang" name="jumlah_orang" value="10" />
+					<div class=" input-group-outline my-2">
+						<label class="form-label" for="mahasiswa">{{ __('Mahasiswa') }}</label>
+						<select class="form-control form-control-sm p-2 form-select form-select-sm" aria-label=".form-select-sm select-mahasiswa" id="mahasiswa" name="mahasiswa" required>
+							<option value="" selected>-Pilih Mahasiswa-</option>
+							@foreach($mahasiswa as $mhs)
+							<option value="{{ $mhs->mahasiswa }}">{{ $mhs->nama_mhs }}</option>
+							@endforeach
+						</select>
 					</div>
-					<br><p id="jmlkel" class="form-label">{{ __('Kemungkinan banyaknya kelompok ada: ') }}</p>
-					<div class="form-group mt-4">
-						<input type="hidden" id="jmlmhs" name="jmlmhs" value="{{ count($mahasiswa) }}">
-						<a id="preview" class="btn btn-warning xs">
-							<i class="fa-solid fa-user-check"></i> <span class="fs-5">{{ __('Preview') }}</span>
-						</a>
-						<a id="submit" class="btn btn-success xs" onclick="formsubmit()">
-							<i class="fa-solid fa-people-line"></i> <span class="fs-5">{{ __('Simpan Kelompok') }}</span>
-						</a>
-						<a id="back" class="btn btn-info xs" onclick="window.history.back()">
-							<i class="fa-solid fa-rotate-left"></i> <span class="fs-5">{{ __('Kembali') }}</span>
+					<div class="form-group mt-2">
+						<button type="submit" class="btn btn-success xs">
+							<span class="material-icons">save</span>
+						</button>
+						<a class="btn btn-info xs" href="{{ route('kelompok.index') }}">
+							<span class="material-icons">undo</span>
 						</a>
 					</div>         
 				</form>
-				<table id="studentTable" class="table">
-	        <thead>
-	        	<tr>
-	        		<th scope="col">Kelompok</th>
-	        		<th scope="col">NIM</th>
-	        		<th scope="col">Nama Mahasiswa</th>
-	        		<th scope="col">#</th>
-	        	</tr>
-	        </thead>
-	        <tbody>
-	            <!-- Data akan dimasukkan di sini oleh JavaScript -->
-	        </tbody>
-	    	</table>
 			</div>
 		</div>
 	</div>
@@ -238,4 +225,3 @@ $(document).ready(function() {
 </script>
 
 @endsection
-
