@@ -33,18 +33,39 @@
 	<!-- Custom style -->
 	<link href="{{ asset('css/style-2.css') }}" rel="stylesheet" />
 
+	{{-- <script src="{{ asset('js/jquery-3.7.1.min.js')}}"></script>
+  	<script src="{{ asset('js/popper.min.js') }}" ></script> --}}
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('fontawesome-6.5.2/css/all.min.css') }}">
+	<script src="{{ asset('fontawesome-6.5.2/js/all.min.js') }}" crossorigin="anonymous"></script>
+
+	<!-- Bootstrap -->
+	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap-5.3.3/css/bootstrap.min.css') }}">
+	<script src="{{ asset('bootstrap-5.3.3/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script> --}}
+
+	<!-- @yield('script') -->
+
 	<!--   Core JS Files   -->
 	<script src="{{ asset('js/app.js') }}" ></script>
 	<script src="{{ asset('js/vendor.js') }}" ></script>
 	<script src="{{ asset('material/js/plugins/perfect-scrollbar.min.js') }}" ></script>
 	<script src="{{ asset('material/js/plugins/smooth-scrollbar.min.js') }}" ></script>
+	{{-- <script src="{{ asset('material//js/plugins/chartjs.min.js')}}"></script> --}}
+	
+	<!-- jQuery DataTable Bootstrap -->
+	{{-- <script src="{{ asset('js/dataTables.js')}}"></script>
+	<script src="{{ asset('js/dataTables.bootstrap5.js')}}"></script> --}}
+
+	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+	{{-- <script src="{{ asset('material/js/material-dashboard.min.js?v=3.1.0') }}"></script> --}}
+	
 	<!-- include summernote css/js -->
 	<link href="{{ asset('summernote/summernote-lite.css') }}" rel="stylesheet">
 	<script src="{{ asset('summernote/summernote-lite.js') }}"></script>
 
-	<!-- Font Awesome -->
-	<link rel="stylesheet" type="text/css" href="{{ asset('fontawesome-6.5.2/css/all.min.css') }}">
-	<script src="{{ asset('fontawesome-6.5.2/js/all.min.js') }}" crossorigin="anonymous"></script>
+	<!-- Custom Script -->
+	{{-- <script src="{{ asset('js/custom.js')}}"></script> --}}
 
 </head>
 

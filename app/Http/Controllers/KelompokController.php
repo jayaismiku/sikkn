@@ -19,7 +19,11 @@ class KelompokController extends Controller
 	 */
 	public function index()
 	{
-		$kelompok = Kelompok::all();
+		$kelompok = Kelompok::leftjoin('pendamping', 'kelompok.pendamping_id', '=', 'pendamping.pendamping_id')
+						->leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')
+						->leftjoin('pemonev', 'kelompok.pemonev_id', '=', 'pemonev.pemonev_id')
+						->leftjoin('desa', 'kelompok.desa_id', '=', 'desa.desa_id')
+						->get(['kelompok.*', 'dosen.nama_dosen', 'desa.nama_desa']);
 		// dd($kelompok);
 		return view('kelompok.index', compact('kelompok'));
 	}
@@ -31,10 +35,10 @@ class KelompokController extends Controller
 	 */
 	public function create()
 	{
-		$pemonev = Pemonev::all();
-		$pendamping = Pendamping::leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')->get();
+		$pemonev = Pemonev::leftjoin('users', 'pemonev.user_id', '=', 'users.user_id')->get(['pemonev.*', 'users.username']);
+		$pendamping = Pendamping::leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')->leftjoin('users', 'dosen.user_id', '=', 'users.user_id')->get(['pendamping.*', 'dosen.nama_dosen', 'dosen.nidn', 'users.username']);
 		$desa = Desa::all();
-		$mahasiswa = Mahasiswa::all();
+		$mahasiswa = Mahasiswa::leftjoin('users', 'mahasiswa.user_id', '=', 'users.user_id')->get(['mahasiswa.*', 'users.username']);
 
 		return view('kelompok.create', compact('pemonev', 'pendamping', 'desa', 'mahasiswa'));
 	}
@@ -47,25 +51,37 @@ class KelompokController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		// dd($request->get('desa'));
+		// dd($request);
+		// Validasi input
 		$request->validate([
-			'nama_kelompok' => 'required',
-			'jenis_kkn' => 'required',
+			'nama_kelompok' => 'required|string|max:255',
+			'jenis_kkn' => 'required|string|max:255',
 			'pemonev' => 'required',
 			'pendamping' => 'required',
-			'desa' => 'required'
+			'desa' => 'required',
+			'mahasiswa' => 'required|array',
 		]);
 
-		$simpanKelompok = new Kelompok([
-			'nama_kelompok' => $request->get('nama_kelompok'),
-			'jenis_kkn' => $request->get('jenis_kkn'),
-			'pemonev_id' => $request->get('pemonev'),
-			'pendamping_id' => $request->get('pendamping'),
-			'desa_id' => $request->get('desa'),
+		// Simpan data kelompok ke dalam tabel `kelompok`
+		$kelompok = Kelompok::create([
+			'nama_kelompok' => $request->nama_kelompok,
+			'jenis_kkn' => $request->jenis_kkn,
+			'pendamping_id' => $request->id_pendamping,
+			'pemonev_id' => $request->id_pemonev,
+			'desa_id' => $request->id_desa,
+			'mahasiswa_id' => implode(',', $request->mahasiswa),
 		]);
-		$simpanKelompok->save();
 
-		return redirect('/kelompok')->with('success', 'Tambah Kelompok berhasil!');
+		// Simpan setiap nim mahasiswa ke dalam tabel `pengelompokan`
+		foreach ($request->mahasiswa as $nim) {
+			Pengelompokan::create([
+				'nim' => $nim,
+				'nama_kelompok' => $kelompok->nama_kelompok,
+				'kelompok_id' => $kelompok->kelompok_id, // Menggunakan ID kelompok yang baru dibuat
+			]);
+		}
+
+		return redirect()->route('kelompok.index')->with('success', 'Kelompok dan pengelompokan berhasil dibuat.');
 	}
 
 	public function storeapi(Request $request)
@@ -111,11 +127,11 @@ class KelompokController extends Controller
 	{
 		$kelompok = Kelompok::find($id);
 		$pemonev = Pemonev::all();
-		$pendamping = Pendamping::leftjoin('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')->get();
+		$pendamping = Pendamping::join('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')->get();
 		$desa = Desa::all();
-		// dd($desa);
+		$mahasiswa = Mahasiswa::leftjoin('users', 'mahasiswa.user_id', '=', 'users.user_id')->get(['mahasiswa.*', 'users.username']);
 
-		return view('kelompok.edit', compact('kelompok','pemonev','pendamping','desa'));
+		return view('kelompok.edit', compact('kelompok','pemonev','pendamping','desa','mahasiswa'));
 	}
 
 	/**
@@ -129,11 +145,12 @@ class KelompokController extends Controller
 	{
 		// dd($request);
 		$request->validate([
-			'nama_kelompok' => 'required',
-			'jenis_kkn' => 'required',
-			'pendamping' => 'required',
+			'nama_kelompok' => 'required|string|max:255',
+			'jenis_kkn' => 'required|string|max:255',
 			'pemonev' => 'required',
+			'pendamping' => 'required',
 			'desa' => 'required',
+			'mahasiswa' => 'required|array',
 		]);
 
 		$kelompok = Kelompok::find($id);
@@ -142,10 +159,11 @@ class KelompokController extends Controller
 		$kelompok->pendamping_id = $request->get('pendamping');
 		$kelompok->pemonev_id = $request->get('pemonev');
 		$kelompok->desa_id = $request->get('desa');
+		$kelompok->mahasiswa_id = implode(',', $request->mahasiswa);
 		$kelompok->updated_at = date('Y-m-d H:i:s');
 		$kelompok->save();
 
-		return redirect('/kelompok')->with('success', 'Kelompok berhasil diubah!');
+		return redirect()->route('kelompok.index')->with('success', 'Kelompok berhasil diubah!');
 	}
 
 	/**

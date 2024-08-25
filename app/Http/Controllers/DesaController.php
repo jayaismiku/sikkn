@@ -52,21 +52,25 @@ class DesaController extends Controller
 		$request->validate([
 			'nama_desa' => 'required',
 			'alamat' => 'required',
+			// 'provinsi' => 'required',
+			// 'kota' => 'required',
+			// 'kecamatan' => 'required',
+			// 'kelurahan' => 'required',
 		]);
 
 		$TambahDesa = new Desa([
 			'nama_desa' => $request->get('nama_desa'),
 			'alamat' => $request->get('alamat'),
-			'kelurahan_id' => $request->get('kelurahan'),
-			'kecamatan_id' => $request->get('kecamatan'),
-			'kota_id' => $request->get('kota'),
 			'provinsi_id' => $request->get('provinsi'),
+			'kota_id' => $request->get('kota'),
+			'kecamatan_id' => $request->get('kecamatan'),
+			'kelurahan_id' => $request->get('kelurahan'),
 			'longitude' => $request->get('longitude'),
 			'latitude' => $request->get('latitude'),
 		]);
 		$TambahDesa->save();
 
-		return redirect('/desa')->with('success', 'Tambah Desa berhasil!');
+		return redirect()->route('desa.index')->with('success', 'Tambah Desa berhasil!');
 	}
 
 	/**
@@ -88,10 +92,11 @@ class DesaController extends Controller
 	 */
 	public function edit($id)
 	{
-		$desa = Desa::join('provinsi', 'desa.provinsi_id', '=', 'provinsi.provinsi_id')
-					->join('kota', 'desa.kota_id', '=', 'kota.kota_id')
-					->join('kecamatan', 'desa.kecamatan_id', '=', 'kecamatan.kecamatan_id')
-					->join('kelurahan', 'desa.kelurahan_id', '=', 'kelurahan.kelurahan_id')
+		$desa = Desa::leftjoin('provinsi', 'desa.provinsi_id', '=', 'provinsi.provinsi_id')
+					->leftjoin('kota', 'desa.kota_id', '=', 'kota.kota_id')
+					->leftjoin('kecamatan', 'desa.kecamatan_id', '=', 'kecamatan.kecamatan_id')
+					->leftjoin('kelurahan', 'desa.kelurahan_id', '=', 'kelurahan.kelurahan_id')
+					->where('desa.desa_id', '=', $id)
 					->first(['desa.*', 'provinsi.nama_provinsi', 'kota.nama_kota', 'kecamatan.nama_kecamatan', 'kelurahan.nama_kelurahan']);
 		
 		// dd($desa);
@@ -118,6 +123,10 @@ class DesaController extends Controller
 		$desa = Desa::find($id);
 		$desa->nama_desa =  $request->get('nama_desa');
 		$desa->alamat = $request->get('alamat');
+		$desa->provinsi_id = $request->get('provinsi');
+		$desa->kota_id = $request->get('kota');
+		$desa->kecamatan_id = $request->get('kecamatan');
+		$desa->kelurahan_id = $request->get('kelurahan');
 		$desa->longitude = $request->get('longitude');
 		$desa->latitude = $request->get('latitude');
 		$desa->updated_at = date('Y-m-d H:i:s');

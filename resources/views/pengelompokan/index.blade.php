@@ -36,7 +36,7 @@
         <div class="bg-gradient-secondary shadow-secondary border-radius-lg pt-4 pb-3 container">
           <div class="row">
             <div class="col-sm-8">
-              <h6 class="text-white text-capitalize ps-3">{{ __('Data Kelompok') }}</h6>
+              <h6 class="text-white text-capitalize ps-3">{{ __('Data Pengelompokan') }}</h6>
             </div>
             <div class="col-sm-4 text-end">
               <a class="text-warning pe-4" href="{{ route('pengelompokan.create') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
@@ -63,7 +63,7 @@
               <tr>
                 <td class="text-xs">{{ $mhs->nama_kelompok }}</td>
                 <td class="text-xs">{{ $mhs->nim }}</td>
-                <td class="text-xs">{{ $mhs->nama_lengkap }}</td>
+                <td class="text-xs">{{ $mhs->nama_mhs }}</td>
                 <td class="text-xs">{{ $mhs->fakultas }}</td>
                 <td class="text-xs">{{ $mhs->prodi }}</td>
               </tr>

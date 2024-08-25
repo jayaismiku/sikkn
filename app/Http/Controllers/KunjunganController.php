@@ -42,8 +42,8 @@ class KunjunganController extends Controller
      */
     public function create()
     {
-        $userid = Auth::user()->user_id;
-        $dplid = User::join('dosen', 'users.user_id', '=', 'dosen.user_id')
+        $userid = Auth::id();
+        $dplid = User::leftjoin('dosen', 'users.user_id', '=', 'dosen.user_id')
                  ->leftjoin('pendamping', 'dosen.dosen_id', '=', 'pendamping.dosen_id')
                  ->where('users.user_id', $userid)->pluck('pendamping.pendamping_id')->first();
         // dd($dplid);

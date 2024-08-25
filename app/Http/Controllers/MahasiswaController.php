@@ -24,13 +24,8 @@ class MahasiswaController extends Controller
 	 */
 	public function index()
 	{
-		$mahasiswa = Mahasiswa::where('users.role', '=', 'mahasiswa')
-								->join('users', 'mahasiswa.user_id', '=', 'users.user_id')
-								->get();
-		// $mahasiswa = User::join('mahasiswa', 'users.user_id', '=', 'mahasiswa.user_id')
-		// 							->where('role', 'mahasiswa')->paginate(10)
-		// 							->get();
-		// dd($mahasiswa);
+		$mahasiswa = Mahasiswa::leftjoin('users', 'mahasiswa.user_id', '=', 'users.user_id')
+						->orderBy('mahasiswa.jenis_kkn', 'asc')->get();
 
 		return view('mahasiswa.index', compact('mahasiswa'));
 	}
