@@ -64,13 +64,9 @@ class MonevController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        // $request->validate([
-        //     'judul' => 'required',
-        //     'slug' => 'required',
-        //     'deskripsi' => 'required',
-        //     'penulis' => 'required',
-        //     'lampiran' => 'required|mimes:pdf|max:2048',
-        // ]);
+        $request->validate([
+            'tanggal_monev' => 'required',
+        ]);
 
         $monev = new Monev([
             'pemonev_id' => $request->get('pemonev_id'), 

@@ -30,7 +30,7 @@ class LaporanController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		$this->nim = $request->attributes->get('nim')->nim;
+		$this->nim = $request->attributes->get('nim');
 		// dd($this->nim);
 		$this->kelompok = Mahasiswa::join('pengelompokan', 'mahasiswa.nim', '=', 'pengelompokan.nim')
 							->where('mahasiswa.nim', $this->nim)
@@ -49,7 +49,7 @@ class LaporanController extends Controller
 	 */
 	public function create(Request $request)
 	{
-		$nim = $request->attributes->get('nim')->nim;
+		$nim = $request->attributes->get('nim');
 		$kelompok = Mahasiswa::join('pengelompokan', 'mahasiswa.nim', '=', 'pengelompokan.nim')
 							->where('mahasiswa.nim', $nim)
 							->get(['pengelompokan.kelompok_id','pengelompokan.nama_kelompok'])->first();
@@ -137,9 +137,9 @@ class LaporanController extends Controller
 
 		$path_storage = 'laporan/' . $request->get('nama_kelompok'). '/';
 		$filelap = $request->file('unggah_laporan');
-        $fileName = date('YmdHis').'.'.$filelap->getClientOriginalExtension();
-        $filePath = $path_storage . $fileName;
-        Storage::disk('public')->put($filePath, file_get_contents($filelap));
+		  $fileName = date('YmdHis').'.'.$filelap->getClientOriginalExtension();
+		  $filePath = $path_storage . $fileName;
+		  Storage::disk('public')->put($filePath, file_get_contents($filelap));
 
 		$ubahLaporan = Laporan::find($id);
 		$ubahLaporan->judul_laporan =  $request->get('judul_laporan');
@@ -174,15 +174,17 @@ class LaporanController extends Controller
 	 */
 	public function validasi()
 	{
-        $userid = Auth::id();
-        $dpl = Pendamping::join('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')
-                ->leftjoin('users', 'dosen.user_id', '=', 'users.user_id')
-                ->where('users.user_id', $userid)->pluck('pendamping.pendamping_id')->first();
-        $laporan = Laporan::join('kelompok', 'laporan.kelompok_id', '=', 'kelompok.kelompok_id')
-                    ->where('kelompok.pendamping_id', $dpl)->get();
-        // dd($laporan);
+		$this->authorize('validasi', Logbook::class);
+		
+		$userid = Auth::id();
+		$dpl = Pendamping::join('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')
+					->leftjoin('users', 'dosen.user_id', '=', 'users.user_id')
+					->where('users.user_id', $userid)->pluck('pendamping.pendamping_id')->first();
+		$laporan = Laporan::join('kelompok', 'laporan.kelompok_id', '=', 'kelompok.kelompok_id')
+						->where('kelompok.pendamping_id', $dpl)->get();
+		// dd($laporan);
 
-        return view('laporan.validasi', compact('dpl', 'laporan'));
+		return view('laporan.validasi', compact('dpl', 'laporan'));
 	}
 
 	public function tervalidasi($id)

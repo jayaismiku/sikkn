@@ -52,10 +52,10 @@ class DesaController extends Controller
 		$request->validate([
 			'nama_desa' => 'required',
 			'alamat' => 'required',
-			// 'provinsi' => 'required',
-			// 'kota' => 'required',
-			// 'kecamatan' => 'required',
-			// 'kelurahan' => 'required',
+			'provinsi' => 'required',
+			'kota' => 'required',
+			'kecamatan' => 'required',
+			'kelurahan' => 'required',
 		]);
 
 		$TambahDesa = new Desa([

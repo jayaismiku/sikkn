@@ -41,7 +41,7 @@
 				</div>
 				<br />
 				@endif
-				<form id="" method="post" action="{{ route('desa.store') }}">
+				<form id="frmTambahDesa" method="post" action="{{ route('desa.store') }}">
 					@csrf
 					<div class="form-group">
 						<label class="form-label" for="nama_desa">{{ __('Nama Desa:') }}</label>
@@ -64,24 +64,24 @@
 						</select>
 					</div>
 					<div class="form-group">
-							<label class="form-label" for="kecamatan">{{ __('Kecamatan:') }}</label>
-							<select class="form-control form-select px-2" id="kecamatan" name="kecamatan" required>
-								<option selected>- Pilih Kecamatan -</option>
-							</select>
+						<label class="form-label" for="kecamatan">{{ __('Kecamatan:') }}</label>
+						<select class="form-control form-select px-2" id="kecamatan" name="kecamatan" required>
+							<option selected>- Pilih Kecamatan -</option>
+						</select>
 					</div>
 					<div class="form-group">
-							<label class="form-label" for="kelurahan">{{ __('Kelurahan:') }}</label>
-							<select class="form-control form-select px-2" id="kelurahan" name="kelurahan" required>
-								<option selected>- Pilih Kelurahan -</option>
-							</select>
+						<label class="form-label" for="kelurahan">{{ __('Kelurahan:') }}</label>
+						<select class="form-control form-select px-2" id="kelurahan" name="kelurahan" required>
+							<option selected>- Pilih Kelurahan -</option>
+						</select>
 					</div>
 					<div class="form-group">
-							<label class="form-label" for="longitude">{{ __('Longitude') }}</label>
-							<input type="text" id="long" class="form-control px-2" id="longitude" name="longitude"/>
+						<label class="form-label" for="longitude">{{ __('Longitude') }}</label>
+						<input type="text" id="long" class="form-control px-2" id="longitude" name="longitude"/>
 					</div>
 					<div class="form-group">
-							<label class="form-label" for="latitude">{{ __('Latitude') }}</label>
-							<input type="text" id="lat" class="form-control px-2" id="latitude" name="latitude"/>
+						<label class="form-label" for="latitude">{{ __('Latitude') }}</label>
+						<input type="text" id="lat" class="form-control px-2" id="latitude" name="latitude"/>
 					</div>
 					<div class="form-group mt-4">
 						<a class="btn btn-warning xs" onclick="getLocation()">

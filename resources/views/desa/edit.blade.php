@@ -41,7 +41,7 @@
 				</div>
 				<br />
 				@endif
-				<form id="editDesa" method="post" action="{{ route('desa.update', $desa->desa_id) }}">
+				<form id="frmEditDesa" method="post" action="{{ route('desa.update', $desa->desa_id) }}">
 					@csrf
 					@method('PUT')
 					<div class=" input-group-outline my-3">

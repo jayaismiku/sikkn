@@ -31,8 +31,8 @@ class LogbookController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		// dd($request->attributes->get('nim')->nim);
-		$this->nim = $request->attributes->get('nim')->nim;
+		// dd($request->attributes->get('nim'));
+		$this->nim = $request->attributes->get('nim');
 		$logbook = Logbook::where('nim', $this->nim)->get();
 		// dd($logbook);
 		return view('logbook.index', compact('logbook'));
@@ -63,13 +63,15 @@ class LogbookController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		// dd($request->get('nim')->nim);
+		// dd($request->get('nim'));
 		$request->validate([
 			'nama_kegiatan' => 'required',
 			'tanggal_kegiatan' => 'required',
 			'deskripsi_kegiatan' => 'required',
 			'foto_kegiatan' => 'required|image',
 		]);
+
+		$nim = $request->get('nim');
 
 		// if ($request->file('foto_kegiatan')) {
 		// 	$file = $request->file('foto_kegiatan');
@@ -78,29 +80,29 @@ class LogbookController extends Controller
 		// 	Storage::disk('public')->put($filePath, file_get_contents($file));
 		// }
 
-		$path_storage = 'logbook/' . $request->get('nim')->nim . '/';
+		$path_storage = 'logbook/' . $nim . '/';
 
 		// if ($request->file('foto_kegiatan')->getClientOriginalName()) {
 		// 	$name_foto = $request->file('foto_kegiatan')->getClientOriginalName();
 		// 	$path_foto = $request->file('foto_kegiatan')->store($path_storage);
 		// }
 		$image = $request->file('foto_kegiatan');
-        $imageName = date('YmdHis').'.'.$image->getClientOriginalExtension();
-        $filePath = $path_storage . $imageName;
-        // dd($imageName);
-        if ($image->getSize() > 2 * 1024 * 1024) {
-            $imageCompressed = Image::make($image)->orientate()
-                ->resize(1024, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->encode('jpg', 80); // Kompresi gambar
-            Storage::disk('public')->put($filePath, (string) $imageCompressed);
-            // Storage::put($path_storage . $imageName, (string) $imageCompressed);
-        } else {
-            // Simpan gambar langsung tanpa kompresi
-            // $image->storeAs($path_storage, $imageName);
-            Storage::disk('public')->put($filePath, file_get_contents($image));
-        }
+		  $imageName = date('YmdHis').'.'.$image->getClientOriginalExtension();
+		  $filePath = $path_storage . $imageName;
+		  // dd($imageName);
+		  if ($image->getSize() > 2 * 1024 * 1024) {
+				$imageCompressed = Image::make($image)->orientate()
+					 ->resize(1024, null, function ($constraint) {
+						  $constraint->aspectRatio();
+					 })
+					 ->encode('jpg', 80); // Kompresi gambar
+				Storage::disk('public')->put($filePath, (string) $imageCompressed);
+				// Storage::put($path_storage . $imageName, (string) $imageCompressed);
+		  } else {
+				// Simpan gambar langsung tanpa kompresi
+				// $image->storeAs($path_storage, $imageName);
+				Storage::disk('public')->put($filePath, file_get_contents($image));
+		  }
 
 		$newLogBook = new Logbook([
 			'nama_kegiatan' => $request->get('nama_kegiatan'),
@@ -108,7 +110,7 @@ class LogbookController extends Controller
 			'tanggal_kegiatan' => $request->get('tanggal_kegiatan'),
 			'deskripsi_kegiatan' => $request->get('deskripsi_kegiatan'),
 			'foto_kegiatan' => $path_storage . $imageName,
-			'nim' => $request->get('nim')->nim,
+			'nim' => $nim,
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')
 		]);
@@ -189,20 +191,22 @@ class LogbookController extends Controller
 	 */
 	public function validasi()
 	{
-        $userid = Auth::id();
-        $dpl = Pendamping::join('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')
-                ->leftjoin('users', 'dosen.user_id', '=', 'users.user_id')
-                ->where('users.user_id', $userid)->pluck('pendamping.pendamping_id')->first();
-        $logbook = Kelompok::join('pengelompokan', 'kelompok.kelompok_id', '=', 'pengelompokan.kelompok_id')
-        			->join('mahasiswa', 'pengelompokan.nim', '=', 'mahasiswa.nim')
-        			->leftjoin('logbook', 'pengelompokan.nim', '=', 'logbook.nim')
-        			->where('kelompok.pendamping_id', '=', $dpl)->get();
-      //   dd($logbook);
+		$this->authorize('validasi', Logbook::class);
 
-        return view('logbook.validasi', compact('dpl', 'logbook'));
+		$userid = Auth::id();
+		$dpl = Pendamping::join('dosen', 'pendamping.dosen_id', '=', 'dosen.dosen_id')
+					->leftjoin('users', 'dosen.user_id', '=', 'users.user_id')
+					->where('users.user_id', $userid)->pluck('pendamping.pendamping_id')->first();
+		$logbook = Kelompok::join('pengelompokan', 'kelompok.kelompok_id', '=', 'pengelompokan.kelompok_id')
+				->join('mahasiswa', 'pengelompokan.nim', '=', 'mahasiswa.nim')
+				->leftjoin('logbook', 'pengelompokan.nim', '=', 'logbook.nim')
+				->where('kelompok.pendamping_id', '=', $dpl)->get();
+		// dd($logbook);
+
+		return view('logbook.validasi', compact('dpl', 'logbook'));
 	}
 
-	public function tervalidasi($id)
+	public function tervalidasi(Request $request, $id)
 	{
 		// dd($logbook);exit();
 		$logbook = Logbook::find($id);

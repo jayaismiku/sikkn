@@ -96,7 +96,7 @@
 								</td>
 								<td class="text-xs">
 									<input type="hidden" name="logbook_id" value="{{ $log->logbook_id }}">
-									<a class="nav-link text-danger display-6" href="{{ route('logbook.tervalidasi', $log->logbook_id) }}" onclick="event.preventDefault(); document.getElementById('validasi-form-{{ $log->logbook_id }}').submit();">
+									<a class="nav-link text-danger display-6" href="#" onclick="event.preventDefault(); document.getElementById('validasi-form-{{ $log->logbook_id }}').submit();">
 										{!! ($log->validasi == 0)?'<i class="fa-solid fa-triangle-exclamation text-warning"></i>':'<i class="fa-solid fa-clipboard-check text-success"></i>' !!}
 										<form id="validasi-form-{{ $log->logbook_id }}" action="{{ route('logbook.tervalidasi', $log->logbook_id) }}" method="POST" class="d-none">
 											@csrf

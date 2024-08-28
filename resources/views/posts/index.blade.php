@@ -62,8 +62,14 @@
               @php
                 $desc = str_replace('<p>', ' ', explode(' ', $post->deskripsi));
                 $deskripsi = '';
-                for($i = 0; $i < 15; $i++){
-                  $deskripsi .= $desc[$i] . ' ';
+                if (length($desc) > 10) {
+                  for($i = 0; $i < 10; $i++){
+                    $deskripsi .= $desc[$i] . ' ';
+                  }
+                }else{
+                  for($i = 0; $i < length($desc); $i++){
+                    $deskripsi .= $desc[$i] . ' ';
+                  }
                 }
                 $deskripsi .= '...';
               @endphp
